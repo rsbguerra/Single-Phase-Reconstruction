@@ -1,0 +1,22 @@
+
+#RECONSTRUCTION PARAMETERS#
+wlen            : 632.8e-9
+pixel_pitch     : 2e-6
+method          : ASM
+zero_pad        : 0
+apod            : 1
+
+#ENHANCEMENT PARAMETERS#
+perc_clip       : 0
+perc_value      : 
+hist_stretch    : 0
+
+#OUTPUT FILE OPTIONS#
+save_as_mat     : 0
+show            : 0
+save_as_image   : 1
+bit_depth       : 16
+save_intensity	: 0
+
+#BINARY FILE OPTIONS#
+offaxisfilter	: h

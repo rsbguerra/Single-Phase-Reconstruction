@@ -1,0 +1,27 @@
+
+#RECONSTRUCTION PARAMETERS#
+wlen            : 660e-9, 532e-9, 460e-9
+pixel_pitch     : 0.24e-6
+method          : RAYS
+zero_pad        : 0
+apod            : 0
+
+#HIGH-RESOLUTION HOLOGRAMS ONLY OPTIONS#
+hologramName	: dices200k
+format			: complex
+segmentsNum		: 50, 50
+segmentsRes		: 2160, 4096
+subSegmentsRes	: 127, 128
+spectrumScale	: 2
+
+#ENHANCEMENT PARAMETERS#
+perc_clip       : 1
+perc_value      : 95
+hist_stretch    : 1
+
+#OUTPUT FILE OPTIONS#
+save_as_mat     : 0
+show            : 0
+save_as_image   : 1
+bit_depth       : 16
+save_intensity	: 1

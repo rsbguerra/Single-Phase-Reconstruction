@@ -1,0 +1,8 @@
+*.exe
+*.docx
+*.mat
+*.bin
+/output
+
+*.png
+*.m~
