@@ -3,6 +3,7 @@
 *.mat
 *.bin
 /output
+.obsidian/
 
 *.png
 *.m~
