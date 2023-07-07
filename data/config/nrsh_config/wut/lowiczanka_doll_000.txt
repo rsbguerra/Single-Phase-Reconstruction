@@ -1,0 +1,31 @@
+
+#RECONSTRUCTION PARAMETERS#
+wlen            : 637e-9, 532e-9, 457e-9
+pixel_pitch     : 3.45e-6
+method          : Fourier-Fresnel
+zero_pad        : 0
+apod            : 0
+
+#ENHANCEMENT PARAMETERS#
+perc_clip       : 1
+perc_value      : 99.9
+hist_stretch    : 1
+
+#WUT DISPLAY ONLY OPTIONS#
+ref_wave_rad    : 1.06
+shift_yx_R      : -6.6035018e-4, 77.407184e-6
+shift_yx_G      : -3.1845007e-3, 6.1635088e-4
+shift_yx_B      : 0, 0
+DC_filter_type  : wut   
+DC_filter_size  : 0.15
+img_flt         : L
+
+#OUTPUT FILE OPTIONS#
+save_as_mat     : 0
+show            : 0
+save_as_image   : 1
+bit_depth       : 16
+save_intensity  : 0
+
+#BINARY FILE OPTIONS#
+offaxisfilter	: v

@@ -1,0 +1,27 @@
+
+#RECONSTRUCTION PARAMETERS#
+wlen            : 660e-9
+pixel_pitch     : 0.5e-6
+method          : RAYS
+zero_pad        : 0
+apod            : 0
+
+#HIGH-RESOLUTION HOLOGRAMS ONLY OPTIONS#
+hologramName	: P00
+format		: bilevel
+segmentsNum	: 10, 10
+segmentsRes	: 10000, 10000
+subSegmentsRes	: 100, 100
+spectrumScale	: 2
+
+#ENHANCEMENT PARAMETERS#
+perc_clip       : 1
+perc_value      : 97
+hist_stretch    : 1
+
+#OUTPUT FILE OPTIONS#
+save_as_mat     : 0
+show            : 0
+save_as_image   : 1
+bit_depth       : 16
+save_intensity  : 0

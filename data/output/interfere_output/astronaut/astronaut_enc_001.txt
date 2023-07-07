@@ -1,0 +1,13 @@
+#Optimization aux. parameters 
+out_bitdepth_max : 11
+bs_max_iter : 100
+gs_max_iter : 10
+opt_target_tolerance : 0.1
+#PROGRAMFLOW PARAMETERS
+doLossless : false
+doObjectPlaneCompression : false
+doTransform : true
+doAdaptiveQuantization : false
+#Optimization control parameters
+mode : "SNR"
+opt_target : 0
