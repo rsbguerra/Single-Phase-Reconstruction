@@ -1,28 +1,29 @@
 function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
     curr_dir = working_dir();
-    config_dir = 'data/config/single_phase_config';
+    config_dir = fullfile(curr_dir, 'data/config/single_phase_config/');
+
     %% Load config
     disp('Loading config');
 
     switch hologram_name
 
         case 'Biplane16k'
-            load('holo_config/Biplane16k_config.mat', 'info', 'hologram_path');
+            load([config_dir 'Biplane16k_config.mat'], 'info', 'hologram_path');
             load(hologram_path, 'CGH');
             original_hologram = CGH.Hol;
 
         case 'CGH_Venus'
-            load('holo_config/CGH_Venus_config.mat', 'info', 'hologram_path');
+            load([config_dir 'CGH_Venus_config.mat'], 'info', 'hologram_path');
             load(hologram_path, 'CGH');
             original_hologram = CGH.Hol;
 
         case 'DeepDices16K'
-            load('holo_config/DeepDices16K_config.mat', 'info', 'hologram_path');
+            load([config_dir 'DeepDices16K_config.mat'], 'info', 'hologram_path');
             load(hologram_path, 'data');
             original_hologram = single(data);
 
         case 'DeepDices2K'
-            load('holo_config/DeepDices2K_config.mat', 'info', 'hologram_path');
+            load([config_dir 'DeepDices2K_config.mat'], 'info', 'hologram_path');
             load(hologram_path, 'data');
             original_hologram = single(data);
 
@@ -35,7 +36,7 @@ function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
             return
     end
 
-    figure_dir = fullfile(working_dir, 'output/single_phase_fig', hologram_name);
+    figure_dir = fullfile(curr_dir, 'data/output/single_phase_fig', hologram_name);
 
     if ~exist(figure_dir, "dir")
         mkdir(figure_dir);
