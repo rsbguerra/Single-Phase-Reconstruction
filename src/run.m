@@ -1,20 +1,21 @@
 clear; clc
 
+curr_dir = working_dir();
+
 %% Set Paths
-add_paths(curr_dir, [
-                     "res/nrsh"
-                     "res/nrsh/core"
-                     "res/nrsh/core/WUT_lib"
-                     "src"
-                     "src/holo_config"
-                     "src/reconstruction"
+add_paths(curr_dir, ["res/nrsh" ...
+                     "res/nrsh/core" ...
+                     "res/nrsh/core/WUT_lib" ...
+                     "src" ...
+                     "src/holo_config" ...
+                     "src/reconstruction" ...
                      "src/utils"
                      ])
 
 %% Load hologram configuration
-hologram_name = 'Lowiczanka_Doll';
+hologram_name = 'CGH_Venus';
 
-rec_dists = [1.030, 1.060, 1.075];
+rec_dists = 0.2955;
 h_pos = [-1 0 1];
 v_pos = 0;
 
