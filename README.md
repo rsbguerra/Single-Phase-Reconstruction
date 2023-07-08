@@ -79,3 +79,5 @@ The following table presents the possible reconstruction distance in meters.
 | DeepDices16K    | 0.00338          | 0.0459           |
 | DeepDices2K     | 0.00507          | 0.246            |
 | Lowiczanka_Doll | 1.030            | 1.077            |
+
+For further information on the holograms, please consult the [JPEG PLENO spreadsheet](https://docs.google.com/spreadsheets/d/17YW4iS6HQEK7-fUA91i0IiwhleaqMjAI7HWX3NwkZyE/edit#gid=0)
