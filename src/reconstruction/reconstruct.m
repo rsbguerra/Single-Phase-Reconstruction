@@ -1,4 +1,4 @@
-function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
+function reconstruct(hologram_name, rec_dist, h_pos, v_pos)
     curr_dir = working_dir();
     config_dir = fullfile(curr_dir, 'data/config/single_phase_config/');
 
@@ -11,43 +11,40 @@ function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
             load([config_dir 'Biplane16k_config.mat'], 'info', 'hologram_path');
             load(hologram_path, 'CGH');
             original_hologram = CGH.Hol;
+            clearvars CGH
 
         case 'CGH_Venus'
             load([config_dir 'CGH_Venus_config.mat'], 'info', 'hologram_path');
             load(hologram_path, 'CGH');
             original_hologram = CGH.Hol;
+            clearvars CGH
 
         case 'DeepDices16K'
             load([config_dir 'DeepDices16K_config.mat'], 'info', 'hologram_path');
             load(hologram_path, 'data');
             original_hologram = single(data);
+            clearvars data
 
         case 'DeepDices2K'
             load([config_dir 'DeepDices2K_config.mat'], 'info', 'hologram_path');
             load(hologram_path, 'data');
             original_hologram = single(data);
+            clearvars data
 
         case 'Lowiczanka_Doll'
-            wut_reconstruction(rec_dist, h_pos, v_pos);
             wut_single_ph_rec(rec_dist, h_pos, v_pos, channel);
             return
 
         otherwise
+            warning('Hologram not recognized. Exiting script.')
             return
     end
 
-    figure_dir = fullfile(curr_dir, 'data/output/single_phase_fig', hologram_name);
+    figure_dir = fullfile(curr_dir, 'data/output/reconstruction', hologram_name);
 
     if ~exist(figure_dir, "dir")
         mkdir(figure_dir);
     end
-
-    % reconstruction distance is not used in this case,
-    % so only the first distance is sent
-    single_ph_holo = remove_phases(original_hologram, rec_dist(1), info, channel);
-
-    % save single_ph_holo
-    info.direction = 'forward';
 
     for d = rec_dist
 
@@ -65,18 +62,21 @@ function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
                 %     info.ap_sizes, ...
                 %     info.apod);
 
-                hol_rendered_forward = num_rec(single_ph_holo, info, d);
+                hol_rendered = num_rec(original_hologram, info, d);
 
-                figure_name = sprintf('%s_%s_%d_[%dx%d]', hologram_name, channel2string(channel), d*1000, h, v);
+                figure_name = sprintf('%s_%d_[%dx%d]', hologram_name, d * 1000, h, v);
                 figure_path = fullfile(figure_dir, figure_name);
-                holo_abs = abs(hol_rendered_forward);
+                holo_abs = abs(hol_rendered);
 
                 try
                     imwrite(holo_abs, [figure_path '.png']);
+                    disp(['Figure saved as ' [figure_path '.png.']])
                 catch
+                    warning('Image size too big, resizing by 0.25')
                     holo_abs = imresize(holo_abs, 0.25);
                     imwrite(holo_abs, [figure_path '.png']);
                 end
+
             end
 
         end
