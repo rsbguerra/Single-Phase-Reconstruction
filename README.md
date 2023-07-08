@@ -29,7 +29,7 @@ Software aiming to reconstruct color holograms using a single matrix containing 
 - `res/` ─ External projects location, contains all of the CTC and NRSH source code;
 - `src/` ─ Source code.
 
-## Usage Guide
+## User Guide
 
 Before running the run.m script, it's necessary to follow these steps:
 1. Download the holograms. The links for the supported holograms are the following (Download will begin automatically):
