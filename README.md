@@ -1,6 +1,6 @@
 # Single-Phase-Reconstruction
 
-Software aiming to reconstruct color holograms using a single matrix containing the hologram's phase information, instead of the three normally used.
+Software aiming to reconstruct color holograms using a single matrix containing the hologram's phase information, instead of the three normally used. In this project, the hologram reconstruction is done using [JPEG Pleno NRSH](https://gitlab.com/wg1/jpeg-pleno-nrsh) functions.
 
 *NOTE:* This README.md is a work in progress, any suggestions please open an issue tagged as `documentation`.
 
@@ -29,7 +29,7 @@ Software aiming to reconstruct color holograms using a single matrix containing 
 - `res/` ─ External projects location, contains all of the CTC and NRSH source code;
 - `src/` ─ Source code.
 
-## Usage
+## Usage Guide
 
 Before running the run.m script, it's necessary to follow these steps:
 1. Download the holograms. The links for the supported holograms are the following (Download will begin automatically):
@@ -37,18 +37,20 @@ Before running the run.m script, it's necessary to follow these steps:
 	2. [CGH_Venus](http://ds.erc-interfere.eu/downloads/dataset3/CGH_Venus.zip) (90 MB)
 	3. [DeepDices16K, Amplitude-Phase](https://hologram-repository.labs.b-com.com/store/dices16k/dices16k-AP.zip) (1.43 GB)
 	4. [DeepDices2K, Amplitude-Phase](https://hologram-repository.labs.b-com.com/store/deepDices2k/deepDices2k-AP.zip) (23.2 MB)
+	5. [DeepDices8K4K, Amplitude-Phase](https://hologram-repository.labs.b-com.com/store/deepDices8k4k/deepDices8k4k-AP.zip) (184 MB)
 	6. [Lowiczanka_Doll](http://plenodb.jpeg.org/holo/WUT/WUT_color_digital_on-axis_holograms.tar.gz) (3.31 GB)
-2. Place the holograms in `data/input/holograms/`;
-3. On MATLAB IDE, change the current folder to  `src/holo_config` ;
-4. Run the script `gen_config_files.m` (for more context read the 'Configuration Files' section below);
-5. On MATLAB IDE, change the current folder to  `src/` ;
+2. *IF THE HOLOGRAM IS ONE OF THE DEEP DICES*, the zip files will contain two .bmp files. However, the NRSH only accepts .mat files. In order to convert them, extract the compressed file and run the conversion script as such: ```python src/utils/bcom2mat.py <path_to_hologram_folder>```. The .mat file will be saved on `data/input/holograms/`.
+3. Place the holograms in `data/input/holograms/`;
+4. On MATLAB IDE, change the current folder to  `src/` ;
+5. Run the script `gen_config_files.m` (for more context read the 'Configuration Files' section below);
 6. On the `run.m` script, change the following variables:
 	1. `hologram_name: string` ─ can be either:
 		1. Biplane16k
 		2. CGH_Venus
 		3. DeepDices16K
 		4. DeepDices2K
-		5. Lowiczanka_Doll
+		5. DeepDices8K4K
+		6. Lowiczanka_Doll
 	2. `rec_dists: float` ─ reconstruction distance within each hologram range (see table in section 'Hologram Configuration').
 	3. `h_pos, v_pos: array` ─ aperture position, values range from -1 to 1.
 	4. `channel: int` ─ channel of the phase matrix to be used on the hologram reconstruction.
@@ -73,11 +75,12 @@ Remember to `cd` to the project root directory, otherwise, MATLAB might not be a
 The following table presents the possible reconstruction distance in meters.
 
 | Hologram        | Min Rec Dist (m) | Max rec Dist (m) |
-|-----------------|:----------------:|:---------------:|
+|-----------------|------------------|------------------|
 | Biplane16K      | 0.037            | 0.049            |
 | CGH_Venus       | 0.2955           | 0.3045           |
 | DeepDices16K    | 0.00338          | 0.0459           |
 | DeepDices2K     | 0.00507          | 0.246            |
+| DeepDices8k4k   | 0.0101           | 0.492            |
 | Lowiczanka_Doll | 1.030            | 1.077            |
 
-For further information on the holograms, please consult the [JPEG PLENO spreadsheet](https://docs.google.com/spreadsheets/d/17YW4iS6HQEK7-fUA91i0IiwhleaqMjAI7HWX3NwkZyE/edit#gid=0)
+For further information on the holograms, please consult the [JPEG PLENO spreadsheet](https://docs.google.com/spreadsheets/d/17YW4iS6HQEK7-fUA91i0IiwhleaqMjAI7HWX3NwkZyE/edit#gid=0).
