@@ -31,6 +31,12 @@ function reconstruct(hologram_name, rec_dist, h_pos, v_pos)
             original_hologram = single(data);
             clearvars data
 
+        case 'DeepDices8K4K'
+            load([config_dir 'DeepDices8K4K_config.mat'], 'info', 'hologram_path');
+            load(hologram_path, 'data');
+            original_hologram = single(data);
+            clearvars data
+
         case 'Lowiczanka_Doll'
             wut_single_ph_rec(rec_dist, h_pos, v_pos, channel);
             return
@@ -56,11 +62,11 @@ function reconstruct(hologram_name, rec_dist, h_pos, v_pos)
 
                 %% Apperture application
                 [original_hologram] = aperture(original_hologram, ...
-                     true, ...
-                     info.pixel_pitch, ...
-                     d, h, v, ...
-                     info.ap_sizes, ...
-                     info.apod);
+                    true, ...
+                    info.pixel_pitch, ...
+                    d, h, v, ...
+                    info.ap_sizes, ...
+                    info.apod);
 
                 hol_rendered = num_rec(original_hologram, info, d);
 
