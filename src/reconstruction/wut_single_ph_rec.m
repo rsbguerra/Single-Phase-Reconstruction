@@ -1,8 +1,12 @@
 function wut_single_ph_rec(rec_dist, h_pos, v_pos, channel)
-    load('holo_config/Lowiczanka_Doll_config.mat');
+    % setup needed paths
+    curr_dir = working_dir();
+    config_dir = fullfile(curr_dir, 'data/config/single_phase_config/');
+    hologram_name = 'Lowiczanka_Doll';
+    figure_dir = fullfile(curr_dir, 'data/output/single_phase_fig', hologram_name);
+
+    load([config_dir 'Lowiczanka_Doll_config.mat']);
     load(hologram_path);
-    hologram_name = 'Lowiczanka_Doll'
-    figure_dir = fullfile('/mnt/data/code/holography-ctc/single_phase_rec/figures', hologram_name);
 
     X = double(dh);
 

@@ -2,13 +2,13 @@
 clear; clc
 working_dir = working_dir();
 
-add_paths(working_dir, ["res/nrsh" "res/nrsh/core"]);
+add_paths(working_dir, ["res/nrsh/" "res/nrsh/core/"]);
 
-cfg_dir  = [working_dir 'data/config/nrsh_config'];
-save_dir = [working_dir 'data/config/single_phase_config'];
+cfg_dir  = [working_dir 'data/config/nrsh_config/'];
+save_dir = [working_dir 'data/config/single_phase_config/'];
 
 hologram_dir = '/mnt/data/Holograms/';
-holograms = ["CGH_Biplane16k_rgb", "CGH_Venus", "DeepDices16K", "Lowiczanka_Doll"];
+holograms = ["CGH_Biplane16k_rgb", "CGH_Venus", "DeepDices16K", "Lowiczanka_Doll", "DeepDices2K"];
 
 for holo_name = holograms
     switch holo_name
@@ -41,7 +41,7 @@ for holo_name = holograms
 
             rec_dist = 0.0455;
 
-            save([save_dir '/Biplane16k_config.mat'])
+            save([save_dir 'Biplane16k_config.mat'])
 
         case "CGH_Venus"
             hologram_path = [hologram_dir 'Interfere/Interfere-III/CGH_Venus.mat'];
@@ -70,7 +70,7 @@ for holo_name = holograms
                 'resize_fun', 'DR');
 
             rec_dist = 0.2957;
-            save([save_dir '/CGH_Venus_config.mat'])
+            save([save_dir 'CGH_Venus_config.mat'])
 
         case "DeepDices16K"
             hologram_path = [hologram_dir 'bcom/DeepDices16K.mat'];
@@ -99,7 +99,7 @@ for holo_name = holograms
                 'resize_fun', 'DR');
 
             rec_dist = 0.0185;
-            save([save_dir '/DeepDices16K_config.mat'])
+            save([save_dir 'DeepDices16K_config.mat'])
 
         case "DeepDices2K"
             hologram_path = [hologram_dir 'bcom/deepDices2k-AP/deepDices2k.mat'];
@@ -128,10 +128,10 @@ for holo_name = holograms
                 'resize_fun', 'DR');
 
             rec_dist = 0.087;
-            save([save_dir '/DeepDices2K_config.mat'])
+            save([save_dir 'DeepDices2K_config.mat'])
 
         case "Lowiczanka_Doll"
-            hologram_path = [hologram_dir 'wut / opt_Warsaw_Lowiczanka_Doll.mat'];
+            hologram_path = [hologram_dir 'wut/opt_Warsaw_Lowiczanka_Doll.mat'];
             cfg_file = [cfg_dir 'wut/lowiczanka_doll_000.txt'];
 
             %% Load config
@@ -160,7 +160,7 @@ for holo_name = holograms
             info.clip_min = -1;
 
             rec_dist = [1.060 1.030 1.075];
-            save([save_dir '/Lowiczanka_Doll_config.mat'])
+            save([save_dir 'Lowiczanka_Doll_config.mat'])
 
         otherwise
             disp('Hologram config missing')
