@@ -7,14 +7,14 @@ add_paths(working_dir, ["res/nrsh/" "res/nrsh/core/"]);
 cfg_dir  = [working_dir 'data/config/nrsh_config/'];
 save_dir = [working_dir 'data/config/single_phase_config/'];
 
-hologram_dir = '/mnt/data/Holograms/';
+hologram_dir = [working_dir 'data/input/holograms/'];
 holograms = ["CGH_Biplane16k_rgb", "CGH_Venus", "DeepDices16K", "Lowiczanka_Doll", "DeepDices2K"];
 
 for holo_name = holograms
     switch holo_name
         case "CGH_Biplane16k_rgb"
             disp("Creating CGH_Biplane16k_rgb")
-            hologram_path = [hologram_dir 'Interfere/Interfere-III/CGH_Biplane16k_rgb.mat'];
+            hologram_path = [hologram_dir 'CGH_Biplane16k_rgb.mat'];
             cfg_file = [cfg_dir 'interfereIII/biplane16kETRO_000.txt'];
 
             %% Load config
@@ -44,7 +44,7 @@ for holo_name = holograms
             save([save_dir 'Biplane16k_config.mat'])
 
         case "CGH_Venus"
-            hologram_path = [hologram_dir 'Interfere/Interfere-III/CGH_Venus.mat'];
+            hologram_path = [hologram_dir 'CGH_Venus.mat'];
             cfg_file = [cfg_dir 'interfereIII/venus_000.txt'];
 
             %% Load config
@@ -73,7 +73,7 @@ for holo_name = holograms
             save([save_dir 'CGH_Venus_config.mat'])
 
         case "DeepDices16K"
-            hologram_path = [hologram_dir 'bcom/DeepDices16K.mat'];
+            hologram_path = [hologram_dir 'DeepDices16K.mat'];
             cfg_file = [cfg_dir 'bcom/DeepDices2k_000.txt'];
 
             %% Load config
@@ -102,7 +102,7 @@ for holo_name = holograms
             save([save_dir 'DeepDices16K_config.mat'])
 
         case "DeepDices2K"
-            hologram_path = [hologram_dir 'bcom/deepDices2k-AP/deepDices2k.mat'];
+            hologram_path = [hologram_dir 'deepDices2k.mat'];
             cfg_file = [cfg_dir 'bcom/DeepDices2k_000.txt'];
 
             %% Load config
@@ -131,7 +131,7 @@ for holo_name = holograms
             save([save_dir 'DeepDices2K_config.mat'])
 
         case "Lowiczanka_Doll"
-            hologram_path = [hologram_dir 'wut/opt_Warsaw_Lowiczanka_Doll.mat'];
+            hologram_path = [hologram_dir 'opt_Warsaw_Lowiczanka_Doll.mat'];
             cfg_file = [cfg_dir 'wut/lowiczanka_doll_000.txt'];
 
             %% Load config
