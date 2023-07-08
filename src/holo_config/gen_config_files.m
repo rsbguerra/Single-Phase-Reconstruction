@@ -1,16 +1,20 @@
 %% Set Paths
 clear; clc
+
+addpath("../")
+
 working_dir = working_dir();
 
-add_paths(working_dir, ["res/nrsh/" "res/nrsh/core/"]);
+add_paths(working_dir, ["src/" "res/nrsh/" "res/nrsh/core/"]);
 
-cfg_dir  = [working_dir 'data/config/nrsh_config/'];
+cfg_dir = [working_dir 'data/config/nrsh_config/'];
 save_dir = [working_dir 'data/config/single_phase_config/'];
 
 hologram_dir = [working_dir 'data/input/holograms/'];
-holograms = ["CGH_Biplane16k_rgb", "CGH_Venus", "DeepDices16K", "Lowiczanka_Doll", "DeepDices2K"];
+holograms = ["CGH_Biplane16k_rgb", "CGH_Venus", "DeepDices16K", "Lowiczanka_Doll", "DeepDices2K", "DeepDices8K4K"];
 
 for holo_name = holograms
+
     switch holo_name
         case "CGH_Biplane16k_rgb"
             disp("Creating CGH_Biplane16k_rgb")
@@ -130,6 +134,35 @@ for holo_name = holograms
             rec_dist = 0.087;
             save([save_dir 'DeepDices2K_config.mat'])
 
+        case "DeepDices8K4K"
+            hologram_path = [hologram_dir 'deepDices8k4k.mat'];
+            cfg_file = [cfg_dir 'bcom/DeepDices8k4k_000.txt'];
+
+            %% Load config
+
+            dataset = 'bcom32';
+            zero_pad = false;
+            ap_sizes = [4320 7680];
+            usagemode = 'individual';
+            h_pos = 0;
+            v_pos = 0;
+            target_res = [4320 7680];
+
+            info = getSettings('dataset', dataset, ...
+                'zero_pad', zero_pad, ...
+                'cfg_file', cfg_file, ...
+                'usagemode', usagemode, ...
+                'ap_sizes', ap_sizes, ...
+                'apertureinpxmode', false, ...
+                'h_pos', h_pos, ...
+                'v_pos', v_pos, ...
+                'targetres', target_res, ...
+                'direction', 'forward', ...
+                'resize_fun', 'DR');
+
+            rec_dist = 0.3;
+            save([save_dir 'DeepDices8K4K_config.mat'])
+
         case "Lowiczanka_Doll"
             hologram_path = [hologram_dir 'opt_Warsaw_Lowiczanka_Doll.mat'];
             cfg_file = [cfg_dir 'wut/lowiczanka_doll_000.txt'];
@@ -165,4 +198,5 @@ for holo_name = holograms
         otherwise
             disp('Hologram config missing')
     end
+
 end

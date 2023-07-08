@@ -11,21 +11,31 @@ function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
             load([config_dir 'Biplane16k_config.mat'], 'info', 'hologram_path');
             load(hologram_path, 'CGH');
             original_hologram = CGH.Hol;
+            clearvars CGH
 
         case 'CGH_Venus'
             load([config_dir 'CGH_Venus_config.mat'], 'info', 'hologram_path');
             load(hologram_path, 'CGH');
             original_hologram = CGH.Hol;
+            clearvars CGH
 
         case 'DeepDices16K'
             load([config_dir 'DeepDices16K_config.mat'], 'info', 'hologram_path');
             load(hologram_path, 'data');
             original_hologram = single(data);
+            clearvars data
 
         case 'DeepDices2K'
             load([config_dir 'DeepDices2K_config.mat'], 'info', 'hologram_path');
             load(hologram_path, 'data');
             original_hologram = single(data);
+            clearvars data
+
+        case 'DeepDices8K4K'
+            load([config_dir 'DeepDices8K4K_config.mat'], 'info', 'hologram_path');
+            load(hologram_path, 'data');
+            original_hologram = single(data);
+            clearvars data
 
         case 'Lowiczanka_Doll'
             wut_reconstruction(rec_dist, h_pos, v_pos);
@@ -67,7 +77,7 @@ function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
 
                 hol_rendered_forward = num_rec(single_ph_holo, info, d);
 
-                figure_name = sprintf('%s_%s_%d_[%dx%d]', hologram_name, channel2string(channel), d*1000, h, v);
+                figure_name = sprintf('%s_%s_%d_[%dx%d]', hologram_name, channel2string(channel), d * 1000, h, v);
                 figure_path = fullfile(figure_dir, figure_name);
                 holo_abs = abs(hol_rendered_forward);
 
@@ -77,6 +87,7 @@ function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
                     holo_abs = imresize(holo_abs, 0.25);
                     imwrite(holo_abs, [figure_path '.png']);
                 end
+
             end
 
         end
