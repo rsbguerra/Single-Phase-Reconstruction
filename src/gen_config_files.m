@@ -1,8 +1,6 @@
 %% Set Paths
 clear; clc
 
-addpath("../")
-
 working_dir = working_dir();
 
 add_paths(working_dir, ["src/" "res/nrsh/" "res/nrsh/core/"]);
