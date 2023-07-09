@@ -45,12 +45,12 @@ Before running the run.m script, it's necessary to follow these steps:
 5. Run the script `gen_config_files.m` (for more context read the 'Configuration Files' section below);
 6. On the `run.m` script, change the following variables:
 	1. `hologram_name: string` ─ can be either:
-		1. Biplane16k
-		2. CGH_Venus
-		3. DeepDices16K
-		4. DeepDices2K
-		5. DeepDices8K4K
-		6. Lowiczanka_Doll
+		1. `"Biplane16k"`
+		2. `"CGH_Venus"`
+		3. `"DeepDices16K"`
+		4. `"DeepDices2K"`
+		5. `"DeepDices8K4K"`
+		6. `"Lowiczanka_Doll"`
 	2. `rec_dists: float` ─ reconstruction distance within each hologram range (see table in section 'Hologram Configuration').
 	3. `h_pos, v_pos: array` ─ aperture position, values range from -1 to 1.
 	4. `channel: int` ─ channel of the phase matrix to be used on the hologram reconstruction.
