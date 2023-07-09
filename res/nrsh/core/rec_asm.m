@@ -1,4 +1,4 @@
-function [recons] = rec_asm(hol, pitch, wlen, rec_dist, zero_pad, direction)
+function [recons] = rec_asm(hol, pitch, wlen, rec_dist, zero_pad, direction, isLast)
     %REC_ASM Angular Spectrum Method implementation
     %
     %   Inputs:
@@ -12,6 +12,7 @@ function [recons] = rec_asm(hol, pitch, wlen, rec_dist, zero_pad, direction)
     %                        the following char. arrays: forward (propagation
     %                        towards the object plane) or inverse (propagation
     %                        towards the hologram plane)
+    %    isLast            - boolean last iteration -> early clear F
     %   Output:
     %    recons            - reconstructed field (complex magnitude)
     %
@@ -19,18 +20,18 @@ function [recons] = rec_asm(hol, pitch, wlen, rec_dist, zero_pad, direction)
 
     %% 0) Initialization
     % Initialize missing arguments
-    if nargin < 6
-        direction = 'forward';
-
-        if nargin < 5
-            zero_pad = false;
-
-            if nargin < 4
-                error('nrsh:rec_asm:input_args', 'Error in rec_asm: not enough input arguments.')
-            end
-
-        end
-
+    switch nargin
+        case 6
+            isLast = false;
+        case 5
+            isLast = false;
+            direction = 'forward';
+        case 4
+            isLast = false;
+            direction = 'forward';
+            zero_pad = 0;
+        case {0, 1, 2, 3}
+            error('nrsh:rec_asm:input_args', 'Error in rec_asm: not enough input arguments.')
     end
 
     % Check if propagation has to happen
@@ -94,15 +95,17 @@ function [recons] = rec_asm(hol, pitch, wlen, rec_dist, zero_pad, direction)
 
     % Perform propagation
     if (do_propag)
-        % Compute propagation kernel
-        H = exp(-2i * pi * sqrt(max(0, (1 / wlen) ^ 2 - F)) * rec_dist);
-        H(H == 1) = 0;
-
         % Forward Fourier transform
         recons = fft2(recons);
 
+        % Compute propagation kernel
+        H = exp(-2i * pi * sqrt(max(0, (1 / wlen) ^ 2 - F)) * rec_dist);
+        if (isLast), clear F; end
+        H(H == 1) = 0;
+
         % Apply kernel
-        recons = recons .* H;
+        recons = recons .* single(H);
+        clear H;
 
         % Inverse Fourier transform
         recons = ifft2(recons);

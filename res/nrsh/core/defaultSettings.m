@@ -85,8 +85,8 @@ function info = defaultSettings(hol, rec_dists, info)
         info.verbosity = true;
     end
 
-    if ~isfield(info, 'orthoscopic')
-        info.orthoscopic = false;
+    if ~isfield(info, 'orthographic')
+        info.orthographic = false;
     end
 
     if isa(info.resize_fun, 'function_handle')

@@ -1,20 +1,20 @@
-function [hol_rendered] = num_rec(hologram, info, rec_dist)
+function [hol_rendered] = num_rec(hologram, info, rec_dist, isLast)
     %NUM_REC reconstructs a hologram belonging to Pleno DB.
     %
     %   Inputs:
-    %    hologram - hologram to reconstruct
-    %    info     - reconstruction parameters
-    %    rec_dist - reconstruction distance [m]
+    %    hologram          - hologram to reconstruct
+    %    info              - reconstruction parameters
+    %    rec_dist          - reconstruction distance [m]
     %
     %   Output:
-    %    hol_rendered - hologram reconstruction.
+    %    hol_rendered      - hologram reconstruction.
     %
-
 
     %% RECONSTRUCTION
     colors = size(hologram, 3);
     hol_rendered = hologram;
     if (rec_dist == 0), return, end % Early exit
+    if (nargin < 4), isLast = false; end
 
     switch lower(info.method)
 
@@ -24,7 +24,7 @@ function [hol_rendered] = num_rec(hologram, info, rec_dist)
                 hol_rendered(:, :, idx) = rec_asm(hol_rendered(:, :, idx), ...
                     info.pixel_pitch, ...
                     info.wlen(idx), rec_dist, ...
-                    info.zero_pad, info.direction);
+                    info.zero_pad, info.direction, isLast);
             end
 
         case 'fresnel'
@@ -36,10 +36,10 @@ function [hol_rendered] = num_rec(hologram, info, rec_dist)
             end
 
             for idx = 1:colors
-                hol_rendered(:, :, idx) = fun(hol_rendered(:, :, idx), ...
+                hol_rendered(:, :, idx) = fun(hol_rendered(:, :, idx), . ...
                     info.pixel_pitch, ...
                     info.wlen(idx), rec_dist, ...
-                    info.zero_pad, info.direction);
+                    info.zero_pad, info.direction, isLast);
             end
 
         case 'fourier-fresnel'
@@ -60,7 +60,7 @@ function [hol_rendered] = num_rec(hologram, info, rec_dist)
                 hol_rendered(:, :, idx) = rec_fresnel(hol_rendered(:, :, idx), ...
                     info.pixel_pitch, ...
                     info.wlen(idx), rec_dist, ...
-                    info.zero_pad, info.direction, info.ref_wave_rad);
+                    info.zero_pad, info.direction, info.ref_wave_rad, isLast);
             end
 
         otherwise
