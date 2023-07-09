@@ -14,14 +14,14 @@ Config file parsed.
 	                        dataset :
 	                      direction : forward
 	                            fps : 10
-	                          h_pos : -10   0  10
+	                          h_pos : -1  0  1
 	                   hist_stretch : 1
 	                       isBinary : 0
 	                    isFourierDH : 0
 	                         method : ASM
 	                    name_prefix :
 	                  offaxisfilter : h
-	                    orthoscopic : 0
+	                   orthographic : 0
 	                  outfolderpath : ./figures
 	                      perc_clip : 1
 	                     perc_value : 98
@@ -35,16 +35,40 @@ Config file parsed.
 	                      targetres : 8192  8192
 	                      usagemode : exhaustive
 	      use_first_frame_reference : 1
-	                          v_pos : -8  0  8
+	                          v_pos : 0
 	                           wlen : 6.4e-07    5.32e-07    4.73e-07
 	                       zero_pad : 1
-Not enough input arguments.
 
-Error in aperture_angle_checker (line 27)
-    if (verbosity)
+Synthetic aperture out-of-bound check...Square fix!
+Square fix!
+passed!
 
-Error in nrsh (line 339)
-                rec_par_idx = aperture_angle_checker(size(hol, 1), size(hol, 2), rec_par_idx, ...
+Calculating h_pos=-1 v_pos=0 apert_size=7 rec_dist=0.0023 ... Error using signal.internal.sigcheckfloattype
+Can't reload '/home/raquel/Applications/MATLAB/bin/glnxa64/libmwxcp_dwarf.so'
 
-Error in specular_car_8k (line 9)
+Error in signal.internal.sigcasttofloat (line 36)
+signal.internal.sigcheckfloattype(x,'', fcnName, varName, datacheckflag);
+
+Error in gencoswin (line 15)
+n = signal.internal.sigcasttofloat(varargin{2},'double','gencoswin','N',...
+
+Error in hann (line 22)
+[w,msg,msgobj] = gencoswin('hann',varargin{:});
+
+Error in window (line 52)
+    w = feval(wname,N,varargin{:});
+
+Error in window2 (line 58)
+    wc = window(w_func, N);
+
+Error in aperture_gen_angle (line 88)
+            apod_wind = window2((end_row - start_row + 1), (end_col - start_col + 1), @hann);
+
+Error in aperture (line 33)
+            hol_rendered = aperture_gen_angle(hologram, isFourierDH, pixel_pitch, rec_dist, h_pos, v_pos, ap_size, apod);
+
+Error in nrsh (line 484)
+                    [hol_rendered] = aperture(hol, info.isFourierDH, ...
+
+Error in specular_car_8k (line 13)
 nrsh(data, 0.0023, info);
