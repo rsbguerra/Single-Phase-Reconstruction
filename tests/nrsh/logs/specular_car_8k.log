@@ -1,0 +1,50 @@
+>> specular_car_8k
+Config file parsed.
+******************************************************************************************
+**************************Configuration setup:**************************
+******************************************************************************************
+	                      rec_dists : 0.0023
+	                       ap_sizes : 7
+	               apertureinpxmode : 0
+	                           apod : 1
+	                      bit_depth : 16
+	                       cfg_file : ../../data/config/nrsh_config/bcom/specular_car8k_000.txt
+	                       clip_max : -1
+	                       clip_min : -1
+	                        dataset :
+	                      direction : forward
+	                            fps : 10
+	                          h_pos : -10   0  10
+	                   hist_stretch : 1
+	                       isBinary : 0
+	                    isFourierDH : 0
+	                         method : ASM
+	                    name_prefix :
+	                  offaxisfilter : h
+	                    orthoscopic : 0
+	                  outfolderpath : ./figures
+	                      perc_clip : 1
+	                     perc_value : 98
+	                    pixel_pitch : 4e-07
+	                     reffronorm : 1  1  1
+	                     resize_fun :
+	                  save_as_image : 1
+	                    save_as_mat : 0
+	                 save_intensity : 0
+	                           show : 0
+	                      targetres : 8192  8192
+	                      usagemode : exhaustive
+	      use_first_frame_reference : 1
+	                          v_pos : -8  0  8
+	                           wlen : 6.4e-07    5.32e-07    4.73e-07
+	                       zero_pad : 1
+Not enough input arguments.
+
+Error in aperture_angle_checker (line 27)
+    if (verbosity)
+
+Error in nrsh (line 339)
+                rec_par_idx = aperture_angle_checker(size(hol, 1), size(hol, 2), rec_par_idx, ...
+
+Error in specular_car_8k (line 9)
+nrsh(data, 0.0023, info);
