@@ -80,7 +80,12 @@ function validateSettings(hol, info)
     end
 
     validateattributes(info.wlen, {'numeric'}, {'nonempty', 'row', 'numel', size(hol, 3)}, 'nrsh', 'wlen');
-    validateattributes(info.pixel_pitch, {'numeric'}, {'scalar', 'nonempty'}, 'nrsh', 'pixel_pitch');
+
+    if (isscalar(info.pixel_pitch))
+        validateattributes(info.pixel_pitch, {'numeric'}, {'scalar', 'nonempty'}, 'nrsh', 'pixel_pitch');
+    else
+        validateattributes(info.pixel_pitch, {'numeric'}, {'numel', 2}, 'nrsh', 'pixel_pitch');
+    end
 
     if (~isOctave)
         validateattributes(info.method, {'char', 'string'}, {'scalartext', 'nonempty'}, 'nrsh', 'method');
@@ -168,7 +173,7 @@ function validateSettings(hol, info)
     end
 
     validateattributes(info.verbosity, {'logical'}, {'scalar', 'nonempty'}, 'nrsh', 'verbosity');
-    validateattributes(info.orthoscopic, {'logical'}, {'scalar', 'nonempty'}, 'nrsh', 'orthoscopic');
+    validateattributes(info.orthographic, {'logical'}, {'scalar', 'nonempty'}, 'nrsh', 'orthographic');
 
     %% Sanity checks
     validateattributes(info.isBinary, {'logical'}, {'scalar', 'nonempty'}, 'nrsh', 'isBinary');

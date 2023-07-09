@@ -15,6 +15,7 @@ function [hol_rendered, clip_min, clip_max] = nrsh(hol, rec_dists, info, varargi
     %                 previously loaded in the workspace or a path to a folder
     %                 where the hologram is stored. If left empty, the hologram
     %                 is loaded manually through the GUI.
+    %                 Binary holograms have to be stored/provided as logical datatype.
     %	rec_dists@numeric(N,1) or numeric(1,N) or numeric(1) (mandatory)
     %               - Reconstruction distance(s) [m]. It can be a single value
     %                 or a row or column vector of values.
@@ -119,8 +120,8 @@ function [hol_rendered, clip_min, clip_max] = nrsh(hol, rec_dists, info, varargi
     %                 usagemode = 'dynamic'.
     %   verbosity@logical(1) (optional, default is true)
     %               - Allows to disable command line output, except for warnings and errors.
-    %   orthoscopic@logical(1) (optional, default is false)
-    %               - Allows to obtain orthoscopic reconstruction
+    %   orthographic@logical(1) (optional, default is false)
+    %               - Allows to obtain orthographic reconstruction
     %
     %   Additionally, any of the following fields may overwrite cfg_file options:
     %       wlen@numeric(1) or numeric(1,3) or numeric(3, 1)
@@ -369,23 +370,23 @@ function [hol_rendered, clip_min, clip_max] = nrsh(hol, rec_dists, info, varargi
             hol = single(hol);
 
             if strcmpi(info.offaxisfilter, 'v')
-                [X, ~] = meshgrid(((-si(2) / 2:si(2) / 2 - 1) + 0.5) / si(2), ((-si(1) / 2:si(1) / 2 - 1) + 0.5) / si(1));
+                [RX, ~] = meshgrid(single(((-si(2) / 2:si(2) / 2 - 1) + 0.5) / si(2)), single(((-si(1) / 2:si(1) / 2 - 1) + 0.5) / si(1)));
                 % bandlimit horizontally the hologram (because we will illuminate it later with off-axis vertical fringes)
                 % simulate an incident off-axis planar illumination above the hologram (create vertical fringes)
-                R = exp(2i * pi * X * si(2) / 4); % off-axis phase modulation
-                clear X;
+                RX = single(exp(2i * pi * RX * si(2) / 4)); % off-axis phase modulation
                 % filter conjugated orders + DC
-                hol = ifftshift(fft2(fftshift(hol .* R)));
+                hol = ifftshift(fft2(fftshift(hol .* RX)));
+                clear RX;
                 hol(:, [1:si(2) / 4, si(2) * 3/4 + 1:end], :) = [];
                 hol = ifftshift(ifft2(fftshift(hol)));
             else
-                [~, Y] = meshgrid(((-si(2) / 2:si(2) / 2 - 1) + 0.5) / si(2), ((-si(1) / 2:si(1) / 2 - 1) + 0.5) / si(1));
+                [~, RY] = meshgrid(single(((-si(2) / 2:si(2) / 2 - 1) + 0.5) / si(2)), single(((-si(1) / 2:si(1) / 2 - 1) + 0.5) / si(1)));
                 % bandlimit vertically the hologram (because we will illuminate it later with off-axis horizontal fringes)
                 % simulate an incident off-axis planar illumination above the hologram (create horizontal fringes)
-                R = exp(2i * pi * Y * si(1) / 4); % off-axis phase modulation
-                clear Y;
+                RY = single(exp(2i * pi * RY * si(1) / 4)); % off-axis phase modulation
                 % filter conjugated orders + DC
-                hol = ifftshift(fft2(fftshift(hol .* R)));
+                hol = ifftshift(fft2(fftshift(hol .* RY)));
+                clear RY;
                 hol([1:si(1) / 4, si(1) * 3/4 + 1:end], :, :) = [];
                 hol = ifftshift(ifft2(fftshift(hol)));
             end
@@ -479,7 +480,7 @@ function [hol_rendered, clip_min, clip_max] = nrsh(hol, rec_dists, info, varargi
                 t = tic();
 
                 % Apperture application - pt. 1
-                if (info.orthoscopic == false) % i.e. perspective
+                if (info.orthographic == false) % i.e. perspective
                     [hol_rendered] = aperture(hol, info.isFourierDH, ...
                         info.pixel_pitch, ...
                         rec_dists(rec_par_idx(1, idx)), ...
@@ -493,7 +494,7 @@ function [hol_rendered, clip_min, clip_max] = nrsh(hol, rec_dists, info, varargi
 
                 % Numerical reconstruction
                 [hol_rendered] = num_rec(hol_rendered, info, ...
-                    rec_dists(rec_par_idx(1, idx)));
+                    rec_dists(rec_par_idx(1, idx)), idx == nbRecons);
 
                 % DC filter
                 if strcmpi(info.dataset, 'wut_disp')
@@ -503,8 +504,8 @@ function [hol_rendered, clip_min, clip_max] = nrsh(hol, rec_dists, info, varargi
                 end
 
                 % Apperture application - pt. 2
-                %   TODO: Rework loop over reconstructions in orthoscopic case, to avoid redundant propagations.
-                if (info.orthoscopic == true)
+                %   TODO: Rework loop over reconstructions in orthographic case, to avoid redundant propagations.
+                if (info.orthographic == true)
                     hol_rendered = fftshift(fft2(ifftshift(hol_rendered)));
 
                     [hol_rendered] = aperture(hol_rendered, info.isFourierDH, ...

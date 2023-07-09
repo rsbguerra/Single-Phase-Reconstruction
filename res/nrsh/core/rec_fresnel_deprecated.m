@@ -1,4 +1,4 @@
-function [recons] = rec_fresnel_deprecated(hol, pitch, wlen, rec_dist, zero_pad, direction)
+function [recons] = rec_fresnel_deprecated(hol, pitch, wlen, rec_dist, zero_pad, direction, isLast)
     %REC_FRESNEL Frensnel Method implementation.
     %
     %   Inputs:
@@ -6,7 +6,7 @@ function [recons] = rec_fresnel_deprecated(hol, pitch, wlen, rec_dist, zero_pad,
     %    pitch             - pixel pitch in meters
     %    wlen              - wavelength in meters.
     %    rec_dist          - reconstruction distance in meters
-    %    zero_pad          - Enables interim zero_padding and kernel
+    %	 zero_pad          - Enables interim zero_padding and kernel
     %                        band-wdith limitation, for more details on the latter
     %                        see [1]
     %    direction         - reconstruction direction. It should be one of
@@ -47,6 +47,7 @@ function [recons] = rec_fresnel_deprecated(hol, pitch, wlen, rec_dist, zero_pad,
     % Initialize other parameters
     super_res_fac = 2;
     k = 2 * pi / wlen;
+    if (nargin < 8), isLast = false; end
 
     % Keep pixel pitch in memory
     persistent pitch_pers;
@@ -63,7 +64,7 @@ function [recons] = rec_fresnel_deprecated(hol, pitch, wlen, rec_dist, zero_pad,
 
     %% 2) Initialize frequency grid and mask
     [rows, cols] = size(hol);
-    persistent F
+    persistent F;
     recons = hol;
 
     Lx = cols * pitch(1);
@@ -74,7 +75,7 @@ function [recons] = rec_fresnel_deprecated(hol, pitch, wlen, rec_dist, zero_pad,
     pitch_pers = pitch;
 
     if (doUpdateF || zero_pad) % Need to compute mask or F
-
+        % Can't reuse F as interim buffer, in general
         if (isSameDim)
             X = -Lx / 2:pitch_pers:Lx / 2 - pitch_pers;
             [X, ~] = meshgrid(X);
@@ -115,35 +116,49 @@ function [recons] = rec_fresnel_deprecated(hol, pitch, wlen, rec_dist, zero_pad,
 
     %% 3) Propagate
     if strcmpi(direction, 'forward')
-        %% 4.a1) Apply Kernel
+        % Apply Kernel
         if (doPropag)
             recons = ((-1i / (wlen * rec_dist)) * exp((1i * k / (2 * rec_dist)) * F)) .* recons;
         end
 
-        %% 4.a2) BW limit, if required
+        if (isLast), clear F; end
+
+        % BW limit, if required
         if (zero_pad == true)
             recons = recons .* mask;
         end
 
-        %% 4.a3) Inverse Fourier transform
-        recons = ifftshift(ifft2(recons));
-    else
-        %% 4.b1) Inverse Fourier transform
-        recons = fft2(fftshift(recons));
+        if (isLast), clear mask; end
 
-        %% 4.b2) Apply kernel
+        % Apply Kernel
         if (doPropag)
+            % Inverse Fourier transform
+            recons = ifftshift(ifft2(recons));
+        end
+
+    else
+
+        if (doPropag)
+            % Forward Fourier transform
+            recons = fft2(fftshift(recons));
+
+            % Apply kernel
             recons = ((- (wlen * rec_dist) / 1i) * exp(- (1i * k / (2 * rec_dist)) * F)) .* recons;
         end
 
-        %% 4.b3) BW limit, if required
+        if (isLast), clear F; end
+
+        % BW limit, if required
         if (zero_pad == true)
             recons = recons .* mask;
         end
 
+        if (isLast), clear mask; end
     end
 
-    %% 5) Undo interim zero padding
+    %% 4) Undo zero-padding
     if (zero_pad == true)
         recons = fourierpadcrop(recons, 1 / super_res_fac);
     end
+
+end

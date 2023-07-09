@@ -3,14 +3,14 @@ function segment = load_segment(hol, info, m, n)
     % This function loads a given hologram segment from its line and column indexes
     %
     % Inputs:
-    %   hol  - folder path in which the hologram segments can be found
-    %   info - structure with rendering parameters, read from
-    %          configuration file
-    %   m    - line index of the hologram segment (from top to bottom)
-    %   n    - column index of the hologram segment (from left to right)
+    %   hol             - folder path in which the hologram segments can be found
+    %   info            - structure with rendering parameters, read from
+    %                     configuration file
+    %   m               - line index of the hologram segment (from top to bottom)
+    %   n               - column index of the hologram segment (from left to right)
     %
     % Outputs:
-    %   segment - complex modulation or bilevel phase hologram segment
+    %   segment         - complex modulation or bilevel phase hologram segment
     %
     % Authors:      Antonin GILLES, Patrick GIOIA
     %               Institute of Research & Technology b<>com

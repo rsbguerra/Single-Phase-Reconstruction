@@ -7,14 +7,14 @@ function H = diff_resize(H, pp, wlen, z, ap_size)
     %   Based on work presented to JPEG Pleno on Holography by D. Blinder and T. Birnbaum.
     %
     % INPUT:
-    %    H@numeric...            complex-valued wavefield of reconstructed hologram, to be resized
-    %    pp@numeric(1,2)...        pixel pitch in m
-    %     or numeric(2,1)
-    %    wlen@numeric(1)...        wavelength(s) in m
-    %     or @numeric(3)
-    %    z@numeric(1)...            distance of wavefield from org. hologram plane in m1
-    %    ap_size@numeric(1,2)...    aperture size used for reconstruction in px
-    %        or @numeric(2,1)
+    %   H@numeric...            complex-valued wavefield of reconstructed hologram, to be resized
+    %   pp@numeric(1,2)...      pixel pitch in m
+    %       or numeric(2,1)
+    %   wlen@numeric(1)...      wavelength(s) in m
+    %       or @numeric(3)
+    %   z@numeric(1)...         distance of wavefield from org. hologram plane in m1
+    %   ap_size@numeric(1,2)... aperture size used for reconstruction in px
+    %       or @numeric(2,1)
     %
     %   Version 1.50
     %   19.11.2020, T. Birnbaum

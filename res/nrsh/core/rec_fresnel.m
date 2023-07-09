@@ -1,4 +1,4 @@
-function [recons] = rec_fresnel(hol, pitch, wlen, rec_dist, zero_pad, direction, ref_wave_rad)
+function [recons] = rec_fresnel(hol, pitch, wlen, rec_dist, zero_pad, direction, ref_wave_rad, isLast)
     %REC_FRESNEL Frensnel + Fourier Method implementation.
     %
     %   Inputs:
@@ -6,7 +6,7 @@ function [recons] = rec_fresnel(hol, pitch, wlen, rec_dist, zero_pad, direction,
     %    pitch             - pixel pitch in meters
     %    wlen              - wavelength in meters.
     %    rec_dist          - reconstruction distance in meters
-    %    zero_pad          - Enables interim zero_padding and kernel
+    %	 zero_pad          - Enables interim zero_padding and kernel
     %                        band-wdith limitation, for more details on the latter
     %                        see [1]
     %    direction         - reconstruction direction. It should be one of
@@ -14,6 +14,7 @@ function [recons] = rec_fresnel(hol, pitch, wlen, rec_dist, zero_pad, direction,
     %                        towards the object plane) or inverse (propagation
     %                        towards the hologram plane)
     %    ref_wave_rad      - optional reference wave radius in meters
+    %    isLast            - boolean last iteration -> early clear F
     %
     %   Output:
     %    recons            - reconstructed field (complex magnitude)
@@ -132,6 +133,7 @@ function [recons] = rec_fresnel(hol, pitch, wlen, rec_dist, zero_pad, direction,
         % Apply Kernel
         if (doPropag)
             recons = recons .* exp(-1i * k * F / (2 * z));
+            if (isLast), clear F; end
         end
 
         % BW limit, if required
@@ -153,6 +155,7 @@ function [recons] = rec_fresnel(hol, pitch, wlen, rec_dist, zero_pad, direction,
         % Apply kernel
         if (doPropag)
             recons = recons .* exp(1i * k * F / (2 * z));
+            if (isLast), clear F; end
         end
 
         % BW limit, if required

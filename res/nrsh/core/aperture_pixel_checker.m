@@ -33,7 +33,7 @@ function [rec_par_idx] = aperture_pixel_checker(hol_rows, hol_cols, ...
         else
             %then do the other checks
             if ((current_size(1) > hol_rows) || (current_size(2) > hol_cols) ...
-                || (current_size(1) < 0) || (current_size(2) < 0))
+                    || (current_size(1) < 0) || (current_size(2) < 0))
 
                 bad_comb = [bad_comb, idx];
             end
