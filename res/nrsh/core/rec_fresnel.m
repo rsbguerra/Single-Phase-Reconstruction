@@ -23,7 +23,6 @@ function [recons] = rec_fresnel(hol, pitch, wlen, rec_dist, zero_pad, direction,
     %       "Pincushion point-spread function for computer-generated holography."
     %       Optics Letters 47.8 (2022): 2077-2080.
 
-
     %% 0) Initialization
     % Initialize missing arguments
     if nargin < 7
