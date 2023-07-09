@@ -1,0 +1,22 @@
+        isInfoStruct: 1
+           verbosity: 1
+            cfg_file: '../../data/config/nrsh_config/bcom/specular_car8k_000.txt'
+            isOctave: 0
+                wlen: [6.4000e-07 5.3200e-07 4.7300e-07]
+         pixel_pitch: 4.0000e-07
+              method: 'ASM'
+            zero_pad: 1
+                apod: 1
+           perc_clip: 1
+          perc_value: 98
+        hist_stretch: 1
+         save_as_mat: 0
+                show: 0
+       save_as_image: 1
+           bit_depth: 16
+      save_intensity: 0
+       offaxisfilter: 'h'
+    apertureinpxmode: 0
+            ap_sizes: 7
+               h_pos: [-10 0 10]
+               v_pos: [-8 0 8]
