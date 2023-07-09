@@ -1,3 +1,5 @@
+- 
+---
 
-
-[\< prev]() [next \>]()
+---
+[[date|< prev]] [[date|next >]]
