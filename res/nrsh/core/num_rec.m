@@ -30,15 +30,15 @@ function [hol_rendered] = num_rec(hologram, info, rec_dist, isLast)
         case 'fresnel'
 
             if (contains(info.dataset, 'emergimg'))
-                fun = @(dh, p, wlen, z, pad, dir) rec_fresnel_deprecated(dh, p, wlen, z, pad, dir);
+                fun = @(dh, p, wlen, z, pad, dir, isLast) rec_fresnel_deprecated(dh, p, wlen, z, pad, dir, isLast);
             else
-                fun = @(dh, p, wlen, z, pad, dir) rec_fresnel(dh, p, wlen, z, pad, dir);
+                fun = @(dh, p, wlen, z, pad, dir, isLast) rec_fresnel(dh, p, wlen, z, pad, dir, isLast);
             end
 
             for idx = 1:colors
-                hol_rendered(:, :, idx) = fun(hol_rendered(:, :, idx), . ...
+                hol_rendered(:, :, idx) = fun(hol_rendered(:, :, idx), ...
                     info.pixel_pitch, ...
-                    info.wlen(idx), rec_dist, ...
+                    info.wlen(idx), -rec_dist, ...
                     info.zero_pad, info.direction, isLast);
             end
 
