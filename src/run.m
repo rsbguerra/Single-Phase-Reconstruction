@@ -1,5 +1,5 @@
 clear; clc
-
+addpath('./utils');
 % Get absolute path to project
 curr_dir = working_dir();
 
@@ -13,16 +13,11 @@ add_paths(curr_dir, ["res/nrsh/" ...
                      ])
 
 %% Load hologram configuration
-hologram_name = 'DeepDices8K4K';
+hologram_name = 'Lowiczanka_Doll';
 
-rec_dists = 0.331;
-h_pos = [-0.5 0.5];
-v_pos = [-0.75 0.75];
+rec_dists = 1.030;
+h_pos = 0;
+v_pos = 0;
 channel = 1;
 
-%% Testing if the reconstruction function is being used correctly
-% After testing, single_phase_rec will be used
-
-reconstruct_nrsh(hologram_name, rec_dists, h_pos, v_pos)
-% reconstruct(hologram_name, rec_dists, h_pos, v_pos);
-% single_phase_rec(hologram_name, rec_dists, h_pos, v_pos, channel);
+single_phase_rec(hologram_name, rec_dists, h_pos, v_pos, channel);
