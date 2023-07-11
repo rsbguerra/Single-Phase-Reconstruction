@@ -13,10 +13,6 @@ function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
         mkdir(figure_dir);
     end
 
-    % reconstruction distance is not used in this case,
-    % so only the first distance is sent
-    single_ph_holo = remove_phases(original_hologram, rec_dist(1), info, channel);
-
     % save single_ph_holo
     info.direction = 'forward';
 
@@ -38,7 +34,7 @@ function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
 
                 hol_rendered_forward = num_rec(single_ph_holo, info, d);
 
-                figure_name = sprintf('%s_%s_%d_[%dx%d]', hologram_name, channel2string(channel), d * 1000, h, v);
+                figure_name = sprintf('%s_%s_%g_[%gx%g]', hologram_name, channel2string(channel), d , h, v);
                 figure_path = fullfile(figure_dir, figure_name);
                 holo_abs = abs(hol_rendered_forward);
 

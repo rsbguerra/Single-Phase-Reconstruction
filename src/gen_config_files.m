@@ -8,15 +8,18 @@ add_paths(working_dir, ["src/" "res/nrsh/" "res/nrsh/core/"]);
 cfg_dir = [working_dir 'data/config/nrsh_config/'];
 save_dir = [working_dir 'data/config/single_phase_config/'];
 hologram_dir = [working_dir 'data/input/holograms/'];
+single_phase_dir = [working_dir 'data/input/single_phase_holograms/'];
 
 holograms = ["CGH_Biplane16k_rgb", "CGH_Venus", "DeepDices16K", "Lowiczanka_Doll", "DeepDices2K", "DeepDices8K4K"];
 
 for holo_name = holograms
+    fprintf(1, 'Creating %s configuration...\n', holo_name)
 
     switch holo_name
         case "CGH_Biplane16k_rgb"
-            disp("Creating CGH_Biplane16k_rgb")
+
             hologram_path = [hologram_dir 'CGH_Biplane16k_rgb.mat'];
+            single_phase_path = [single_phase_dir 'CGH_Biplane16k_rgb_%s.mat'];
             cfg_file = [cfg_dir 'interfereIII/biplane16kETRO_000.txt'];
 
             %% Load config
@@ -42,13 +45,18 @@ for holo_name = holograms
                 'direction', 'forward', ...
                 'resize_fun', 'DR');
 
-            save([save_dir 'Biplane16k_config.mat'], ...
+            save_path = [save_dir 'Biplane16k_config.mat'];
+            save(save_path, ...
                 'default_rec_dist', ...
                 'info', ...
-            'hologram_path');
+                'hologram_path', ...
+            'single_phase_path');
+
+            fprintf(1, 'Configuration file saved as %s.\n\n', save_path)
 
         case "CGH_Venus"
             hologram_path = [hologram_dir 'CGH_Venus.mat'];
+            single_phase_path = [single_phase_dir 'CGH_Venus_%s.mat'];
             cfg_file = [cfg_dir 'interfereIII/venus_000.txt'];
 
             %% Load config
@@ -74,13 +82,18 @@ for holo_name = holograms
                 'direction', 'forward', ...
                 'resize_fun', 'DR');
 
-            save([save_dir 'CGH_Venus_config.mat'], ...
+            save_path = [save_dir 'CGH_Venus_config.mat'];
+            save(save_path, ...
                 'default_rec_dist', ...
                 'info', ...
-            'hologram_path');
+                'hologram_path', ...
+            'single_phase_path');
+
+            fprintf(1, 'Configuration file saved as %s.\n\n', save_path)
 
         case "DeepDices16K"
             hologram_path = [hologram_dir 'DeepDices16K.mat'];
+            single_phase_path = [single_phase_dir 'DeepDices16K_%s.mat'];
             cfg_file = [cfg_dir 'bcom/DeepDices2k_000.txt'];
 
             %% Load config
@@ -106,13 +119,18 @@ for holo_name = holograms
                 'direction', 'forward', ...
                 'resize_fun', 'DR');
 
-            save([save_dir 'DeepDices16K_config.mat'], ...
+            save_path = [save_dir 'DeepDices16K_config.mat'];
+            save(save_path, ...
                 'default_rec_dist', ...
                 'info', ...
-            'hologram_path');
+                'hologram_path', ...
+            'single_phase_path');
+
+            fprintf(1, 'Configuration file saved as %s.\n\n', save_path)
 
         case "DeepDices2K"
             hologram_path = [hologram_dir 'deepDices2k.mat'];
+            single_phase_path = [single_phase_dir 'DeepDices2K_%s.mat'];
             cfg_file = [cfg_dir 'bcom/DeepDices2k_000.txt'];
 
             %% Load config
@@ -138,13 +156,18 @@ for holo_name = holograms
                 'direction', 'forward', ...
                 'resize_fun', 'DR');
 
-            save([save_dir 'DeepDices2K_config.mat'], ...
+            save_path = [save_dir 'DeepDices2K_config.mat'];
+            save(save_path, ...
                 'default_rec_dist', ...
                 'info', ...
-            'hologram_path');
+                'hologram_path', ...
+            'single_phase_path');
+
+            fprintf(1, 'Configuration file saved as %s.\n\n', save_path)
 
         case "DeepDices8K4K"
             hologram_path = [hologram_dir 'deepDices8k4k.mat'];
+            single_phase_path = [single_phase_dir 'DeepDices8K4K_%s.mat'];
             cfg_file = [cfg_dir 'bcom/DeepDices8k4k_000.txt'];
 
             %% Load config
@@ -170,13 +193,17 @@ for holo_name = holograms
                 'direction', 'forward', ...
                 'resize_fun', 'DR');
 
-            save([save_dir 'DeepDices8K4K_config.mat'], ...
+            save_path = [save_dir 'DeepDices8K4K_config.mat'];
+            save(save_path, ...
                 'default_rec_dist', ...
                 'info', ...
             'hologram_path');
 
+            fprintf(1, 'Configuration file saved as %s.\n\n', save_path)
+
         case "Lowiczanka_Doll"
             hologram_path = [hologram_dir 'opt_Warsaw_Lowiczanka_Doll.mat'];
+            single_phase_path = [single_phase_dir 'Lowiczanka_Doll_%s.mat'];
             cfg_file = [cfg_dir 'wut/lowiczanka_doll_000.txt'];
 
             %% Load config
@@ -205,10 +232,13 @@ for holo_name = holograms
             info.clip_max = -1;
             info.clip_min = -1;
 
-            save([save_dir 'Lowiczanka_Doll_config.mat'], ...
+            save_path = [save_dir 'Lowiczanka_Doll_config.mat'];
+            save(save_path, ...
                 'default_rec_dist', ...
                 'info', ...
             'hologram_path');
+
+            fprintf(1, 'Configuration file saved as %s.\n\n', save_path)
 
         otherwise
             disp('Hologram config missing')
