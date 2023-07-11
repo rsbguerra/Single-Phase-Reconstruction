@@ -5,7 +5,7 @@ function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
     %% Load config
     disp('Loading config');
 
-    [original_hologram, info] = load_hologram(hologram_name);
+    [single_ph_holo, info] = load_hologram(hologram_name, channel);
 
     figure_dir = fullfile(curr_dir, 'data/output/single_phase_fig', hologram_name);
 
@@ -13,8 +13,7 @@ function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
         mkdir(figure_dir);
     end
 
-    % save single_ph_holo
-    info.direction = 'forward';
+    % info.direction = 'forward';
 
     for d = rec_dist
 
@@ -33,10 +32,10 @@ function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
                 %     info.apod);
 
                 hol_rendered_forward = num_rec(single_ph_holo, info, d);
+                holo_abs = abs(hol_rendered_forward);
 
                 figure_name = sprintf('%s_%s_%g_[%gx%g]', hologram_name, channel2string(channel), d , h, v);
                 figure_path = fullfile(figure_dir, figure_name);
-                holo_abs = abs(hol_rendered_forward);
 
                 try
                     imwrite(holo_abs, [figure_path '.png']);

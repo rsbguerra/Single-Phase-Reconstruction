@@ -1,4 +1,8 @@
-function [original_hologram, info] = load_hologram(hologram_name, channel)
+function [hologram, info] = load_hologram(hologram_name, channel)
+
+    if nargin < 2
+        channel = 0;
+    end
 
     curr_dir = working_dir();
     config_dir = fullfile(curr_dir, 'data/config/single_phase_config/');
@@ -10,10 +14,10 @@ function [original_hologram, info] = load_hologram(hologram_name, channel)
 
             if channel
                 holo_path = sprintf(vars.single_phase_path, channel2string(channel));
-                original_hologram = load(holo_path);
+                load(holo_path, 'hologram');
             else
                 load(vars.hologram_path, 'CGH');
-                original_hologram = CGH.Hol;
+                hologram = CGH.Hol;
             end
 
         case "CGH_Venus"
@@ -22,10 +26,10 @@ function [original_hologram, info] = load_hologram(hologram_name, channel)
 
             if channel
                 holo_path = sprintf(vars.single_phase_path, channel2string(channel));
-                original_hologram = load(holo_path);
+                load(holo_path, 'hologram');
             else
                 load(vars.hologram_path, 'CGH');
-                original_hologram = CGH.Hol;
+                hologram = CGH.Hol;
             end
 
         case "DeepDices16K"
@@ -34,10 +38,10 @@ function [original_hologram, info] = load_hologram(hologram_name, channel)
 
             if channel
                 holo_path = sprintf(vars.single_phase_path, channel2string(channel));
-                original_hologram = load(holo_path);
+                load(holo_path, 'hologram');
             else
                 load(vars.hologram_path, 'data');
-                original_hologram = single(data);
+                hologram = single(data);
             end
 
         case "DeepDices2K"
@@ -46,10 +50,10 @@ function [original_hologram, info] = load_hologram(hologram_name, channel)
 
             if channel
                 holo_path = sprintf(vars.single_phase_path, channel2string(channel));
-                original_hologram = load(holo_path);
+                load(holo_path, 'hologram');
             else
                 load(vars.hologram_path, 'data');
-                original_hologram = single(data);
+                hologram = single(data);
             end
 
         case "Lowiczanka_Doll"
@@ -58,10 +62,10 @@ function [original_hologram, info] = load_hologram(hologram_name, channel)
 
             if channel
                 holo_path = sprintf(vars.single_phase_path, channel2string(channel));
-                original_hologram = load(holo_path);
+                load(holo_path, 'hologram');
             else
                 load(vars.hologram_path, 'dh');
-                original_hologram = double(dh);
+                hologram = double(dh);
             end
 
         otherwise
