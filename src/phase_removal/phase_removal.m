@@ -2,11 +2,11 @@ clear; clc
 %% script imports
 
 addpath('../utils')
-add_paths(root_dir, ['src/reconstruction'])
+add_paths(root_dir, ['src/reconstruction']);
 
 %% path definition
 
-root_dir = working_dir()
+root_dir = working_dir();
 save_dir = fullfile(root_dir, 'res/single_phase_holograms/');
 
 if ~exist(save_dir, 'dir')
