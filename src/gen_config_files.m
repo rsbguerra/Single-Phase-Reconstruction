@@ -7,8 +7,8 @@ add_paths(working_dir, ["src/" "res/nrsh/" "res/nrsh/core/"]);
 
 cfg_dir = [working_dir 'data/config/nrsh_config/'];
 save_dir = [working_dir 'data/config/single_phase_config/'];
-
 hologram_dir = [working_dir 'data/input/holograms/'];
+
 holograms = ["CGH_Biplane16k_rgb", "CGH_Venus", "DeepDices16K", "Lowiczanka_Doll", "DeepDices2K", "DeepDices8K4K"];
 
 for holo_name = holograms
@@ -23,11 +23,12 @@ for holo_name = holograms
 
             dataset = 'interfere';
             zero_pad = false;
-            ap_sizes = [16384 16384];
             usagemode = 'individual';
             h_pos = 0;
             v_pos = 0;
+            ap_sizes = [16384 16384];
             target_res = [16384 16384];
+            default_rec_dist = 0.0455;
 
             info = getSettings('dataset', dataset, ...
                 'zero_pad', zero_pad, ...
@@ -41,9 +42,10 @@ for holo_name = holograms
                 'direction', 'forward', ...
                 'resize_fun', 'DR');
 
-            rec_dist = 0.0455;
-
-            save([save_dir 'Biplane16k_config.mat'])
+            save([save_dir 'Biplane16k_config.mat'], ...
+                'default_rec_dist', ...
+                'info', ...
+            'hologram_path');
 
         case "CGH_Venus"
             hologram_path = [hologram_dir 'CGH_Venus.mat'];
@@ -53,11 +55,12 @@ for holo_name = holograms
 
             dataset = 'interfere';
             zero_pad = false;
-            ap_sizes = [2048 2048];
             usagemode = 'individual';
             h_pos = 0.5;
             v_pos = 0.5;
+            ap_sizes = [2048 2048];
             target_res = [2048 2048];
+            default_rec_dist = 0.2957;
 
             info = getSettings('dataset', dataset, ...
                 'zero_pad', zero_pad, ...
@@ -71,8 +74,10 @@ for holo_name = holograms
                 'direction', 'forward', ...
                 'resize_fun', 'DR');
 
-            rec_dist = 0.2957;
-            save([save_dir 'CGH_Venus_config.mat'])
+            save([save_dir 'CGH_Venus_config.mat'], ...
+                'default_rec_dist', ...
+                'info', ...
+            'hologram_path');
 
         case "DeepDices16K"
             hologram_path = [hologram_dir 'DeepDices16K.mat'];
@@ -82,11 +87,12 @@ for holo_name = holograms
 
             dataset = 'bcom32';
             zero_pad = false;
-            ap_sizes = [16384 16384];
             usagemode = 'individual';
             h_pos = 0;
             v_pos = 0;
+            ap_sizes = [16384 16384];
             target_res = [16384 16384];
+            default_rec_dist = 0.0185;
 
             info = getSettings('dataset', dataset, ...
                 'zero_pad', zero_pad, ...
@@ -100,8 +106,10 @@ for holo_name = holograms
                 'direction', 'forward', ...
                 'resize_fun', 'DR');
 
-            rec_dist = 0.0185;
-            save([save_dir 'DeepDices16K_config.mat'])
+            save([save_dir 'DeepDices16K_config.mat'], ...
+                'default_rec_dist', ...
+                'info', ...
+            'hologram_path');
 
         case "DeepDices2K"
             hologram_path = [hologram_dir 'deepDices2k.mat'];
@@ -111,11 +119,12 @@ for holo_name = holograms
 
             dataset = 'bcom32';
             zero_pad = false;
-            ap_sizes = [2048 2048];
             usagemode = 'individual';
             h_pos = 0;
             v_pos = 0;
+            ap_sizes = [2048 2048];
             target_res = [2048 2048];
+            default_rec_dist = 0.087;
 
             info = getSettings('dataset', dataset, ...
                 'zero_pad', zero_pad, ...
@@ -129,8 +138,10 @@ for holo_name = holograms
                 'direction', 'forward', ...
                 'resize_fun', 'DR');
 
-            rec_dist = 0.087;
-            save([save_dir 'DeepDices2K_config.mat'])
+            save([save_dir 'DeepDices2K_config.mat'], ...
+                'default_rec_dist', ...
+                'info', ...
+            'hologram_path');
 
         case "DeepDices8K4K"
             hologram_path = [hologram_dir 'deepDices8k4k.mat'];
@@ -140,11 +151,12 @@ for holo_name = holograms
 
             dataset = 'bcom32';
             zero_pad = false;
-            ap_sizes = [4320 7680];
             usagemode = 'individual';
             h_pos = 0;
             v_pos = 0;
+            ap_sizes = [4320 7680];
             target_res = [4096 4096];
+            default_rec_dist = 0.3;
 
             info = getSettings('dataset', dataset, ...
                 'zero_pad', zero_pad, ...
@@ -158,8 +170,10 @@ for holo_name = holograms
                 'direction', 'forward', ...
                 'resize_fun', 'DR');
 
-            rec_dist = 0.3;
-            save([save_dir 'DeepDices8K4K_config.mat'])
+            save([save_dir 'DeepDices8K4K_config.mat'], ...
+                'default_rec_dist', ...
+                'info', ...
+            'hologram_path');
 
         case "Lowiczanka_Doll"
             hologram_path = [hologram_dir 'opt_Warsaw_Lowiczanka_Doll.mat'];
@@ -169,11 +183,12 @@ for holo_name = holograms
 
             dataset = 'wut_disp_on_axis';
             zero_pad = false;
-            ap_sizes = [2016 2016];
             usagemode = 'individual';
             h_pos = [-1 0 1];
             v_pos = 0;
+            ap_sizes = [2016 2016];
             target_res = [2016 2016];
+            default_rec_dist = [1.060 1.030 1.075];
 
             info = getSettings('dataset', dataset, ...
                 'zero_pad', zero_pad, ...
@@ -190,8 +205,10 @@ for holo_name = holograms
             info.clip_max = -1;
             info.clip_min = -1;
 
-            rec_dist = [1.060 1.030 1.075];
-            save([save_dir 'Lowiczanka_Doll_config.mat'])
+            save([save_dir 'Lowiczanka_Doll_config.mat'], ...
+                'default_rec_dist', ...
+                'info', ...
+            'hologram_path');
 
         otherwise
             disp('Hologram config missing')
