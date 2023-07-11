@@ -1,50 +1,11 @@
 function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
+
     curr_dir = working_dir();
-    config_dir = fullfile(curr_dir, 'data/config/single_phase_config/');
 
     %% Load config
     disp('Loading config');
 
-    switch hologram_name
-
-        case 'Biplane16k'
-            load([config_dir 'Biplane16k_config.mat'], 'info', 'hologram_path');
-            load(hologram_path, 'CGH');
-            original_hologram = CGH.Hol;
-            clearvars CGH
-
-        case 'CGH_Venus'
-            load([config_dir 'CGH_Venus_config.mat'], 'info', 'hologram_path');
-            load(hologram_path, 'CGH');
-            original_hologram = CGH.Hol;
-            clearvars CGH
-
-        case 'DeepDices16K'
-            load([config_dir 'DeepDices16K_config.mat'], 'info', 'hologram_path');
-            load(hologram_path, 'data');
-            original_hologram = single(data);
-            clearvars data
-
-        case 'DeepDices2K'
-            load([config_dir 'DeepDices2K_config.mat'], 'info', 'hologram_path');
-            load(hologram_path, 'data');
-            original_hologram = single(data);
-            clearvars data
-
-        case 'DeepDices8K4K'
-            load([config_dir 'DeepDices8K4K_config.mat'], 'info', 'hologram_path');
-            load(hologram_path, 'data');
-            original_hologram = single(data);
-            clearvars data
-
-        case 'Lowiczanka_Doll'
-            wut_reconstruction(rec_dist, h_pos, v_pos);
-            wut_single_ph_rec(rec_dist, h_pos, v_pos, channel);
-            return
-
-        otherwise
-            return
-    end
+    [original_hologram, info] = load_hologram(hologram_name);
 
     figure_dir = fullfile(curr_dir, 'data/output/single_phase_fig', hologram_name);
 
