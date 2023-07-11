@@ -1,4 +1,4 @@
-function wut_single_ph_rec(rec_dist, h_pos, v_pos, channel)
+function wut_single_ph_rec(rec_dists, h_pos, v_pos, channel)
     % setup needed paths
     curr_dir = working_dir();
     config_dir = fullfile(curr_dir, 'data/config/single_phase_config/');
@@ -20,7 +20,7 @@ function wut_single_ph_rec(rec_dist, h_pos, v_pos, channel)
     X = circshift(X, [0, round(si(2) / 4), 0]);
     X = ifft2(ifftshift(X));
 
-    for d = rec_dist
+    for d = rec_dists
         for h = h_pos
             for v = v_pos
                 info.h_pos = h;
