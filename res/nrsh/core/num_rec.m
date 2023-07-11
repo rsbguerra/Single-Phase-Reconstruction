@@ -13,6 +13,7 @@ function [hol_rendered] = num_rec(hologram, info, rec_dist, isLast)
     %% RECONSTRUCTION
     colors = size(hologram, 3);
     hol_rendered = hologram;
+    clear hologram;
     if (rec_dist == 0), return, end % Early exit
     if (nargin < 4), isLast = false; end
 
