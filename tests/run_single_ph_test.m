@@ -1,5 +1,5 @@
 clear; clc
-addpath('../../src/utils');
+addpath('../src/utils');
 % Get absolute path to project
 curr_dir = working_dir();
 

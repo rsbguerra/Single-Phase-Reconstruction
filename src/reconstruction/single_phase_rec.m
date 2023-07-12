@@ -34,14 +34,14 @@ function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
                 hol_rendered_forward = num_rec(single_ph_holo, info, d);
                 holo_abs = abs(hol_rendered_forward);
 
-                figure_name = sprintf('%s_%s_%g_[%gx%g]', hologram_name, channel2string(channel), d , h, v);
+                figure_name = sprintf('%s_%s_%g_[%gx%g].png', hologram_name, channel2string(channel), d , h, v);
                 figure_path = fullfile(figure_dir, figure_name);
 
                 try
-                    imwrite(holo_abs, [figure_path '.png']);
+                    imwrite(holo_abs, figure_path);
                 catch
                     holo_abs = imresize(holo_abs, 0.25);
-                    imwrite(holo_abs, [figure_path '.png']);
+                    imwrite(holo_abs, figure_path);
                 end
 
             end
