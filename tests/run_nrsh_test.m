@@ -10,7 +10,8 @@ add_paths(parent_dir, ["res/nrsh/" ...
                          "src/utils/"
                      ])
 
-folder_info = dir('nrsh/*.m');
+% folder_info = dir('nrsh/*.m');
+folder_info = dir('nrsh/lowiczanak_doll.m');
 
 for i = 1:size(folder_info, 1) % allFiles has one row per file, so loop over those
     script = folder_info(i).name;
@@ -20,6 +21,6 @@ for i = 1:size(folder_info, 1) % allFiles has one row per file, so loop over tho
         eval(['nrsh/' script]);
     catch error
         warning(['[ERROR] ' script ' failed with:']);
-        warning(error.message)
+        rethrow(error)
     end
 end
