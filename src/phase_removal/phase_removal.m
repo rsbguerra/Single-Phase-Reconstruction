@@ -14,7 +14,7 @@ if ~exist(save_dir, 'dir')
 end
 
 %% hologram settings
-channels = 1;
+channels = [1 2 3];
 holograms = ["Lowiczanka_Doll"];
 
 %% phase removal

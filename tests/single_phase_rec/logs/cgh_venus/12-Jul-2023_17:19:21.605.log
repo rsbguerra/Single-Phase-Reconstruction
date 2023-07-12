@@ -1,0 +1,22 @@
+
+[TEST] Running /mnt/data/code/Single-Phase-Reconstruction/tests/single_phase_rec/cgh_venus.m test script.
+Loading config
+
+[ERROR] /mnt/data/code/Single-Phase-Reconstruction/tests/single_phase_rec/cgh_venus.m exited with:
+Error using load
+Unable to read file '/mnt/data/code/Single-Phase-Reconstruction/data/input/single_phase_holograms/CGH_Venus_r.mat'. No such file or directory.
+
+Error in load_hologram (line 29)
+                load(holo_path, 'hologram');
+
+Error in single_phase_rec (line 8)
+    [single_ph_holo, info] = load_hologram(hologram_name, channel);
+
+Error in cgh_venus (line 9)
+single_phase_rec(hologram_name, rec_dists, h_pos, v_pos, channel);
+
+Error in run (line 91)
+evalin('caller', strcat(script, ';'));
+
+Error in run_single_ph_test (line 33)
+        run(convertStringsToChars(script_path));

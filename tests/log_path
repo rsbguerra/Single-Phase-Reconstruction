@@ -1,0 +1,42 @@
+get(0,'DiaryFile')
+
+ans =
+
+    'log_path'
+
+    dairy off
+{Undefined function or variable 'dairy'.
+} 
+dairy off
+{Undefined function or variable 'dairy'.
+} 
+diary off
+
+get(0,'DiaryFile')
+
+ans =
+
+    'log_path'
+
+if system_dependent('IsDebugMode')==1, dbquit; end
+    diary(log_path)
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('diary')" style="font-weight:bold">diary</a>
+Arguments must contain a character vector.
+} 
+diary('log_path')
+get(0,'DiaryFile')
+
+ans =
+
+    'log_path'
+
+    diary(sprintf("nrsh/logs/%s.log", script_name(1:end-2));)
+     diary(sprintf("nrsh/logs/%s.log", script_name(1:end-2));)
+                                                            ↑
+{Error: Invalid expression. When calling a function or indexing a variable, use parentheses. Otherwise, check for mismatched delimiters.
+} 
+diary(sprintf("nrsh/logs/%s.log", script_name(1:end-2)))
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('diary')" style="font-weight:bold">diary</a>
+Arguments must contain a character vector.
+} 
+diary(convertStringsToChars(log_dir))
