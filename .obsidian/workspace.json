@@ -1,0 +1,192 @@
+{
+  "main": {
+    "id": "765ecd663baed781",
+    "type": "split",
+    "children": [
+      {
+        "id": "df4a2ac9278d0b96",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ffe6f226d8b454c2",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "res/nrsh/NRSH_12_0_userguide.pdf"
+              },
+              "pinned": true
+            }
+          },
+          {
+            "id": "4c765160baf26d43",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/logs/12-07-2023.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "799b191c791a01c3",
+    "type": "split",
+    "children": [
+      {
+        "id": "09aab7eb07a5e799",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6f36111e6e2b1cad",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "507e87b131d2bcb9",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "1c05f72fe9580279",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 651.5,
+    "collapsed": true
+  },
+  "right": {
+    "id": "c0b75e7693bc88ff",
+    "type": "split",
+    "children": [
+      {
+        "id": "0bba89245f50f8e0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6932e946658723b4",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "docs/logs/12-07-2023.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "bef0db0dfdbe1a05",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "docs/logs/12-07-2023.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "4994992def422b00",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "62647495a5f85a5b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "docs/logs/12-07-2023.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "4c765160baf26d43",
+  "lastOpenFiles": [
+    "tests/nrsh/figures/lowiczanka_doll_000/target_res_2016x2016/lowiczanka_doll_000_1_0_[2000x59394]_[2016x2016]_1.06_LR.png",
+    "tests/nrsh/figures/lowiczanka_doll_000/lowiczanka_doll_000_1_0_[2000x59394]_[2016x2016]_1.06_LR.png",
+    "tests/nrsh/figures/lowiczanka_doll_000/lowiczanka_doll_000_1_0_[2000x]_[2016x2016]_1.06_LR.png",
+    "tests/nrsh/figures/lowiczanka_doll_000/lowiczanka_doll_000_1_0_[2016x2016]_1.06_LR.png",
+    "tests/nrsh/figures/lowiczanka_doll_000/target_res_2016x2016/lowiczanka_doll_000_1_0_[2000x6000]_[2016x2016]_1.06_LR.png",
+    "tests/nrsh/figures/lowiczanka_doll_000/lowiczanka_doll_000_1_0_[2000x6000]_[2016x2016]_1.06_LR.png",
+    "tests/nrsh/logs/Lowiczanka_Doll_2016x59394_2016x59394/12-Jul-2023_18:43:21.443.log",
+    "tests/nrsh/figures/lowiczanka_doll_000/target_res_2016x2016/lowiczanka_doll_000_1_0_[2000x3000]_[2016x2016]_1.06_LR.png",
+    "tests/nrsh/figures/lowiczanka_doll_000/target_res_2016x2016/lowiczanka_doll_000_1_0_[2000x3000][2016x2016]_1.06_LR.png",
+    "tests/nrsh/figures/lowiczanka_doll_000/target_res_2016x2016/lowiczanka_doll_000_1_0_[][2016x2016]_1.06_LR.png",
+    "tests/nrsh/figures/lowiczanka_doll_000/target_res_2016x2016/lowiczanka_doll_000_1_0_[2016x2016]_1.06_LR.png",
+    "tests/nrsh/logs/Lowiczanka_Doll_2000x6000_2016x2016/12-Jul-2023_18:37:00.709.log",
+    "tests/nrsh/logs/Lowiczanka_Doll_2000x3000_2016x2016/12-Jul-2023_18:36:37.272.log",
+    "tests/nrsh/logs/Lowiczanka_Doll_2016x59394_2016x59394/12-Jul-2023_18:35:28.719.log",
+    "tests/nrsh/logs/Lowiczanka_Doll_2000x6000_2016x2016/12-Jul-2023_18:35:07.761.log",
+    "tests/nrsh/logs/Lowiczanka_Doll_2000x6000_2016x2016",
+    "tests/nrsh/logs/Lowiczanka_Doll_2000x3000_2016x2016/12-Jul-2023_18:34:47.578.log",
+    "tests/nrsh/logs/Lowiczanka_Doll_2000x3000_2016x2016",
+    "tests/nrsh/Lowiczanka_Doll_2016x59394_2016x59394.m",
+    "tests/nrsh/Lowiczanka_Doll_2016x59394_2016x59394 copy.m",
+    "tests/nrsh/figures/lowiczanka_doll_000/target_res_0x0/lowiczanka_doll_000_1_0_[2016x59394]_1.06_LR.png",
+    "docs/logs/12-07-2023.md",
+    "README.md",
+    "docs/logs/11-07-2023.md",
+    "docs/logs/09-07-2023.md",
+    "Untitled.md"
+  ]
+}
