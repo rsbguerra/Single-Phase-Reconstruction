@@ -13,7 +13,6 @@ function [recons_ali] = rgb_align(recons, info)
     %                        specified in the configuration file.
     %
 
-
     %recons=uint8(recons.*255);%recons should be the out. of the stretch.
 
     %channel shifts: m to pixel conversion
@@ -30,41 +29,34 @@ function [recons_ali] = rgb_align(recons, info)
     %            (rec_par_cfg.wlen(3)) / (rec_par_cfg.ref_wave_rad) *...
     %            (rec_par_cfg.pixel_pitch);
 
-    Nyx_R = ceil(info.wlen(1) / info.wlen(3) * recons_img_size(1));
-    Nyx_G = ceil(info.wlen(2) / info.wlen(3) * recons_img_size(1));
+    Nyx_R = ceil(info.wlen(1) / info.wlen(3) * recons_img_size);
+    Nyx_G = ceil(info.wlen(2) / info.wlen(3) * recons_img_size);
 
     %force even dimensions
-    if mod(Nyx_R, 2) ~= 0
-        Nyx_R = Nyx_R + 1;
-    end
-
-    if mod(Nyx_G, 2) ~= 0
-        Nyx_G = Nyx_G + 1;
-    end
+    Nyx_R = Nyx_R + (mod(Nyx_R, 2) ~= 0);
+    Nyx_G = Nyx_G + (mod(Nyx_G, 2) ~= 0);
 
     %RGB channels scale and padding to equal size
-    rows_ali = (recons_img_size(1) + (Nyx_R - recons_img_size(1)));
-    cols_ali = (recons_img_size(2) + (Nyx_R - recons_img_size(1)));
-    recons_ali = zeros(rows_ali, cols_ali, 3);
+    recons_ali = zeros(Nyx_R(1), Nyx_R(2), 3);
 
     %R channel
     ch_temp = fftshift(fft2(recons(:, :, 1)));
-    ch_temp_pad = padarray(ch_temp, [(Nyx_R - recons_img_size(1)) / 2, (Nyx_R - recons_img_size(1)) / 2]);
+    ch_temp_pad = padarray(ch_temp, [(Nyx_R(1) - recons_img_size(1)) / 2, (Nyx_R(2) - recons_img_size(2)) / 2]);
     ch_temp_pad = ifft2(ifftshift(ch_temp_pad));
     recons_ali(:, :, 1) = abs(real(ch_temp_pad));
     recons_ali(:, :, 1) = subarray_yx(recons_ali(:, :, 1), [], -shift_yx_R ./ size(ch_temp_pad));
 
     %G channel
     ch_temp = fftshift(fft2(recons(:, :, 2)));
-    ch_temp_pad = padarray(ch_temp, [(Nyx_G - recons_img_size(1)) / 2, (Nyx_G - recons_img_size(1)) / 2]);
+    ch_temp_pad = padarray(ch_temp, [(Nyx_G(1) - recons_img_size(1)) / 2, (Nyx_G(2) - recons_img_size(2)) / 2]);
     ch_temp_pad = ifft2(ifftshift(ch_temp_pad));
-    ch_temp_pad = padarray(ch_temp_pad, [(Nyx_R - Nyx_G) / 2, (Nyx_R - Nyx_G) / 2]);
+    ch_temp_pad = padarray(ch_temp_pad, [(Nyx_R(1) - Nyx_G(1)) / 2, (Nyx_R(2) - Nyx_G(2)) / 2]);
     recons_ali(:, :, 2) = abs(real(ch_temp_pad));
     recons_ali(:, :, 2) = subarray_yx(recons_ali(:, :, 2), [], -shift_yx_G ./ size(ch_temp_pad));
 
     %B channel
-    recons_ali(:, :, 3) = padarray(recons(:, :, 3), [(Nyx_R - recons_img_size(1)) / 2, ...
-                                                  (Nyx_R - recons_img_size(1)) / 2]);
+    recons_ali(:, :, 3) = padarray(recons(:, :, 3), [(Nyx_R(1) - recons_img_size(1)) / 2, ...
+                                                  (Nyx_R(2) - recons_img_size(2)) / 2]);
 
     %%saturate
     %for ch=1:3
@@ -72,9 +64,9 @@ function [recons_ali] = rgb_align(recons, info)
     %end
 
     %restore user-defined output size
-    recons_ali = recons_ali((rows_ali / 2 - recons_img_size(1) / 2) + 1: ...
-        (rows_ali / 2 + recons_img_size(1) / 2), ...
-        (cols_ali / 2 - recons_img_size(2) / 2) + 1: ...
-        (cols_ali / 2 + recons_img_size(2) / 2), :);
+    recons_ali = recons_ali((Nyx_R(1) / 2 - recons_img_size(1) / 2) + 1: ...
+        (Nyx_R(1) / 2 + recons_img_size(1) / 2), ...
+        (Nyx_R(2) / 2 - recons_img_size(2) / 2) + 1: ...
+        (Nyx_R(2) / 2 + recons_img_size(2) / 2), :);
 
 end
