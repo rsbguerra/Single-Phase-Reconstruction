@@ -2,8 +2,10 @@
 *.docx
 *.mat
 *.bin
-/output
-.obsidian/
-
 *.png
 *.m~
+*.zip
+
+.vscode/
+/output
+tests/nrsh/logs/

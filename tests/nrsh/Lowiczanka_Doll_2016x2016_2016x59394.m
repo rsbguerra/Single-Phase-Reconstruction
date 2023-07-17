@@ -1,6 +1,6 @@
 load("../../data/input/holograms/opt_Warsaw_Lowiczanka_Doll.mat");
 
-ap_sizes = [2016 59394];
+ap_sizes = [2016 2016];
 out_dir = sprintf("./lowiczanka_doll_[%dx%d]/", ap_sizes(1), ap_sizes(2));
 
 info = getSettings('cfg_file', '../../data/config/nrsh_config/wut/lowiczanka_doll_000.txt', ...
