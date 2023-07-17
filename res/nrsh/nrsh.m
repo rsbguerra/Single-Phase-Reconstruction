@@ -109,6 +109,7 @@ function [hol_rendered, clip_min, clip_max] = nrsh(hol, rec_dists, info, varargi
     %                 reconstruction is performed using phase-space bandwidth
     %                 limitation to reduce the resolution of reconstructed
     %                 image. If left empty, no resizing is performed.
+    %                 Note: 'DR' may only be chosen for non-Fourier holograms.
     %   targetres@numeric(1,2) or numeric(2,1) (optional, default is empty)
     %               - Target resolution of the final video, when using resize_fun = 'DR'.
     %                 No frame will have higher resolution. A single aperture size
@@ -339,7 +340,7 @@ function [hol_rendered, clip_min, clip_max] = nrsh(hol, rec_dists, info, varargi
                 % TODO: Add equivalent check to: if(info.isBinary && any(cellfun(@(x)any(x>size(hol(:,:,1))),  repmat(ap_sizes, [2,1]))))
                 rec_par_idx = aperture_angle_checker(size(hol, 1), size(hol, 2), rec_par_idx, ...
                     rec_dists, info.ap_sizes, ...
-                    info.h_pos, info.v_pos, info.pixel_pitch, 1);
+                    info.h_pos, info.v_pos, info.pixel_pitch);
             else
 
                 if (info.isBinary && any(cellfun(@(x)any(x > size(hol(:, :, 1))), info.ap_sizes)))
