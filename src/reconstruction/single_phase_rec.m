@@ -1,5 +1,10 @@
 function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
 
+    if hologram_name == "Lowiczanka_Doll"
+        wut_single_ph_rec(rec_dist, h_pos, v_pos, channel)
+        return
+    end
+
     curr_dir = working_dir();
 
     %% Load config
@@ -34,7 +39,13 @@ function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
                 hol_rendered_forward = num_rec(single_ph_holo, info, d);
                 holo_abs = abs(hol_rendered_forward);
 
-                figure_name = sprintf('%s_%s_%g_[%gx%g].png', hologram_name, channel2string(channel), d , h, v);
+                if channel
+                    ch_str = channel2string(channel);
+                else
+                    ch_str = 'rgb';
+                end
+
+                figure_name = sprintf('%s_%s_%g_[%dx%d]_[%gx%g].png', hologram_name, ch_str, d, info.ap_sizes(1), info.ap_sizes(2), h, v);
                 figure_path = fullfile(figure_dir, figure_name);
 
                 try
