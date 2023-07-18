@@ -8,24 +8,24 @@
         "type": "tabs",
         "children": [
           {
-            "id": "ffe6f226d8b454c2",
+            "id": "4c765160baf26d43",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "pdf",
               "state": {
-                "file": "res/nrsh/NRSH_12_0_userguide.pdf"
+                "file": "res/nrsh/NRSH_13_0_userguide.pdf"
               },
               "pinned": true
             }
           },
           {
-            "id": "4c765160baf26d43",
+            "id": "09f470ae1a31f91e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/logs/12-07-2023.md",
+                "file": "Issues.md",
                 "mode": "source",
                 "source": false
               }
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/logs/12-07-2023.md",
+                "file": "Issues.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -116,7 +116,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/logs/12-07-2023.md",
+                "file": "Issues.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -139,7 +139,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/logs/12-07-2023.md"
+                "file": "Issues.md"
               }
             }
           }
@@ -160,33 +160,34 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4c765160baf26d43",
+  "active": "09f470ae1a31f91e",
   "lastOpenFiles": [
-    "tests/nrsh/figures/lowiczanka_doll_000/target_res_2016x2016/lowiczanka_doll_000_1_0_[2000x59394]_[2016x2016]_1.06_LR.png",
-    "tests/nrsh/figures/lowiczanka_doll_000/lowiczanka_doll_000_1_0_[2000x59394]_[2016x2016]_1.06_LR.png",
-    "tests/nrsh/figures/lowiczanka_doll_000/lowiczanka_doll_000_1_0_[2000x]_[2016x2016]_1.06_LR.png",
-    "tests/nrsh/figures/lowiczanka_doll_000/lowiczanka_doll_000_1_0_[2016x2016]_1.06_LR.png",
-    "tests/nrsh/figures/lowiczanka_doll_000/target_res_2016x2016/lowiczanka_doll_000_1_0_[2000x6000]_[2016x2016]_1.06_LR.png",
-    "tests/nrsh/figures/lowiczanka_doll_000/lowiczanka_doll_000_1_0_[2000x6000]_[2016x2016]_1.06_LR.png",
-    "tests/nrsh/logs/Lowiczanka_Doll_2016x59394_2016x59394/12-Jul-2023_18:43:21.443.log",
-    "tests/nrsh/figures/lowiczanka_doll_000/target_res_2016x2016/lowiczanka_doll_000_1_0_[2000x3000]_[2016x2016]_1.06_LR.png",
-    "tests/nrsh/figures/lowiczanka_doll_000/target_res_2016x2016/lowiczanka_doll_000_1_0_[2000x3000][2016x2016]_1.06_LR.png",
-    "tests/nrsh/figures/lowiczanka_doll_000/target_res_2016x2016/lowiczanka_doll_000_1_0_[][2016x2016]_1.06_LR.png",
-    "tests/nrsh/figures/lowiczanka_doll_000/target_res_2016x2016/lowiczanka_doll_000_1_0_[2016x2016]_1.06_LR.png",
-    "tests/nrsh/logs/Lowiczanka_Doll_2000x6000_2016x2016/12-Jul-2023_18:37:00.709.log",
-    "tests/nrsh/logs/Lowiczanka_Doll_2000x3000_2016x2016/12-Jul-2023_18:36:37.272.log",
-    "tests/nrsh/logs/Lowiczanka_Doll_2016x59394_2016x59394/12-Jul-2023_18:35:28.719.log",
-    "tests/nrsh/logs/Lowiczanka_Doll_2000x6000_2016x2016/12-Jul-2023_18:35:07.761.log",
-    "tests/nrsh/logs/Lowiczanka_Doll_2000x6000_2016x2016",
-    "tests/nrsh/logs/Lowiczanka_Doll_2000x3000_2016x2016/12-Jul-2023_18:34:47.578.log",
-    "tests/nrsh/logs/Lowiczanka_Doll_2000x3000_2016x2016",
-    "tests/nrsh/Lowiczanka_Doll_2016x59394_2016x59394.m",
-    "tests/nrsh/Lowiczanka_Doll_2016x59394_2016x59394 copy.m",
-    "tests/nrsh/figures/lowiczanka_doll_000/target_res_0x0/lowiczanka_doll_000_1_0_[2016x59394]_1.06_LR.png",
+    "tests/nrsh/figures/DeepDices16k_000/DeepDices16k_000_-1_0_[2048x2048]_0.0185.png",
+    "tests/nrsh/logs/dices16k/18-Jul-2023_17:33:36.468.log",
+    "tests/nrsh/logs/dices16k/18-Jul-2023_17:32:44.189.log",
+    "tests/nrsh/logs/dices16k/18-Jul-2023_17:31:52.768.log",
+    "tests/nrsh/logs/dices16k/18-Jul-2023_17:29:56.713.log",
+    "tests/nrsh/logs/dices16k/18-Jul-2023_17:28:34.165.log",
+    "tests/nrsh/logs/dices16k/18-Jul-2023_17:23:59.437.log",
+    "tests/nrsh/logs/dices16k/18-Jul-2023_17:14:11.316.log",
+    "tests/nrsh/dices16k.m",
+    "tests/dices16k.m",
+    "res/nrsh/NRSH_13_0_userguide.pdf",
+    "Issues.md",
+    "tests/nrsh/figures/DeepDices16k_000/DeepDices16k_000_1_0_[0x0]_0.0185.png",
+    "tests/nrsh/figures/DeepDices16k_000/DeepDices16k_000_0_0_[0x0]_0.0185.png",
+    "tests/nrsh/figures/DeepDices16k_000/DeepDices16k_000_-1_0_[0x0]_0.0185.png",
+    "tests/nrsh/figures/DeepDices16k_000/with_dr/DeepDices16k_000_1_0_[16384x16384]_0.0185_LR.png",
+    "tests/nrsh/figures/DeepDices16k_000/with_dr/DeepDices16k_000_0_0_[16384x16384]_0.0185_LR.png",
+    "tests/nrsh/figures/DeepDices16k_000/with_dr/DeepDices16k_000_-1_0_[16384x16384]_0.0185_LR.png",
+    "tests/nrsh/figures/DeepDices16k_000/DeepDices16k_000_1_0_[16384x16384]_0.0185_LR.png",
+    "tests/nrsh/figures/DeepDices16k_000/DeepDices16k_000_0_0_[16384x16384]_0.0185_LR.png",
+    "tests/nrsh/figures/DeepDices16k_000/DeepDices16k_000_-1_0_[16384x16384]_0.0185_LR.png",
+    "Pasted image 20230718153838.png",
+    "docs/logs/17-07-2023.md",
     "docs/logs/12-07-2023.md",
     "README.md",
     "docs/logs/11-07-2023.md",
-    "docs/logs/09-07-2023.md",
-    "Untitled.md"
+    "docs/logs/09-07-2023.md"
   ]
 }

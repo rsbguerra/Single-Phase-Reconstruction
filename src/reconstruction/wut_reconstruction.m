@@ -14,12 +14,6 @@ function wut_reconstruction(rec_dist, h_pos, v_pos)
         mkdir(figure_dir);
     end
 
-    %% Convert on-axis to off-axis holograms
-    si = size(X);
-    X = fftshift(fft2(X));
-    X = circshift(X, [0, round(si(2) / 4), 0]);
-    X = ifft2(ifftshift(X));
-
     for d = rec_dist
         for h = h_pos
             for v = v_pos

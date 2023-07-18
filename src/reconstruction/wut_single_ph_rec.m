@@ -14,7 +14,6 @@ function wut_single_ph_rec(rec_dists, h_pos, v_pos, channel)
         for d = rec_dists
 
             for h = h_pos
-
                 for v = v_pos
                     info.h_pos = h;
                     info.v_pos = v;
