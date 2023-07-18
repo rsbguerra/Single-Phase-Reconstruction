@@ -340,7 +340,7 @@ function [hol_rendered, clip_min, clip_max] = nrsh(hol, rec_dists, info, varargi
                 % TODO: Add equivalent check to: if(info.isBinary && any(cellfun(@(x)any(x>size(hol(:,:,1))),  repmat(ap_sizes, [2,1]))))
                 rec_par_idx = aperture_angle_checker(size(hol, 1), size(hol, 2), rec_par_idx, ...
                     rec_dists, info.ap_sizes, ...
-                    info.h_pos, info.v_pos, info.pixel_pitch);
+                    info.h_pos, info.v_pos, info.pixel_pitch, 1);
             else
 
                 if (info.isBinary && any(cellfun(@(x)any(x > size(hol(:, :, 1))), info.ap_sizes)))
