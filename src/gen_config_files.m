@@ -11,7 +11,7 @@ save_dir = [working_dir 'data/config/single_phase_config/'];
 hologram_dir = [working_dir 'data/input/holograms/'];
 single_phase_dir = [working_dir 'data/input/single_phase_holograms/'];
 
-holograms = ["CGH_Biplane16k_rgb", "CGH_Venus", "DeepDices16K", "Lowiczanka_Doll", "DeepDices2K", "DeepDices8K4K"];
+holograms = ["Lowiczanka_Doll"];
 
 for holo_name = holograms
     fprintf(1, 'Creating %s configuration...\n', holo_name)
@@ -192,9 +192,9 @@ for holo_name = holograms
                 'apertureinpxmode', true, ...
                 'h_pos', h_pos, ...
                 'v_pos', v_pos, ...
-                'targetres', target_res, ...
                 'direction', 'forward', ...
-                'resize_fun', 'DR');
+                'resize_fun', @(x) imresize(x, target_res, 'bilinear'));
+
             info.default_rec_dist = [1.060 1.030 1.075];
             info.isFourierDH = 1;
             info.clip_max = -1;
