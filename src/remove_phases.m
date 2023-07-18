@@ -2,7 +2,7 @@ function remove_phases(hologram_list, channel_list)
     clc
     %% script imports
 
-    addpath('../utils')
+    addpath('./utils')
     root_dir = working_dir();
     add_paths(root_dir, "src/reconstruction");
 
