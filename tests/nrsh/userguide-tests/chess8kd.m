@@ -1,0 +1,6 @@
+load()
+
+info = getSettings('cfg_file', 'config_files/interfereII/chess8kd_000.txt', ...
+    'apertureinpxmode', false, ...
+    'ap_sizes', 7);
+nrsh('./data/Chess8kd', [0.014:0.001:0.016], info);
