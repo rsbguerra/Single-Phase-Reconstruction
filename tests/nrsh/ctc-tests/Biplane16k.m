@@ -1,5 +1,5 @@
-hologram_path = '../../data/input/holograms/CGH_Biplane16k_rgb.mat';
-config_path = '../../data/config/nrsh_config/interfereIII/biplane16kETRO_000.txt';
+hologram_path = '../../../data/input/holograms/CGH_Biplane16k_rgb.mat';
+config_path = '../../../data/config/nrsh_config/interfereIII/biplane16kETRO_000.txt';
 
 load(hologram_path)
 
@@ -9,4 +9,4 @@ info = getSettings('cfg_file', config_path, ...
     'h_pos', [0 1], ...
     'v_pos', [0 1]);
 
-nrsh(double(data.CGH.Hol), 0.0455, info)
+nrsh(double(CGH.Hol), 0.0455, info)

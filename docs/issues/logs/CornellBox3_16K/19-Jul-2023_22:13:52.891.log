@@ -1,0 +1,18 @@
+
+[TEST] Running /mnt/data/code/Single-Phase-Reconstruction/tests/nrsh/ctc-tests/CornellBox3_16K.m test script.
+
+[ERROR] /mnt/data/code/Single-Phase-Reconstruction/tests/nrsh/ctc-tests/CornellBox3_16K.m exited with:
+Error using load
+Unable to read MAT-file /mnt/data/code/Single-Phase-Reconstruction/data/input/holograms/CornellBox3_16K.mat. Not a binary MAT-file. Try load -ASCII to read as text.
+
+Error in CornellBox3_16K (line 4)
+load(hologram_path)
+
+Error in run (line 91)
+evalin('caller', strcat(script, ';'));
+
+Error in run_nrsh_test (line 34)
+        run(convertStringsToChars(script));
+
+Error in run (line 91)
+evalin('caller', strcat(script, ';'));

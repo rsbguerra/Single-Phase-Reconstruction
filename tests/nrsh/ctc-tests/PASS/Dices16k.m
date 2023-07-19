@@ -1,5 +1,5 @@
-hologram_path = '../../data/input/holograms/Piano16K.mat';
-config_path = '../../data/config/nrsh_config/bcom/piano16k_000.txt';
+hologram_path = '../../../data/input/holograms/dices16K.mat';
+config_path = '../../../data/config/nrsh_config/bcom/dices16k_000.txt';
 
 load(hologram_path)
 

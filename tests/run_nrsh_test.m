@@ -11,13 +11,13 @@ add_paths(parent_dir, ["res/nrsh/" ...
                          "src/utils/"
                      ])
 log_dir = "nrsh/logs/";
-
-folder_info = dir('nrsh/*.m');
+test_dir = "tests/nrsh/ctc-tests/";
+folder_info = dir('nrsh/ctc-tests/*.m');
 %folder_info = dir('nrsh/Lowiczanka_Doll*.m');
 
 for i = 1:size(folder_info, 1) % allFiles has one row per file, so loop over those
     script_name = folder_info(i).name;
-    script = sprintf("%stests/nrsh/%s",parent_dir, script_name);
+    script = sprintf("%s%s%s",parent_dir, test_dir,script_name);
 
     log_dir = "nrsh/logs/"+script_name(1:end-2);
     time = string(datetime('now', 'Format', 'dd-MMM-y_HH:mm:ss.SSS'));
