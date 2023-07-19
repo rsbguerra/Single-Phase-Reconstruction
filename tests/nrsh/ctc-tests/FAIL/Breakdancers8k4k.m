@@ -1,5 +1,5 @@
-hologram_path = '../../data/input/holograms/breakdancers8k4k_022.mat';
-config_path = '../../data/config/nrsh_config/bcom/breakdancers8k4k_000.txt';
+hologram_path = '../../../data/input/holograms/breakdancers8k4k_022.mat';
+config_path = '../../../data/config/nrsh_config/bcom/breakdancers8k4k_000.txt';
 
 load(hologram_path)
 

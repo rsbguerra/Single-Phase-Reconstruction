@@ -1,5 +1,5 @@
-hologram_path = '../../data/input/holograms/DeepChess.mat';
-config_path = '../../data/config/nrsh_config/interfereIV/deepchess2_000.txt';
+hologram_path = '../../../data/input/holograms/DeepChess.mat';
+config_path = '../../../data/config/nrsh_config/interfereIV/deepchess2_000.txt';
 
 load(hologram_path)
 
@@ -9,4 +9,4 @@ info = getSettings('cfg_file', config_path, ...
     'h_pos', [0 1], ...
     'v_pos', [0]);
 
-nrsh(double(data.dh), 0.3964, info)
+nrsh(double(dh), 0.3964, info)

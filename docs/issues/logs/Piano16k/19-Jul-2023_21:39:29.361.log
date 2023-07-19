@@ -1,0 +1,64 @@
+
+[TEST] Running /mnt/data/code/Single-Phase-Reconstruction/tests/nrsh/ctc-tests/Piano16k.m test script.
+Config file parsed.
+******************************************************************************************
+**************************Configuration setup:**************************
+******************************************************************************************
+	                      rec_dists : 0.01
+	                       ap_sizes : 2048  2048 
+	               apertureinpxmode : 1
+	                           apod : 1
+	                      bit_depth : 16
+	                       cfg_file : ../../../data/config/nrsh_config/bcom/piano16k_000.txt
+	                       clip_max : -1
+	                       clip_min : -1
+	                        dataset : 
+	                      direction : forward
+	                            fps : 10
+	                          h_pos : 0  1
+	                   hist_stretch : 1
+	                       isBinary : 0
+	                    isFourierDH : 0
+	                         method : ASM
+	                    name_prefix : 
+	                  offaxisfilter : h
+	                   orthographic : 0
+	                  outfolderpath : ./figures
+	                      perc_clip : 1
+	                     perc_value : 99
+	                    pixel_pitch : 4e-07
+	                     reffronorm : 1  1  1
+	                     resize_fun : 
+	                  save_as_image : 1
+	                    save_as_mat : 0
+	                 save_intensity : 0
+	                           show : 0
+	                      targetres : 16384  16384
+	                      usagemode : exhaustive
+	      use_first_frame_reference : 1
+	                          v_pos : 0  1
+	                           wlen : 6.4e-07    5.32e-07    4.73e-07
+	                       zero_pad : 1
+
+Synthetic aperture out-of-bound check...passed!
+
+Calculating h_pos=0 v_pos=0 apert_size=[2048x2048] rec_dist=0.01 ... done in 147.03 seconds.
+Wrote to file: ./figures/piano16k_000/piano16k_000_0_0_[2048x2048]_0.01.png
+
+Calculating h_pos=1 v_pos=0 apert_size=[2048x2048] rec_dist=0.01 ... done in 128.66 seconds.
+Wrote to file: ./figures/piano16k_000/piano16k_000_1_0_[2048x2048]_0.01.png
+
+Calculating h_pos=0 v_pos=1 apert_size=[2048x2048] rec_dist=0.01 ... done in 125.17 seconds.
+Wrote to file: ./figures/piano16k_000/piano16k_000_0_1_[2048x2048]_0.01.png
+
+Calculating h_pos=1 v_pos=1 apert_size=[2048x2048] rec_dist=0.01 ... done in 134.00 seconds.
+Wrote to file: ./figures/piano16k_000/piano16k_000_1_1_[2048x2048]_0.01.png
+
+Average reconstruction time (4 reconstruction(s)): 133.71 seconds.
+
+ans =
+
+     []
+
+
+[PASS] /mnt/data/code/Single-Phase-Reconstruction/tests/nrsh/ctc-tests/Piano16k.m exited with 0.

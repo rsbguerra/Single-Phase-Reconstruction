@@ -1,5 +1,5 @@
-hologram_path = '../../data/input/holograms/DeepDices2K.mat';
-config_path = '../../data/config/nrsh_config/bcom/DeepDices2k_000.txt';
+hologram_path = '../../../data/input/holograms/deepDices2k.mat';
+config_path = '../../../data/config/nrsh_config/bcom/DeepDices2k_000.txt';
 
 load(hologram_path)
 

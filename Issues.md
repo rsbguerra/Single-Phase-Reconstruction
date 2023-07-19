@@ -140,16 +140,16 @@ And the b-com links are broken.
 # CTC tests
 ## Test data for subjective tests
 
-| holograms | dwld? | dataset | ap_size | rec_dist(m) |
-| - |:-:| - | - | -:|
-| DeepCornellBox_16K       | Y | Interfere-V | [4096x4096]| 0.250 |
-| CornellBox3_16K          | Y | Interfere-V | [4096x4096]| 0.250 |
-| DeepChess                | Y | Interfere-IV | [2048x2048]| 0.3964 |
-| Biplane16k               | Y | Interfere-III | [2048x2048]| 0.0455 |
-| Dices16k                 | Y | b-com | [2048x2048] | 0.01
-| DeepDices2k              | Y | b-com | [2048x2048] | 0.867 |
-| Piano16k                 | Y | b-com | [16384x16384]| 0.01 |
-| Breakdancers8k4k         | Y | b-com | [7680x4320] | 0.025 |
-| Astronaut                | Y | EmergImg-HoloGrail | [1940x2588] | -0.172 |
-| Lowiczanka Doll (OnAxis) | Y | WUT | [2016x2016] | 1.06 |
+| holograms | Status| dwld? | dataset | ap_size | rec_dist(m) |
+| - |:-:| - | - | - | -:|
+| DeepCornellBox_16K       | Fail | Y | Interfere-V | [4096x4096]| 0.250 |
+| CornellBox3_16K          | Fail | Y | Interfere-V | [4096x4096]| 0.250 |
+| DeepChess                | Fail | Y | Interfere-IV | [2048x2048]| 0.3964 |
+| Biplane16k               | Fail | Y | Interfere-III | [2048x2048]| 0.0455 |
+| Dices16k                 | PASS | Y | b-com | [2048x2048] | 0.01
+| DeepDices2k              | Fail | Y | b-com | [2048x2048] | 0.867 |
+| Piano16k                 | PASS | Y | b-com | [16384x16384]| 0.01 |
+| Breakdancers8k4k         | Fail | Y | b-com | [7680x4320] | 0.025 |
+| Astronaut                | Fail | Y | EmergImg-HoloGrail | [1940x2588] | -0.172 |
+| Lowiczanka Doll (OnAxis) | Fail | Y | WUT | [2016x2016] | 1.06 |
 

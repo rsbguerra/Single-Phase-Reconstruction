@@ -1,0 +1,24 @@
+
+[TEST] Running /mnt/data/code/Single-Phase-Reconstruction/tests/nrsh/ctc-tests/Lowiczanka_Doll.m test script.
+Config file parsed.
+
+[ERROR] /mnt/data/code/Single-Phase-Reconstruction/tests/nrsh/ctc-tests/Lowiczanka_Doll.m exited with:
+Brace indexing is not supported for variables of this type.
+
+Error in defaultSettings (line 90)
+            info.targetres = info.ap_sizes{1};
+
+Error in nrsh (line 208)
+    info = defaultSettings(hol, rec_dists, info);
+
+Error in Lowiczanka_Doll (line 12)
+nrsh(double(dh), 1.06, info)
+
+Error in run (line 91)
+evalin('caller', strcat(script, ';'));
+
+Error in run_nrsh_test (line 34)
+        run(convertStringsToChars(script));
+
+Error in run (line 91)
+evalin('caller', strcat(script, ';'));

@@ -1,5 +1,5 @@
-hologram_path = '../../data/input/holograms/CornellBox3_16K.mat';
-config_path = '../../data/config/nrsh_config/interfereV/CornellBox2_10K_000.txt';
+hologram_path = '../../../data/input/holograms/CornellBox3_16K.mat';
+config_path = '../../../data/config/nrsh_config/interfereV/CornellBox2_10K_000.txt';
 
 load(hologram_path)
 
@@ -9,4 +9,4 @@ info = getSettings('cfg_file', config_path, ...
     'h_pos', [0 1], ...
     'v_pos', [0 1]);
 
-nrsh(double(data.H), 0.25, info)
+nrsh(double(H), 0.25, info)

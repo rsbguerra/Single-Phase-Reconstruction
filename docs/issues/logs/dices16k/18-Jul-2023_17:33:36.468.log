@@ -1,0 +1,70 @@
+
+[TEST] Running /mnt/data/code/Single-Phase-Reconstruction/tests/nrsh/dices16k.m test script.
+Config file parsed.
+******************************************************************************************
+**************************Configuration setup:**************************
+******************************************************************************************
+	                      rec_dists : 0.0185
+	                       ap_sizes : 2048  2048 ; 4096  4096 
+	               apertureinpxmode : 1
+	                           apod : 1
+	                      bit_depth : 16
+	                       cfg_file : /mnt/data/code/Single-Phase-Reconstruction/data/config/nrsh_config/bcom/DeepDices16k_000.txt
+	                       clip_max : -1
+	                       clip_min : -1
+	                        dataset : 
+	                      direction : forward
+	                            fps : 10
+	                          h_pos : -1  0  1
+	                   hist_stretch : 1
+	                       isBinary : 0
+	                    isFourierDH : 0
+	                         method : ASM
+	                    name_prefix : 
+	                  offaxisfilter : h
+	                   orthographic : 0
+	                  outfolderpath : ./figures
+	                      perc_clip : 1
+	                     perc_value : 97
+	                    pixel_pitch : 4e-07
+	                     reffronorm : 1  1  1
+	                     resize_fun : 
+	                  save_as_image : 1
+	                    save_as_mat : 0
+	                 save_intensity : 0
+	                           show : 0
+	                      targetres : 16384  16384
+	                      usagemode : exhaustive
+	      use_first_frame_reference : 1
+	                          v_pos : 0
+	                           wlen : 6.4e-07    5.32e-07    4.73e-07
+	                       zero_pad : 1
+
+Synthetic aperture out-of-bound check...passed!
+
+Calculating h_pos=-1 v_pos=0 apert_size=[2048x2048] rec_dist=0.0185 ... done in 144.92 seconds.
+Wrote to file: ./figures/DeepDices16k_000/DeepDices16k_000_-1_0_[2048x2048]_0.0185.png
+
+Calculating h_pos=0 v_pos=0 apert_size=[2048x2048] rec_dist=0.0185 ... done in 136.19 seconds.
+Wrote to file: ./figures/DeepDices16k_000/DeepDices16k_000_0_0_[2048x2048]_0.0185.png
+
+Calculating h_pos=1 v_pos=0 apert_size=[2048x2048] rec_dist=0.0185 ... done in 126.26 seconds.
+Wrote to file: ./figures/DeepDices16k_000/DeepDices16k_000_1_0_[2048x2048]_0.0185.png
+
+Calculating h_pos=-1 v_pos=0 apert_size=[4096x4096] rec_dist=0.0185 ... done in 125.36 seconds.
+Wrote to file: ./figures/DeepDices16k_000/DeepDices16k_000_-1_0_[4096x4096]_0.0185.png
+
+Calculating h_pos=0 v_pos=0 apert_size=[4096x4096] rec_dist=0.0185 ... done in 125.99 seconds.
+Wrote to file: ./figures/DeepDices16k_000/DeepDices16k_000_0_0_[4096x4096]_0.0185.png
+
+Calculating h_pos=1 v_pos=0 apert_size=[4096x4096] rec_dist=0.0185 ... done in 133.47 seconds.
+Wrote to file: ./figures/DeepDices16k_000/DeepDices16k_000_1_0_[4096x4096]_0.0185.png
+
+Average reconstruction time (6 reconstruction(s)): 132.03 seconds.
+
+ans =
+
+     []
+
+
+[PASS] /mnt/data/code/Single-Phase-Reconstruction/tests/nrsh/dices16k.m exited with 0.
