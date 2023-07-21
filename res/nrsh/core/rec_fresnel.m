@@ -1,4 +1,4 @@
-function [recons] = rec_fresnel(hol, pitch, wlen, rec_dist, zero_pad, direction, ref_wave_rad, isLast)
+function [recons] = rec_fresnel(hol, pitch, wlen, rec_dist, zero_pad, direction, isLast, ref_wave_rad)
     %REC_FRESNEL Frensnel + Fourier Method implementation.
     %
     %   Inputs:
@@ -25,23 +25,17 @@ function [recons] = rec_fresnel(hol, pitch, wlen, rec_dist, zero_pad, direction,
 
     %% 0) Initialization
     % Initialize missing arguments
-    if nargin < 7
+    if nargin < 8
         ref_wave_rad = 0;
-
-        if nargin < 6
+        if nargin < 7
             direction = 'forward';
-
-            if nargin < 5
+            if nargin < 6
                 zero_pad = false;
-
-                if nargin < 4
+                if nargin < 5
                     error('nrsh:rec_fresnel:input_args', 'Error in rec_fresnel: not enough input arguments.')
                 end
-
             end
-
         end
-
     end
 
     % Check if propagation has to happen
