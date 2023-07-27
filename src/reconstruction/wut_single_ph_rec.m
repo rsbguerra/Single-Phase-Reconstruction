@@ -4,6 +4,10 @@ function wut_single_ph_rec(rec_dists, h_pos, v_pos, channel)
     curr_dir = working_dir();
     figure_dir = fullfile(curr_dir, 'data/output/single_phase_fig', hologram_name);
 
+    if ~exist('channel', 'var')
+        channel = 0;
+    end
+
     if ~exist(figure_dir, "dir")
         mkdir(figure_dir);
     end
