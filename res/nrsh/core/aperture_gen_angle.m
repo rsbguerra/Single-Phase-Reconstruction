@@ -1,4 +1,4 @@
-function [hol_view] = aperture_gen_angle(Hol, isFourierDH, pp, rec_dist, ...
+function [hol_view] = aperture_gen_angle(Hol, dataset, pp, rec_dist, ...
         h_angle, v_angle, dof_angle, apod)
     %APERTURE_GEN_ANGLE sets an automatic (position and dimension)
     % synthetic aperture from h_angle,v_angle,dof_angle.
@@ -6,7 +6,7 @@ function [hol_view] = aperture_gen_angle(Hol, isFourierDH, pp, rec_dist, ...
     %
     %   Inputs:
     %    Hol               - hologram
-    %    isFourierDH       - isFourierDH boolean
+    %    dataset           - dataset info. Same as load_data.
     %    pp                - pixel pitch [m]
     %    rec_dist          - reconstruction distance [m]
     %    h_angle           - horizontal angle (theta) [deg]
@@ -19,8 +19,6 @@ function [hol_view] = aperture_gen_angle(Hol, isFourierDH, pp, rec_dist, ...
     %
     % Positive h_angle: right
     % Positive v_angle: up
-    %
-
 
     [hol_rows, hol_cols, ~] = size(Hol);
 
@@ -73,25 +71,26 @@ function [hol_view] = aperture_gen_angle(Hol, isFourierDH, pp, rec_dist, ...
     end
 
     %set the aperture
-    if (isFourierDH)
-        hol_view = Hol(start_row:end_row, start_col:end_col, :);
+    switch dataset
+        case {'interfere4', 'wut_disp'}
+            hol_view = Hol(start_row:end_row, start_col:end_col, :);
 
-        if apod == 1
-            apod_wind = window2((end_row - start_row + 1), (end_col - start_col + 1), @hann);
-            hol_view = hol_view .* apod_wind;
-        end
+            if apod == 1
+                apod_wind = window2((end_row - start_row + 1), (end_col - start_col + 1), @hann);
+                hol_view = hol_view .* apod_wind;
+            end
 
-    else
-        hol_view = zeros(size(Hol));
+        otherwise
+            hol_view = zeros(size(Hol));
 
-        if apod == 1
-            apod_wind = window2((end_row - start_row + 1), (end_col - start_col + 1), @hann);
-            hol_view(start_row:end_row, start_col:end_col, :) = ...
-                Hol(start_row:end_row, start_col:end_col, :) .* apod_wind;
-        else
-            hol_view(start_row:end_row, start_col:end_col, :) = ...
-                Hol(start_row:end_row, start_col:end_col, :);
-        end
+            if apod == 1
+                apod_wind = window2((end_row - start_row + 1), (end_col - start_col + 1), @hann);
+                hol_view(start_row:end_row, start_col:end_col, :) = ...
+                    Hol(start_row:end_row, start_col:end_col, :) .* apod_wind;
+            else
+                hol_view(start_row:end_row, start_col:end_col, :) = ...
+                    Hol(start_row:end_row, start_col:end_col, :);
+            end
 
     end
 

@@ -24,7 +24,7 @@ function [img_filtered] = dc_filter(img, dc_size, dc_type)
 
     if (dc_size > 1) || (dc_size < 0)
         dc_size = 0.5;
-        warning('nrsh:dc_filter', 'Warning in nrsh: the DC filter size is out of the allowed range [0, 1]. The default value of %.2f is used.', dc_size)
+        warning('The DC filter size is out of the allowed range [0, 1]. The default value of %.2f is used.', dc_size)
     end
 
     if isempty(dc_size)

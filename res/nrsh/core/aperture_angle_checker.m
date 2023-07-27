@@ -1,5 +1,5 @@
 function [rec_par_idx] = aperture_angle_checker(hol_rows, hol_cols, rec_par_idx, ...
-        rec_dists, ap_sizes, h_pos, v_pos, pp, verbosity)
+        rec_dists, ap_sizes, h_pos, v_pos, pp)
     %APERTURE_ANGLE_CHECKER checks for out-of-bound synthetic apertures (angle-based).
     %
     %   Inputs:
@@ -14,19 +14,14 @@ function [rec_par_idx] = aperture_angle_checker(hol_rows, hol_cols, rec_par_idx,
     %    v_pos             - vertical position(s) [deg] at which the synthetic
     %                        aperture will be placed
     %    pp                - pixel pitch [m]
-    %    verbosity         - boolean
     %
     %   Output:
     %    rec_par_idx       - is equal to the input if no out-of-bound is
     %                        detected. If out-of-bound is detected and the user
     %                        wishes to continue, it does not contain the
     %                        out-of-bound combinations.
-    %
 
-
-    if (verbosity)
-        fprintf('\nSynthetic aperture out-of-bound check...')
-    end
+    fprintf('\nSynthetic aperture out-of-bound check...')
 
     bad_comb = [];
 
@@ -35,7 +30,7 @@ function [rec_par_idx] = aperture_angle_checker(hol_rows, hol_cols, rec_par_idx,
         rec_dist = rec_dists(rec_par_idx(1, idx));
         h_angle = h_pos(rec_par_idx(2, idx));
         v_angle = v_pos(rec_par_idx(3, idx));
-        dof_angle = ap_sizes{rec_par_idx(4, idx)};
+        dof_angle = ap_sizes(rec_par_idx(4, idx));
 
         if ~isequal(dof_angle, 0)
 
@@ -91,11 +86,11 @@ function [rec_par_idx] = aperture_angle_checker(hol_rows, hol_cols, rec_par_idx,
                 disp('Square fix!')
                 end_row = end_row - 1;
             elseif (((size_V - size_H) > 1) || ((size_H - size_V) > 1))
-                warning('nrsh:aperture', ['Warning in nrsh: the synthetic aperture is not squared!\n', ...
-                                'Please keep track of the following parameters that generate ', ...
-                                'this condition:\n', ...
-                                'Hologram rows: %d cols: %d, rec_dist: %d pitch: %d ', ...
-                            'theta: %d [deg] phi: %d [deg] psi: %d [deg]'], hol_rows, hol_cols, rec_dist, pp, ...
+                warning(['The synthetic aperture is not squared!\n', ...
+                             'Please keep track of the following parameters that generate ', ...
+                             'this condition:\n', ...
+                             'Hologram rows: %d cols: %d, rec_dist: %d pitch: %d ', ...
+                         'theta: %d [deg] phi: %d [deg] psi: %d [deg]'], hol_rows, hol_cols, rec_dist, pp, ...
                     rad2deg(h_angle), rad2deg(v_angle), rad2deg(dof_angle))
 
             end
@@ -112,27 +107,35 @@ function [rec_par_idx] = aperture_angle_checker(hol_rows, hol_cols, rec_par_idx,
 
     if ~isempty(bad_comb)
         fprintf('\n')
-        warning('nrsh:aperture', 'Warning in nrsh: the following combination(s) of h_angle/v_angle/dof_angle/rec_dist generate(s) an out-of-bound synthetic aperture:')
+        warning('The following combination(s) of h_angle/v_angle/dof_angle/rec_dist generate(s) an out-of-bound synthetic aperture:')
 
         for idx = 1:size(bad_comb, 2)
             fprintf('h_angle=%g, v_angle=%g, dof_angle=%g, rec_dist=%g\n', ...
                 h_pos(rec_par_idx(2, bad_comb(idx))), ...
                 v_pos(rec_par_idx(3, bad_comb(idx))), ...
-                ap_sizes{rec_par_idx(4, bad_comb(idx))}, ...
+                ap_sizes(rec_par_idx(4, bad_comb(idx))), ...
                 rec_dists(rec_par_idx(1, bad_comb(idx))));
         end
 
         if isequal(size(bad_comb, 2), size(rec_par_idx, 2))
-            error('nrsh:aperture', 'Error in nrsh: there are no other valid combinations! Execution aborted.')
+            error('There are no other valid combinations! Execution aborted.')
         else
-            rec_par_idx(:, bad_comb) = [];
-            disp('The execution will continue without the uncorrect apertures.')
+            user_rep = input('Do you wish to delete these combinations and continue with the other combinations? Otherwise the current execution will be aborted. (y/n) [n]: ', 's');
+
+            if strcmpi(user_rep, 'y')
+                rec_par_idx(:, bad_comb) = [];
+                disp('The execution will continue without the uncorrect combinations.')
+                return
+            elseif strcmpi(user_rep, 'n')
+                error('Exectution aborted by the user.')
+            else
+                error('Exectution aborted.')
+            end
+
         end
 
     end
 
-    if (verbosity)
-        disp('passed!')
-    end
+    disp('passed!')
 
 end

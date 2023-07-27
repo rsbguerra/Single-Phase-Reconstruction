@@ -9,7 +9,6 @@ function [img_cut] = twin_filter(img, mode)
     %    img_cut           - img filtered
     %
 
-
     img_cols = size(img, 2);
 
     if strcmpi(mode, 'r') %R filter
@@ -19,7 +18,7 @@ function [img_cut] = twin_filter(img, mode)
         img_cut = img(:, (round(img_cols / 2)) + 1:end, :);
     else
         img_cut = img;
-        warning('nrsh:wut_filter', 'Warning in nrsh: unable to filter the input. The mode parameter should be set to ''R'' or ''L''.')
+        warning("Unable to filter the input. The mode parameter should be set to 'R' or 'L'.")
     end
 
 end
