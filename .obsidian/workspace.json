@@ -4,35 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "df4a2ac9278d0b96",
+        "id": "ccd41a740d3be479",
         "type": "tabs",
         "children": [
           {
-            "id": "4c765160baf26d43",
+            "id": "b86ff7361d4cd8c4",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "pdf",
               "state": {
                 "file": "res/nrsh/NRSH_13_0_userguide.pdf"
-              },
-              "pinned": true
-            }
-          },
-          {
-            "id": "09f470ae1a31f91e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Issues.md",
-                "mode": "source",
-                "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -99,7 +84,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Issues.md",
+                "file": "res/nrsh/NRSH_13_0_userguide.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -116,7 +101,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Issues.md",
+                "file": "res/nrsh/NRSH_13_0_userguide.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -139,7 +124,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Issues.md"
+                "file": "res/nrsh/NRSH_13_0_userguide.pdf"
               }
             }
           }
@@ -160,8 +145,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "09f470ae1a31f91e",
+  "active": "b86ff7361d4cd8c4",
   "lastOpenFiles": [
+    "res/nrsh/NRSH_13_0_userguide.pdf",
+    "Issues.md",
     "tests/nrsh/figures/DeepDices16k_000/DeepDices16k_000_-1_0_[2048x2048]_0.0185.png",
     "tests/nrsh/logs/dices16k/18-Jul-2023_17:33:36.468.log",
     "tests/nrsh/logs/dices16k/18-Jul-2023_17:32:44.189.log",
@@ -172,8 +159,6 @@
     "tests/nrsh/logs/dices16k/18-Jul-2023_17:14:11.316.log",
     "tests/nrsh/dices16k.m",
     "tests/dices16k.m",
-    "res/nrsh/NRSH_13_0_userguide.pdf",
-    "Issues.md",
     "tests/nrsh/figures/DeepDices16k_000/DeepDices16k_000_1_0_[0x0]_0.0185.png",
     "tests/nrsh/figures/DeepDices16k_000/DeepDices16k_000_0_0_[0x0]_0.0185.png",
     "tests/nrsh/figures/DeepDices16k_000/DeepDices16k_000_-1_0_[0x0]_0.0185.png",
@@ -183,7 +168,6 @@
     "tests/nrsh/figures/DeepDices16k_000/DeepDices16k_000_1_0_[16384x16384]_0.0185_LR.png",
     "tests/nrsh/figures/DeepDices16k_000/DeepDices16k_000_0_0_[16384x16384]_0.0185_LR.png",
     "tests/nrsh/figures/DeepDices16k_000/DeepDices16k_000_-1_0_[16384x16384]_0.0185_LR.png",
-    "Pasted image 20230718153838.png",
     "docs/logs/17-07-2023.md",
     "docs/logs/12-07-2023.md",
     "README.md",
