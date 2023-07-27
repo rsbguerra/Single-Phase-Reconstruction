@@ -14,7 +14,6 @@ function [image, minim, max_scaled] = real2uint(image, qbit)
     %modifications, minim and max_scaled will be empty.
     %
 
-
     if isa(image, 'uint8') || isa (image, 'uint16')
         minim = [];
         max_scaled = [];
@@ -22,11 +21,9 @@ function [image, minim, max_scaled] = real2uint(image, qbit)
     end
 
     minim = min(image(:));
-
     image = (image - minim);
 
     max_scaled = max(image(:));
-
     image = (image / max_scaled);
 
     image = image * ((2 ^ (qbit)) - 1);
