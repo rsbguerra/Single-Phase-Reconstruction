@@ -18,12 +18,8 @@ function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
         mkdir(figure_dir);
     end
 
-    % info.direction = 'forward';
-
     for d = rec_dist
-
         for h = h_pos
-
             for v = v_pos
                 info.h_pos = h;
                 info.v_pos = v;
@@ -56,9 +52,6 @@ function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
                 end
 
             end
-
         end
-
     end
-
 end

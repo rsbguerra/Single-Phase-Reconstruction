@@ -11,7 +11,7 @@ save_dir = [working_dir 'data/config/single_phase_config/'];
 hologram_dir = [working_dir 'data/input/holograms/'];
 single_phase_dir = [working_dir 'data/input/single_phase_holograms/'];
 
-holograms = ["Lowiczanka_Doll"];
+holograms = ["CGH_Venus"];
 
 for holo_name = holograms
     fprintf(1, 'Creating %s configuration...\n', holo_name)
@@ -55,7 +55,7 @@ for holo_name = holograms
 
             %% Load config
             info.dataset = 'interfere';
-            info.direction = 'forward'
+            info.direction = 'forward';
             info.rec_par_cfg = read_render_cfg(cfg_file, dataset);
 
             info.default_rec_dist = 0.2957;

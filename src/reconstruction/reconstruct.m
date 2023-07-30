@@ -1,11 +1,18 @@
-function reconstruct(hologram_name, rec_dist, h_pos, v_pos)
+function single_phase_rec(hologram_name, rec_dist, h_pos, v_pos, channel)
+
+    if hologram_name == "Lowiczanka_Doll"
+        wut_single_ph_rec(rec_dist, h_pos, v_pos, channel)
+        return
+    end
+
     curr_dir = working_dir();
-    figure_dir = fullfile(curr_dir, 'data/output/reconstruction', hologram_name);
 
     %% Load config
     disp('Loading config');
 
-    [original_hologram, info] = load_hologram(hologram_name);
+    [single_ph_holo, info] = load_hologram(hologram_name, channel);
+
+    figure_dir = fullfile(curr_dir, 'data/output/single_phase_fig', hologram_name);
 
     if ~exist(figure_dir, "dir")
         mkdir(figure_dir);
@@ -20,26 +27,30 @@ function reconstruct(hologram_name, rec_dist, h_pos, v_pos)
                 info.v_pos = v;
 
                 %% Apperture application
-                [original_hologram] = aperture(original_hologram, ...
-                    true, ...
-                    info.pixel_pitch, ...
-                    d, h, v, ...
-                    info.ap_sizes, ...
-                    info.apod);
+                % [hologram] = aperture(single_ph_holo, ...
+                %     true, ...
+                %     info.pixel_pitch, ...
+                %     d, h, v, ...
+                %     info.ap_sizes, ...
+                %     info.apod);
 
-                hol_rendered = num_rec(original_hologram, info, d);
+                hol_rendered_forward = num_rec(single_ph_holo, info.dataset, info.rec_par_cfg, rec_dist, info.direction);
+                holo_abs = abs(hol_rendered_forward);
 
-                figure_name = sprintf('%s_%d_[%dx%d]', hologram_name, d * 1000, h, v);
+                if channel
+                    ch_str = channel2string(channel);
+                else
+                    ch_str = 'rgb';
+                end
+
+                figure_name = sprintf('%s_%s_%g_[%dx%d]_[%gx%g].png', hologram_name, ch_str, d, info.ap_sizes(1), info.ap_sizes(2), h, v);
                 figure_path = fullfile(figure_dir, figure_name);
-                holo_abs = abs(hol_rendered);
 
                 try
-                    imwrite(holo_abs, [figure_path '.png']);
-                    disp(['Figure saved as ' [figure_path '.png.']])
+                    imwrite(holo_abs, figure_path);
                 catch
-                    warning('Image size too big, resizing by 0.25')
                     holo_abs = imresize(holo_abs, 0.25);
-                    imwrite(holo_abs, [figure_path '.png']);
+                    imwrite(holo_abs, figure_path);
                 end
 
             end
