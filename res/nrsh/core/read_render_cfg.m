@@ -33,20 +33,16 @@ function [recons_param] = read_render_cfg(cfg_path, dataset)
                     recons_param.pixel_pitch = str2num(key_value{2});
                 case 'method'
                     recons_param.method = key_value{2};
-                    %case 'apert_dim'
-                    %    recons_param.apert_dim=str2num(key_value{2});
                 case 'apod'
                     recons_param.apod = str2num(key_value{2});
                 case 'zero_pad'
                     recons_param.zero_pad = str2num(key_value{2});
-
                 case 'perc_clip'
                     recons_param.perc_clip = str2num(key_value{2});
                 case 'perc_value'
                     recons_param.perc_value = str2num(key_value{2});
                 case 'hist_stretch'
                     recons_param.hist_stretch = str2num(key_value{2});
-
                 case 'save_intensity'
                     recons_param.save_intensity = str2num(key_value{2});
                 case 'save_as_mat'
@@ -57,33 +53,23 @@ function [recons_param] = read_render_cfg(cfg_path, dataset)
                     recons_param.save_as_image = str2num(key_value{2});
                 case 'bit_depth'
                     recons_param.bit_depth = str2num(key_value{2});
-
                     %WUT_DIPS or INTERFERE 4 only
-
                 case 'ref_wave_rad' %WUT_DISP and INTERFERE4
                     recons_param.ref_wave_rad = str2num(key_value{2});
-
                 case 'recons_img_size'
                     recons_param.recons_img_size = str2num(key_value{2});
-
                 case 'dc_filter_type'
                     recons_param.DC_filter_type = key_value{2};
-
                 case 'dc_filter_size'
                     recons_param.DC_filter_size = str2num(key_value{2});
-
                 case 'img_flt'
                     recons_param.img_flt = key_value{2};
-
                 case 'shift_yx_r'
                     recons_param.shift_yx_R = str2num(key_value{2});
-
                 case 'shift_yx_g'
                     recons_param.shift_yx_G = str2num(key_value{2});
-
                 case 'shift_yx_b'
                     recons_param.shift_yx_B = str2num(key_value{2});
-
                     %High-resolution holograms only
                 case 'hologramname'
                     recons_param.hologramName = key_value{2};
