@@ -16,6 +16,7 @@ ref_wave_rad    : 1.06
 shift_yx_R      : -6.6035018e-4, 77.407184e-6
 shift_yx_G      : -3.1845007e-3, 6.1635088e-4
 shift_yx_B      : 0, 0
+recons_img_size : 2048,2048
 DC_filter_type  : wut   
 DC_filter_size  : 0.15
 img_flt         : L
@@ -27,5 +28,3 @@ save_as_image   : 1
 bit_depth       : 16
 save_intensity  : 0
 
-#BINARY FILE OPTIONS#
-offaxisfilter	: v

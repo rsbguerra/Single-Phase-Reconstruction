@@ -1,18 +1,15 @@
 
 #RECONSTRUCTION PARAMETERS#
-wlen            : 532e-9
-pixel_pitch     : 3.45e-6
-method          : Fourier-Fresnel
-zero_pad        : 0
-apod            : 0
+wlen            : 633e-9, 532e-9, 460e-9
+pixel_pitch     : 1e-6
+method          : ASM
+zero_pad        : 1
+apod            : 1
 
 #ENHANCEMENT PARAMETERS#
 perc_clip       : 1
-perc_value      : 99.95
+perc_value      : 95
 hist_stretch    : 1
-
-#INTERFERE_IV ONLY OPTIONS#
-ref_wave_rad    : 0.9986
 
 #OUTPUT FILE OPTIONS#
 save_as_mat     : 0

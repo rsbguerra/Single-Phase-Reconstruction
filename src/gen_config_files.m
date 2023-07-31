@@ -11,7 +11,7 @@ save_dir = [working_dir 'data/config/single_phase_config/'];
 hologram_dir = [working_dir 'data/input/holograms/'];
 single_phase_dir = [working_dir 'data/input/single_phase_holograms/'];
 
-holograms = ["Lowiczanka_Doll"];
+holograms = ["CGH_Venus"];
 
 for holo_name = holograms
     fprintf(1, 'Creating %s configuration...\n', holo_name)

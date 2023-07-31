@@ -1,7 +1,7 @@
 
 #RECONSTRUCTION PARAMETERS#
 wlen            : 640e-9, 532e-9, 473e-9
-pixel_pitch     : 0.4e-6
+pixel_pitch     : 1e-6
 method          : ASM
 zero_pad        : 1
 apod            : 1
