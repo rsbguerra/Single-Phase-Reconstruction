@@ -1,4 +1,4 @@
-function [hol_rendered] = num_rec(hologram, dataset, rec_par_cfg, rec_dist, direction)
+function [hol_rendered] = num_rec(hologram, rec_par_cfg, rec_dist, direction)
     %NUM_REC reconstructs a hologram belonging to Pleno DB.
     %
     %   Inputs:
