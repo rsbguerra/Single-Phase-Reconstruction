@@ -1,38 +1,20 @@
----
-name: Bug report
-about: Create a report to help us improve
-title: "[BUG]"
-labels: bug
-assignees: rsbguerra
+# Summary
+# Steps to reproduce
+# Current behavior
+# Fix
+# Relevant logs
+# System information
+## Software information
+- **NRSH version**: 12.0
+- **MATLAB version**: 9.4.0.813654 (R2018a)
+- **Relevant enabled toolboxes**:
+    - Image Processing Toolbox Version 10.2 (R2018a)
+    - Signal Processing Toolbox Version 8.0 (R2018a)
+    - Statistics and Machine Learning Toolbox Version 11.3 (R2018a)
+- **OS**: Manjaro Linux x86_64
+- **Kernel**: 6.3.12-1-MANJARO
 
----
-
-**Describe the bug**
-A clear and concise description of what the bug is.
-
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
-
-**Expected behavior**
-A clear and concise description of what you expected to happen.
-
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
-
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
-
-**Additional context**
-Add any other context about the problem here.
+## Hardware information
+- **CPU**: AMD Ryzen 5 5600G with Radeon Graphics (12) @ 3.900GHz
+- **GPU**: AMD ATI Radeon Vega Series / Radeon Vega Mobile Series
+- **Memory**: 16 GB
