@@ -1,9 +1,10 @@
 %% Load hologram configuration
 hologram_name = 'Lowiczanka_Doll';
 
-rec_dists = 1.030;
+rec_dists = [1.030 1.06 1.075];
 h_pos = 0;
 v_pos = 0;
-channel = [1 2 3];
+ap_size = [2000 2000];
+channel = [1 2 3 0];
 
-wut_single_ph_rec(rec_dists, h_pos, v_pos, channel);
+reconstruct(rec_dists, h_pos, v_pos, channel);
