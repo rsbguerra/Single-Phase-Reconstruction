@@ -88,6 +88,7 @@ for holo_name = holograms
             %% Load config
 
             info.dataset = 'wut_disp_on_axis';
+            info.rec_par_cfg = read_render_cfg(cfg_file, dataset);
             info.default_rec_dist = [1.060 1.030 1.075];
             info.isFourierDH = 1;
             info.clip_max = -1;
