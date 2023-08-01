@@ -11,7 +11,7 @@ save_dir = [working_dir 'data/config/single_phase_config/'];
 hologram_dir = [working_dir 'data/input/holograms/'];
 single_phase_dir = [working_dir 'data/input/single_phase_holograms/'];
 
-holograms = ["CGH_Venus"];
+holograms = ["CGH_Venus" "CGH_Biplane16k_rgb" "DeepDices16K" "DeepDices2K" "DeepDices8K4K" "Lowiczanka_Doll"];
 
 for holo_name = holograms
     fprintf(1, 'Creating %s configuration...\n', holo_name)
@@ -20,7 +20,7 @@ for holo_name = holograms
         case "CGH_Biplane16k_rgb"
             hologram_path = [hologram_dir 'CGH_Biplane16k_rgb.mat'];
             single_phase_path = [single_phase_dir 'CGH_Biplane16k_rgb_%s.mat'];
-            cfg_file = [cfg_dir 'interfereIII/biplane16kETRO_000.txt'];
+            cfg_file = [cfg_dir 'interfereIII/biplane16k_000.txt'];
 
             %% Load config
 
