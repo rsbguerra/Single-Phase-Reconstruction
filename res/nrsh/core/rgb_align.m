@@ -11,21 +11,15 @@ function [recons_ali] = rgb_align(recons, rec_par_cfg)
     %    recons_ali        - reconstructed RGB hologram with the three color
     %                        channels aligned. The dimension is equal to that
     %                        specified in the configuration file.
-    %
 
     recons_img_size = size(recons(:, :, 1));
 
-    %channel shifts: m to pixel conversion
     shift_yx_R = (rec_par_cfg.shift_yx_R) .* (recons_img_size) ./ ...
         (rec_par_cfg.wlen(1)) / (rec_par_cfg.ref_wave_rad) * ...
         (rec_par_cfg.pixel_pitch);
     shift_yx_G = (rec_par_cfg.shift_yx_G) .* (recons_img_size) ./ ...
         (rec_par_cfg.wlen(2)) / (rec_par_cfg.ref_wave_rad) * ...
         (rec_par_cfg.pixel_pitch);
-    %NOT USED, for now:
-    %shift_yx_B=(rec_par_cfg.shift_yx_B) .* (rec_par_cfg.out_size) ./...
-    %            (rec_par_cfg.wlen(3)) / (rec_par_cfg.ref_wave_rad) *...
-    %            (rec_par_cfg.pixel_pitch);
 
     Nyx_R = ceil(rec_par_cfg.wlen(1) / rec_par_cfg.wlen(3) * recons_img_size);
     Nyx_G = ceil(rec_par_cfg.wlen(2) / rec_par_cfg.wlen(3) * recons_img_size);
