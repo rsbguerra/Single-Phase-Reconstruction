@@ -8,4 +8,4 @@
 
 .vscode/
 /output
-tests/nrsh/logs/
+tests/*/logs/

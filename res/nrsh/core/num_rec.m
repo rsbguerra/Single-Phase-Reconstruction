@@ -1,10 +1,16 @@
-function [hol_rendered] = num_rec(hologram, info, rec_dist, isLast)
+function [hol_rendered] = num_rec(hologram, rec_par_cfg, rec_dist, direction)
     %NUM_REC reconstructs a hologram belonging to Pleno DB.
     %
     %   Inputs:
     %    hologram          - hologram to reconstruct
-    %    info              - reconstruction parameters
+    %    dataset           - dataset info. Same as load_data.
+    %    rec_par_cfg       - structure with rendering parameters, read from
+    %                        configuration file
     %    rec_dist          - reconstruction distance [m]
+    %    direction         - reconstruction direction. It should be one of
+    %                        the following char. arrays: forward (propagation
+    %                        towards the object plane) or inverse (propagation
+    %                        towards the hologram plane)
     %
     %   Output:
     %    hol_rendered      - hologram reconstruction.
@@ -13,34 +19,25 @@ function [hol_rendered] = num_rec(hologram, info, rec_dist, isLast)
     %% RECONSTRUCTION
     colors = size(hologram, 3);
     hol_rendered = hologram;
-    clear hologram;
-    if (rec_dist == 0), return, end % Early exit
-    if (nargin < 4), isLast = false; end
 
-    switch lower(info.method)
+    switch lower(rec_par_cfg.method)
 
         case 'asm'
 
             for idx = 1:colors
                 hol_rendered(:, :, idx) = rec_asm(hol_rendered(:, :, idx), ...
-                    info.pixel_pitch, ...
-                    info.wlen(idx), rec_dist, ...
-                    info.zero_pad, info.direction, isLast);
+                    rec_par_cfg.pixel_pitch, ...
+                    rec_par_cfg.wlen(idx), rec_dist, ...
+                    rec_par_cfg.zero_pad, direction);
             end
 
         case 'fresnel'
 
-            if (contains(info.dataset, 'emergimg'))
-                fun = @(dh, p, wlen, z, pad, dir, isLast) rec_fresnel_deprecated(dh, p, wlen, z, pad, dir, isLast);
-            else
-                fun = @(dh, p, wlen, z, pad, dir, isLast) rec_fresnel(dh, p, wlen, z, pad, dir, isLast);
-            end
-
             for idx = 1:colors
-                hol_rendered(:, :, idx) = fun(hol_rendered(:, :, idx), ...
-                    info.pixel_pitch, ...
-                    info.wlen(idx), -rec_dist, ...
-                    info.zero_pad, info.direction, isLast);
+                hol_rendered(:, :, idx) = rec_fresnel(hol_rendered(:, :, idx), ...
+                    rec_par_cfg.pixel_pitch, ...
+                    rec_par_cfg.wlen(idx), rec_dist, ...
+                    direction);
             end
 
         case 'fourier-fresnel'
@@ -57,15 +54,21 @@ function [hol_rendered] = num_rec(hologram, info, rec_dist, isLast)
                 hol_rendered = hol_rendered(:, 1:cols_ev, :);
             end
 
+            %         %this if needs to be verified
+            %         if strcmpi(dataset, 'interfere4')
+            %             rec_dist=-rec_dist;
+            %             rec_par_cfg.ref_wave_rad=-rec_par_cfg.ref_wave_rad;
+            %         end
+
             for idx = 1:colors
-                hol_rendered(:, :, idx) = rec_fresnel(hol_rendered(:, :, idx), ...
-                    info.pixel_pitch, ...
-                    info.wlen(idx), rec_dist, ...
-                    info.zero_pad, info.direction, info.ref_wave_rad, isLast);
+                hol_rendered(:, :, idx) = rec_fourier_fresnel(hol_rendered(:, :, idx), ...
+                    rec_par_cfg.pixel_pitch, ...
+                    rec_par_cfg.wlen(idx), rec_dist, ...
+                    rec_par_cfg.ref_wave_rad, direction);
             end
 
         otherwise
-            error('nrsh:num_rec:method', 'Error in nrsh: %s: unknown reconstruction method.', info.method)
+            error('%s: unknown reconstruction method.', rec_par_cfg.method)
     end
 
 end

@@ -4,6 +4,10 @@ function wut_single_ph_rec(rec_dists, h_pos, v_pos, channel)
     curr_dir = working_dir();
     figure_dir = fullfile(curr_dir, 'data/output/single_phase_fig', hologram_name);
 
+    if ~exist('channel', 'var')
+        channel = 0;
+    end
+
     if ~exist(figure_dir, "dir")
         mkdir(figure_dir);
     end
@@ -14,7 +18,6 @@ function wut_single_ph_rec(rec_dists, h_pos, v_pos, channel)
         for d = rec_dists
 
             for h = h_pos
-
                 for v = v_pos
                     info.h_pos = h;
                     info.v_pos = v;
@@ -27,7 +30,7 @@ function wut_single_ph_rec(rec_dists, h_pos, v_pos, channel)
                         info.ap_sizes, ...
                         info.apod);
 
-                    hol_rendered_forward = num_rec(hologram, info, d);
+                    hol_rendered_forward = num_rec(hologram, info.dataset, info.rec_par_cfg, d, info.direction);
 
                     % Amplitude calculation
                     hol_rendered_forward = abs(hol_rendered_forward);
@@ -38,8 +41,13 @@ function wut_single_ph_rec(rec_dists, h_pos, v_pos, channel)
                         info.perc_clip, info.perc_value, info.hist_stretch, ...
                         info.clip_min, info.clip_max);
 
-                    figure_name = sprintf('%s_%s_%g_[%gx%g].png', hologram_name, channel2string(c), d, h, v);
-                    figure_path = fullfile(figure_dir, figure_name);
+                    if channel
+                        ch_str = channel2string(channel);
+                    else
+                        ch_str = 'rgb';
+                    end
+
+                    figure_name = sprintf('%s_%s_%g_[%dx%d]_[%gx%g].png', hologram_name, ch_str, d, info.ap_sizes(1), info.ap_sizes(2), h, v); figure_path = fullfile(figure_dir, figure_name);
                     imwrite(abs(hol_rendered_forward_clip), figure_path);
                     fprintf(1, "Figure saved as %s.\n\n", figure_path)
                 end
