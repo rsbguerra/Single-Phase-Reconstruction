@@ -1,10 +1,5 @@
 function reconstruct(hologram_name, rec_dist, h_pos, v_pos, ap_sizes, channel)
 
-    % if hologram_name == "Lowiczanka_Doll"
-    %     wut_single_ph_rec(rec_dist, h_pos, v_pos, ap_sizes, channel)
-    %     return
-    % end
-
     curr_dir = working_dir();
 
     % Load config
@@ -18,7 +13,20 @@ function reconstruct(hologram_name, rec_dist, h_pos, v_pos, ap_sizes, channel)
 
     for c = channel
         fprintf("Loading hologram %s...", hologram_name)
-        [single_ph_holo, info] = load_hologram(hologram_name, channel);
+        [single_ph_holo, info] = load_hologram(hologram_name, c);
+
+        if hologram_name == "Lowiczanka_Doll"
+            si = size(single_ph_holo);
+            hol = single(hol);
+            [X, ~] = meshgrid(((-si(2) / 2:si(2) / 2 - 1) + 0.5) / si(2), ((-si(1) / 2:si(1) / 2 - 1) + 0.5) / si(1));
+            R = exp(2i * pi * X * si(2) / 4);
+            clear X;
+
+            single_ph_holo = ifftshift(fft2(fftshift(single_ph_holo .* R)));
+            clear R;
+            single_ph_holo(:, [1:si(2) / 4, si(2) * 3/4 + 1:end], :) = [];
+            single_ph_holo = ifftshift(ifft2(fftshift(single_ph_holo)));
+        end
 
         for d = rec_dist
 
@@ -36,21 +44,29 @@ function reconstruct(hologram_name, rec_dist, h_pos, v_pos, ap_sizes, channel)
                             d, h, v, ...
                             [ap_sizes{a}]);
 
-                        hol_rendered_forward = num_rec(single_ph_holo, info.rec_par_cfg, d, info.direction);
-                        holo_abs = abs(hol_rendered_forward);
+                        hol_rendered = num_rec(single_ph_holo, info.rec_par_cfg, d, info.direction);
 
                         if hologram_name == "Lowiczanka_Doll"
-                            info.rec_par_cfg
-                            holo_abs = wut_filter(holo_abs, info.rec_par_cfg);
+
+                            hol_rendered = dc_filter(hol_rendered, ...
+                                info.rec_par_cfg.DC_filter_size, ...
+                                info.rec_par_cfg.DC_filter_type);
+
+                            hol_rendered = abs(hol_rendered);
+                            hol_rendered = imresize(hol_rendered, info.rec_par_cfg.recons_img_size, 'bilinear');
+
+                            holo_abs = wut_filter(hol_rendered, info.rec_par_cfg);
 
                             %% Clipping
                             [holo_abs, info.clip_min, info.clip_max] = clipping(holo_abs, ...
                                 info.rec_par_cfg, ...
                                 info.clip_min, info.clip_max);
+                        else
+                            holo_abs = abs(hol_rendered);
                         end
 
-                        if channel
-                            ch_str = channel2string(channel);
+                        if c
+                            ch_str = channel2string(c);
                         else
                             ch_str = 'rgb';
                         end

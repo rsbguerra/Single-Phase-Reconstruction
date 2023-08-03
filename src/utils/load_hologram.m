@@ -1,9 +1,8 @@
 function [hologram, info] = load_hologram(hologram_name, channel)
 
-    if nargin < 2
+    if ~exist("channel", "var")
         channel = 0;
     end
-
     curr_dir = working_dir();
     config_dir = fullfile(curr_dir, 'data/config/single_phase_config/');
 
