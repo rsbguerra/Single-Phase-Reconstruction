@@ -16,7 +16,7 @@ function H = diff_resize2(H, varargin)
     %
     %   pp@numeric(1,2)...      pixel pitch in m
     %    or numeric(2,1)
-    %   tau@numeric(1,2)...     effective bandwidth
+    %   tau@numeric(1,2)...		effective bandwidth
     %    or @numeric(2,1)
     %
     % OUTPUT:
@@ -90,15 +90,15 @@ function H = diff_resize2(H, varargin)
         m2 = max(H(:));
     end
 
-    %     %% Adjust datatype
-    %     switch(c)
-    %         case 'uint8'
-    %             H = uint8(double(intmax('uint8'))*mat2gray(H));
-    %         case 'uint16'
-    %             H = uint16(double(intmax('uint16'))*mat2gray(H));
-    %         case {'double', 'single'}
-    %             H = mat2gray(H);
-    %     end
+    %% Adjust datatype
+    switch (c)
+        case 'uint8'
+            H = uint8(double(intmax('uint8')) * mat2gray(H));
+        case 'uint16'
+            H = uint16(double(intmax('uint16')) * mat2gray(H));
+        case {'double', 'single'}
+            H = mat2gray(H);
+    end
 
     if (verbose)
         disp('Fourier resize statistics: ')

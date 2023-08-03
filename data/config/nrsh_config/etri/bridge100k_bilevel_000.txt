@@ -21,7 +21,7 @@ hist_stretch    : 1
 
 #OUTPUT FILE OPTIONS#
 save_as_mat     : 0
-show            : 0
+show            : 1
 save_as_image   : 1
 bit_depth       : 16
 save_intensity  : 0

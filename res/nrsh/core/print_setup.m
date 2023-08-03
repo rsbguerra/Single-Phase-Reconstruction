@@ -1,83 +1,83 @@
-function [] = print_setup(rec_dists, info)
+function [] = print_setup(cfg_path, rec_par_cfg, rec_dists, h_pos, ...
+        v_pos, ap_sizes)
     %PRINT_SETUP Prints current settings informations (user input & cfg file)
     %
     %   Inputs:
-    %       rec_dists   - reconstruction distance(s)
-    %       info        - reconstruction parameters
+    %    cfg_path          - path to configuration file
+    %    rec_param_cfg     - reconstruction parameters (from config. file)
+    %    rec_dists         - reconstruction distance(s)
+    %    h_pos             - horizontal positions at which the synthetic
+    %                        aperture will be placed.
+    %    v_pos             - vertical positions at which the synthetic
+    %                        aperture will be placed.
+    %    ap_sizes          - synthetic aperture sizes
     %
 
+    %% PARAMETERS FROM CONFIG. FILE
 
-    %% Layman's check for octave compatible mode
-    isOctave = false;
+    disp(repmat('*', 1, 90));
+    disp(strcat(repmat('*', 1, 26), 'Parameters set from configuration file', ...
+        repmat('*', 1, 26)));
+    disp(repmat('*', 1, 90));
 
-    try
-        a = datetime; clear a;
-        contains('abc', 'a');
-        isOctave = false;
-    catch me
-        isOctave = true;
+    fprintf('\nConfiguration file in use: %s\n\n', cfg_path);
+
+    fields_list = ["wlen [m]", "pixel_pitch [m]", "method", "apod (0:off, 1:on)", ...
+                     "zero_pad (0:off, 1:on)", "perc_clip (0:off, 1:on)", ...
+                     "perc_value", ...
+                     "hist_stretch (0:off, 1:on)", ...
+                     "save_intensity (0:off, 1:on)", ...
+                     "save_as_mat (0:off, 1:on)", ...
+                     "show (0:off, 1:on)", ...
+                     "save_as_image (0:off, 1:on)", ...
+                     "ref_wave_rad [m]", ...
+                     "shift_yx_R [m]", "shift_yx_G [m]", "shift_yx_B [m]", ...
+                     "recons_img_size [pixel]", "DC_filter_type", "DC_filter_size", ...
+                     "img_flt", "saturate_gray (0:off, 1:on)"];
+
+    for names = fieldnames(rec_par_cfg).'
+        field = names{1};
+        match = contains(fields_list, field, 'IgnoreCase', true);
+        field2print = fields_list(match);
+
+        if ~(field2print == "")
+            fprintf('\t %30s : %s\n', field2print, num2str(rec_par_cfg.(field)));
+        end
+
     end
 
-    %% Print configuration
+    %% PARAMETERS PASSED AS FUNCTION INPUT
+
     disp(repmat('*', 1, 90));
-    disp(strcat(repmat('*', 1, 26), 'Configuration setup: ', repmat('*', 1, 26)));
+    disp(strcat(repmat('*', 1, 34), 'Parameters manually set', ...
+        repmat('*', 1, 33)));
     disp(repmat('*', 1, 90));
 
-    % Valid field names
-    validFieldnameList = {'usagemode', 'apertureinpxmode', 'ap_sizes', 'h_pos', 'v_pos', ...
-                              'clip_min', 'clip_max', 'use_first_frame_reference', ...
-                              'dataset', 'cfg_file', 'name_prefix', 'outfolderpath', ...
-                              'direction', 'resize_fun', 'targetres', 'fps', ...
-                              'wlen', 'pixel_pitch', 'method', 'apod', 'zero_pad', ...
-                              'perc_clip', 'perc_value', 'hist_stretch', ...
-                              'save_intensity', 'save_as_mat', 'save_as_image', ...
-                              'show', 'bit_depth', 'reffronorm', 'offaxisfilter', ...
-                              'ref_wave_rad', 'dc_filter_type', 'dc_filter_size', 'img_flt', ...
-                              'shift_yx_r', 'shift_yx_g', 'shift_yx_b', ...
-                              'hologramname', 'format', 'segmentsnum', ...
-                              'segmentsres', 'subsegmentsres', 'spectrumscale', 'isBinary', 'isFourierDH', 'orthographic'};
+    fprintf('\t %30s : %s\n', 'Reconstruction distance(s) [m]', num2str(rec_dists));
 
-    fprintf('\t %30s : %s\n', 'rec_dists', num2str(rec_dists));
+    if iscell(ap_sizes)
 
-    try
+        fprintf('\t %30s : %s\n', 'Horizontal positions:', num2str(h_pos));
 
-        for names = fieldnames(info).'
-            fieldname = names{1};
+        fprintf('\t %30s : %s\n', 'Vertical positions:', num2str(v_pos));
 
-            if ((~isOctave && any(contains(validFieldnameList, fieldname))) || (isOctave && any(~cellfun('isempty', strfind(validFieldnameList, fieldname)))))
-                fprintf('\t %30s : ', fieldname);
+        fprintf('\t %30s : %s\n', 'Aperture size [pixel]', strrep(mat2str((ap_sizes{1, 1})), ' ', 'x'));
 
-                if iscell(info.(fieldname))
+        if size(ap_sizes, 2) > 1
 
-                    for i = 1:numel(info.(fieldname))
-
-                        if isnumeric(info.(fieldname){i}) || islogical(info.(fieldname){i})
-                            fprintf('%s ', num2str(info.(fieldname){i}));
-                        else
-                            fprintf('%s ', info.(fieldname){i});
-                        end
-
-                        if i < numel(info.(fieldname))
-                            fprintf('; ');
-                        end
-
-                    end
-
-                    fprintf('\n');
-                elseif isnumeric(info.(fieldname)) || islogical(info.(fieldname))
-                    fprintf('%s\n', num2str(info.(fieldname)));
-                elseif isa(info.(fieldname), 'function_handle')
-                    fprintf('%s\n', strrep(char(info.(fieldname)), '@(x)', ''));
-                else
-                    fprintf('%s\n', info.(fieldname));
-                end
-
+            for idx = 2:size(ap_sizes, 2)
+                fprintf('\t %30s : %s\n', ' ', strrep(mat2str((ap_sizes{1, idx})), ' ', 'x'));
             end
 
         end
 
-    catch me
-        disp('foo')
+    else
+
+        fprintf('\t %30s : %s\n', 'Horizontal angle(s) [deg]', num2str(h_pos));
+
+        fprintf('\t %30s : %s\n', 'Vertical angle(s) [deg]', num2str(v_pos));
+
+        fprintf('\t %30s : %s\n', 'DOF angle(s) [deg]', num2str(ap_sizes));
     end
 
 end

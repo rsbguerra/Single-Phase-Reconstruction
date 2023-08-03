@@ -22,7 +22,6 @@ function [hologram, dataset] = load_data()
     % For B-com 32bit exr files HDRITools is used:
     % https://bitbucket.org/edgarv/hdritools
 
-
     dataset_type = {'b<>com 8bit (Am-Ph)', 'b<>com 32bit (Re-Im)', ...
                         'b<>com binary', 'Interfere (I, II, III)', ...
                         'Interfere IV', 'EmergImg-HoloGrail', ...
@@ -32,7 +31,7 @@ function [hologram, dataset] = load_data()
         'Name', 'Select Dataset Type', 'ListSize', [300, 100]);
 
     if tf == 0 %no user selection
-        error('nrsh:load_data', 'Error in nrsh: you have to select a dataset type');
+        error('You have to select a dataset type');
     end
 
     switch idx
@@ -42,7 +41,7 @@ function [hologram, dataset] = load_data()
             [filename, filepath] = uigetfile('*.bmp', 'Search Amplitude to load');
 
             if filename == 0
-                error('nrsh:load_data', 'Error in nrsh: no file selected');
+                error('No file selected');
             end
 
             am = im2double(imread([filepath, filename]));
@@ -50,7 +49,7 @@ function [hologram, dataset] = load_data()
             [filename, filepath] = uigetfile([filepath, '*.bmp'], 'Search Phase to load');
 
             if filename == 0
-                error('nrsh:load_data', 'Error in nrsh: no file selected');
+                error('No file selected');
             end
 
             ph = 2.0 * pi * im2double(imread([filepath, filename]));
@@ -62,7 +61,7 @@ function [hologram, dataset] = load_data()
             [filename, filepath] = uigetfile('*.exr', 'Search Real Part to load');
 
             if filename == 0
-                error('nrsh:load_data', 'Error in nrsh: no file selected');
+                error('No file selected');
             end
 
             info = exrinfo([filepath, filename]);
@@ -74,7 +73,7 @@ function [hologram, dataset] = load_data()
             [filename, filepath] = uigetfile([filepath, '*.exr'], 'Search Imaginary Part to load');
 
             if filename == 0
-                error('nrsh:load_data', 'Error in nrsh: no file selected');
+                error('No file selected');
             end
 
             hol_imag = zeros(size(hol_real), 'single');
@@ -89,7 +88,7 @@ function [hologram, dataset] = load_data()
             [filename, filepath] = uigetfile('*.mat', 'Search hologram to load');
 
             if filename == 0
-                error('nrsh:load_data', 'Error in nrsh: no file selected');
+                error('No file selected');
             end
 
             hologram = load([filepath filename]);
@@ -97,7 +96,7 @@ function [hologram, dataset] = load_data()
             try
                 hologram = hologram.Hbin; %bcom32_bin
             catch
-                error('nrsh:load_data', 'Error in nrsh: cannot load hologram')
+                error('Cannot load hologram')
             end
 
         case {4} %InterfereI,II,III
@@ -105,7 +104,7 @@ function [hologram, dataset] = load_data()
             [filename, filepath] = uigetfile('*.mat', 'Search hologram to load');
 
             if filename == 0
-                error('nrsh:load_data', 'Error in nrsh: no file selected');
+                error('No file selected');
             end
 
             hologram = load([filepath filename]);
@@ -122,7 +121,7 @@ function [hologram, dataset] = load_data()
                         hologram = hologram.Hbin; %Interfere_bin
                         dataset = 'interfere_bin';
                     catch
-                        error('nrsh:load_data', 'Error in nrsh: cannot load hologram')
+                        error('Cannot load hologram')
                     end
 
                 end
@@ -134,7 +133,7 @@ function [hologram, dataset] = load_data()
             [filename, filepath] = uigetfile('*.mat', 'Search hologram to load');
 
             if filename == 0
-                error('nrsh:load_data', 'Error in nrsh: no file selected');
+                error('No file selected');
             end
 
             hologram = load([filepath filename]);
@@ -151,7 +150,7 @@ function [hologram, dataset] = load_data()
                         hologram = hologram.Hbin; %BIN
                         dataset = 'interfere4_bin';
                     catch
-                        error('nrsh:load_data', 'Error in nrsh: cannot load hologram')
+                        error('Cannot load hologram')
                     end
 
                 end
@@ -163,7 +162,7 @@ function [hologram, dataset] = load_data()
             [filename, filepath] = uigetfile('*.mat', 'Search hologram to load');
 
             if filename == 0
-                error('nrsh:load_data', 'Error in nrsh: no file selected');
+                error('No file selected');
             end
 
             hologram = load([filepath filename]);
@@ -176,7 +175,7 @@ function [hologram, dataset] = load_data()
                     hologram = hologram.Hbin; %EmergImg_bin
                     dataset = 'emergimg_bin';
                 catch
-                    error('nrsh:load_data', 'Error in nrsh: cannot load hologram')
+                    error('Cannot load hologram')
                 end
 
             end
@@ -186,7 +185,7 @@ function [hologram, dataset] = load_data()
             [filename, filepath] = uigetfile('*.bmp', 'Search Red channel (or monochrome hologram) to load');
 
             if filename == 0
-                error('nrsh:load_data', 'Error in nrsh: no file selected');
+                error('No file selected');
             else
                 hologram(:, :, 1) = double(imread([filepath, filename]));
 
@@ -201,7 +200,7 @@ function [hologram, dataset] = load_data()
             [filename, filepath] = uigetfile([filepath, '*.bmp'], 'Search Green channel to load');
 
             if filename == 0
-                error(nrsh:load_data', 'Error in nrsh: no files selected')
+                error('No files selected')
             end
 
             hologram(:, :, 2) = double(imread([filepath, filename]));
@@ -209,7 +208,7 @@ function [hologram, dataset] = load_data()
             [filename, filepath] = uigetfile([filepath, '*.bmp'], 'Search Blue channel to load');
 
             if filename == 0
-                error('nrsh:load_data', 'Error in nrsh: no file selected');
+                error('No file selected');
             end
 
             hologram(:, :, 3) = double(imread([filepath, filename]));
@@ -219,7 +218,7 @@ function [hologram, dataset] = load_data()
             [filename, filepath] = uigetfile('*.mat', 'Search hologram to load');
 
             if filename == 0
-                error('nrsh:load_data', 'Error in nrsh: no file selected');
+                error('No file selected');
             end
 
             hologram = load([filepath filename]);
@@ -232,13 +231,13 @@ function [hologram, dataset] = load_data()
                     hologram = hologram.Hbin;
                     dataset = 'wut_disp_on_axis_bin';
                 catch
-                    error('nrsh:load_data', 'Error in nrsh: cannot load hologram')
+                    error('Cannot load hologram')
                 end
 
             end
 
         otherwise
-            error('nrsh:load_data', 'Error in nrsh: unknown dataset type');
+            error('Unknown dataset type');
     end
 
     %msg_box=msgbox('Hologram Loaded','Info');

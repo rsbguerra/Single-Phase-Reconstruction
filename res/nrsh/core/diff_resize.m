@@ -7,14 +7,14 @@ function H = diff_resize(H, pp, wlen, z, ap_size)
     %   Based on work presented to JPEG Pleno on Holography by D. Blinder and T. Birnbaum.
     %
     % INPUT:
-    %   H@numeric...            complex-valued wavefield of reconstructed hologram, to be resized
-    %   pp@numeric(1,2)...      pixel pitch in m
-    %       or numeric(2,1)
-    %   wlen@numeric(1)...      wavelength(s) in m
-    %       or @numeric(3)
-    %   z@numeric(1)...         distance of wavefield from org. hologram plane in m1
-    %   ap_size@numeric(1,2)... aperture size used for reconstruction in px
-    %       or @numeric(2,1)
+    %	H@numeric...			complex-valued wavefield of reconstructed hologram, to be resized
+    %	pp@numeric(1,2)...		pixel pitch in m
+    %	 or numeric(2,1)
+    %   wlen@numeric(1)...		wavelength(s) in m
+    %	 or @numeric(3)
+    %	z@numeric(1)...			distance of wavefield from org. hologram plane in m1
+    %	ap_size@numeric(1,2)...	aperture size used for reconstruction in px
+    %		or @numeric(2,1)
     %
     %   Version 1.50
     %   19.11.2020, T. Birnbaum
@@ -49,22 +49,22 @@ function H = diff_resize(H, pp, wlen, z, ap_size)
         m1 = max(H(:));
     end
 
-    H = diff_resize2(abs(H), pp, ratio(:) ./ pp);
+    H = diff_resize2(abs(H), pp, ratio ./ pp);
 
     if (verbose)
         norm2 = norm(double(H(:)), 'fro');
         m2 = max(H(:));
     end
 
-    %     %% Adjust datatype
-    %     switch(c)
-    %         case 'uint8'
-    %             H = uint8(double(intmax('uint8'))*mat2gray(H));
-    %         case 'uint16'
-    %             H = uint16(double(intmax('uint16'))*mat2gray(H));
-    %         case {'double', 'single'}
-    %             H = mat2gray(H);
-    %     end
+    %% Adjust datatype
+    switch (c)
+        case 'uint8'
+            H = uint8(double(intmax('uint8')) * mat2gray(H));
+        case 'uint16'
+            H = uint16(double(intmax('uint16')) * mat2gray(H));
+        case {'double', 'single'}
+            H = mat2gray(H);
+    end
 
     if (verbose)
         disp('Fourier resize statistics: ')

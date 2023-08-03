@@ -1,4 +1,4 @@
-function [recons_ali] = rgb_align(recons, info)
+function [recons_ali] = rgb_align(recons, rec_par_cfg)
     %RGB_ALIGN aligns the three color channels, necessary for WUT display RGB
     % holograms after the reconstruction process.
     %
@@ -11,26 +11,18 @@ function [recons_ali] = rgb_align(recons, info)
     %    recons_ali        - reconstructed RGB hologram with the three color
     %                        channels aligned. The dimension is equal to that
     %                        specified in the configuration file.
-    %
 
-    %recons=uint8(recons.*255);%recons should be the out. of the stretch.
-
-    %channel shifts: m to pixel conversion
     recons_img_size = size(recons(:, :, 1));
 
-    shift_yx_R = (info.shift_yx_r) .* (recons_img_size) ./ ...
-        (info.wlen(1)) / (info.ref_wave_rad) * ...
-        (info.pixel_pitch);
-    shift_yx_G = (info.shift_yx_g) .* (recons_img_size) ./ ...
-        (info.wlen(2)) / (info.ref_wave_rad) * ...
-        (info.pixel_pitch);
-    %NOT USED, for now:
-    %shift_yx_B=(rec_par_cfg.shift_yx_b) .* (rec_par_cfg.out_size) ./...
-    %            (rec_par_cfg.wlen(3)) / (rec_par_cfg.ref_wave_rad) *...
-    %            (rec_par_cfg.pixel_pitch);
+    shift_yx_R = (rec_par_cfg.shift_yx_R) .* (recons_img_size) ./ ...
+        (rec_par_cfg.wlen(1)) / (rec_par_cfg.ref_wave_rad) * ...
+        (rec_par_cfg.pixel_pitch);
+    shift_yx_G = (rec_par_cfg.shift_yx_G) .* (recons_img_size) ./ ...
+        (rec_par_cfg.wlen(2)) / (rec_par_cfg.ref_wave_rad) * ...
+        (rec_par_cfg.pixel_pitch);
 
-    Nyx_R = ceil(info.wlen(1) / info.wlen(3) * recons_img_size);
-    Nyx_G = ceil(info.wlen(2) / info.wlen(3) * recons_img_size);
+    Nyx_R = ceil(rec_par_cfg.wlen(1) / rec_par_cfg.wlen(3) * recons_img_size);
+    Nyx_G = ceil(rec_par_cfg.wlen(2) / rec_par_cfg.wlen(3) * recons_img_size);
 
     %force even dimensions
     Nyx_R = Nyx_R + (mod(Nyx_R, 2) ~= 0);
@@ -56,12 +48,7 @@ function [recons_ali] = rgb_align(recons, info)
 
     %B channel
     recons_ali(:, :, 3) = padarray(recons(:, :, 3), [(Nyx_R(1) - recons_img_size(1)) / 2, ...
-                                                  (Nyx_R(2) - recons_img_size(2)) / 2]);
-
-    %%saturate
-    %for ch=1:3
-    %    recons_ali(:,:,ch)=saturate_gray(recons_ali(:,:,ch),[],1,info.bit_depth);
-    %end
+                                                         (Nyx_R(2) - recons_img_size(2)) / 2]);
 
     %restore user-defined output size
     recons_ali = recons_ali((Nyx_R(1) / 2 - recons_img_size(1) / 2) + 1: ...

@@ -1,42 +1,44 @@
-function segment = load_segment(hol, info, m, n)
+function segment = load_segment(folder_path, dataset, rec_par_cfg, m, n)
     % Function Name: load_segment
     % This function loads a given hologram segment from its line and column indexes
     %
     % Inputs:
-    %   hol             - folder path in which the hologram segments can be found
-    %   info            - structure with rendering parameters, read from
+    %   folder_path		- folder path in which the hologram segments can be found
+    %   dataset         - dataset to which the hologram belongs. It should be one
+    %                     of the following char. arrays: bcom_print, etri_print
+    %    rec_par_cfg    - structure with rendering parameters, read from
     %                     configuration file
-    %   m               - line index of the hologram segment (from top to bottom)
-    %   n               - column index of the hologram segment (from left to right)
+    %   m				- line index of the hologram segment (from top to bottom)
+    %   n				- column index of the hologram segment (from left to right)
     %
     % Outputs:
-    %   segment         - complex modulation or bilevel phase hologram segment
+    %   segment		    - complex modulation or bilevel phase hologram segment
     %
     % Authors:      Antonin GILLES, Patrick GIOIA
     %               Institute of Research & Technology b<>com
     % -------------------------------------------------------------------------
 
-    switch lower(info.dataset)
+    switch lower(dataset)
         case 'bcom_print'
 
-            if strcmpi(info.format, 'bilevel')
-                filePath = [hol '\' info.hologramname '_' int2str(m - 1) '_' int2str(n - 1) '.bmp'];
+            if strcmp(rec_par_cfg.format, 'bilevel')
+                filePath = [folder_path '\' rec_par_cfg.hologramName '_' int2str(m - 1) '_' int2str(n - 1) '.bmp'];
                 phase = pi * im2double(imread(filePath));
                 segment = single(exp(1i * phase));
             else
-                ampliPath = [hol '\' info.hologramname '_' int2str(m - 1) '_' int2str(n - 1) '_ampli.bmp'];
-                phasePath = [hol '\' info.hologramname '_' int2str(m - 1) '_' int2str(n - 1) '_phase.bmp'];
+                ampliPath = [folder_path '\' rec_par_cfg.hologramName '_' int2str(m - 1) '_' int2str(n - 1) '_ampli.bmp'];
+                phasePath = [folder_path '\' rec_par_cfg.hologramName '_' int2str(m - 1) '_' int2str(n - 1) '_phase.bmp'];
                 ampli = im2double(imread(ampliPath));
                 phase = 2.0 * pi * im2double(imread(phasePath));
                 segment = single(ampli .* exp(1i * phase));
             end
 
         case 'etri_print'
-            filePath = [hol '\' info.hologramname '_' sprintf('%02d%02d', m, n) '.tif'];
+            filePath = [folder_path '\' rec_par_cfg.hologramName '_' sprintf('%02d%02d', m, n) '.tif'];
             phase = pi * im2double(imread(filePath));
             segment = single(exp(1i * phase));
 
         otherwise
-            error('nrsh_print:load_segment', 'Error in nrsh_print: expected input number 2, dataset, to be one of the following char. array: ''bcom_print'', ''etri_print''')
+            error("Expected input number 2, dataset, to be one of the following char. array: 'bcom_print', 'etri_print'")
 
     end

@@ -11,8 +11,8 @@ add_paths(parent_dir, ["res/nrsh/" ...
                          "src/utils/"
                      ])
 log_dir = "nrsh/logs/";
-test_dir = "tests/nrsh/ctc-tests/";
-folder_info = dir('nrsh/ctc-tests/*.m');
+test_dir = "tests/nrsh/";
+folder_info = dir('nrsh/*.m');
 %folder_info = dir('nrsh/Lowiczanka_Doll*.m');
 
 for i = 1:size(folder_info, 1) % allFiles has one row per file, so loop over those

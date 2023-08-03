@@ -30,7 +30,7 @@ function wut_single_ph_rec(rec_dists, h_pos, v_pos, channel)
                         info.ap_sizes, ...
                         info.apod);
 
-                    hol_rendered_forward = num_rec(hologram, info, d);
+                    hol_rendered_forward = num_rec(hologram, info.dataset, info.rec_par_cfg, d, info.direction);
 
                     % Amplitude calculation
                     hol_rendered_forward = abs(hol_rendered_forward);
