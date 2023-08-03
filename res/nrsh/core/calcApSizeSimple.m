@@ -35,8 +35,8 @@ function [apResOutList, tauList, idxWC] = calcApSizeSimple(arg1, arg2, resTarget
     %
     %   idxWC@numeric(idx)...       list index for worst case scenario, usable for apResOutList and tauList
     %
-    % Version 2.51
-    % 09.07.2021, Tobias Birnbaum
+    % Version 2.5
+    % 23.11.2020, Tobias Birnbaum
 
     verbose = false;
 
@@ -68,12 +68,11 @@ function [apResOutList, tauList, idxWC] = calcApSizeSimple(arg1, arg2, resTarget
 
     %% Calculate number of viewpoints
     numViews = numel(z);
-    if (numViews == 0), apResOutList = []; tauList = []; idxWC = 0; warning('nrsh:calcApSize:empty_input', 'Warning in nrsh: 0 valid view points provided.'); end
+    if (numViews == 0), apResOutList = []; tauList = []; idxWC = 0; warning('calcApSize:empty_input', '0 valid view points provided.'); end
 
     %% Verify that resizing without vignetting is possible
     if (any(resTarget ./ si > 1)), apResOutList = si; tauList = [1, 1]; idxWC = 1; return, end
 
-    z = abs(z); % Assumes that always reconstructions are done.
     minZ = min(abs(z(:)));
     theta = asin(min(wlen ./ pp / 2, 1));
     zMinReqOrg = (abs(pp .* si / 2 ./ tan(theta))); % Convergence to point
@@ -81,27 +80,18 @@ function [apResOutList, tauList, idxWC] = calcApSizeSimple(arg1, arg2, resTarget
     resTargetMin = ceil([max(zMinReqOrg(1) - minZ, 0), max(zMinReqOrg(2) - minZ, 0)] .* tan(theta) * 2 ./ pp);
     %resTargetMin = floor(tan(asin(min(wlen./pp/2, 1))) * min(abs(z-zMinReq)) ./ pp)
     maxDHres = resTarget + floor(tan(theta) * minZ ./ pp);
-    if (minZ < zMinReq), error('nrsh:calcApSizeSimple:DiffractionLimitation', ['Error in nrsh: insufficient diffraction given DH resolution=' num2str(si) ' px, pp=' num2str(pp) ' px, min. wlen=' num2str(wlen) ' nm, min. z=' num2str(min(z(:))) ' m to achieve target resolution: ' num2str(resTarget) ' px. Change either one:\n a) Minimal reconstruction distance z to >= ' num2str(zMinReq) ' m.\n b) Requested target resolution >= ' num2str(resTargetMin) ' px.\n c) DH resolution to <= ' num2str(maxDHres) ' px.']); end
+    if (minZ < zMinReq), error('calcApSizeSimple:DiffractionLimitation', ['Insufficient diffraction given DH resolution=' num2str(si) ' px, pp=' num2str(pp) ' px, min. wlen=' num2str(wlen) ' nm, min. z=' num2str(min(z(:))) ' m to achieve target resolution: ' num2str(resTarget) ' px. Change either one:\n a) Minimal reconstruction distance z to >= ' num2str(zMinReq) ' m.\n b) Requested target resolution >= ' num2str(resTargetMin) ' px.\n c) DH resolution to <= ' num2str(maxDHres) ' px.']); end
 
     %% Start search for minimal required aperture size, s.t. resolution anywhere in reconstruction < targetRes
     if (nargout > 2)
 
         for id = numViews:-1:1
-            [apResOutList(id, 1:2), tauList(id, 1:2)] = eq(abs(z(id)));
+            [apResOutList(id, 1:2), tauList(id, 1:2)] = eq(z(id));
         end
 
         [~, idxWC] = min(apResOutList(:, 1) .* apResOutList(:, 2));
     else
         [apResOutList, tauList] = eq(min(abs(z)));
-    end
-
-    %% Sanity check: Aperture size may not be larger than the DH
-    if (any(apResOutList > si))
-        [~, idxL] = max(prod(apResOutList, 2));
-        %TODO: Compute reduced target resolution
-        warning('nrsh:calcApSize', ['Insufficient hologram resolution of DH ( only ' num2str(si) ' instead of ' num2str(apResOutList(idxL, :)) ' ) for requested target resolution. Reducing aperture resolution to hologram resolution, resulting in a lower target resolution.'])
-        apResOutList(:, 1) = min(apResOutList(:, 1), si(1));
-        apResOutList(:, 2) = min(apResOutList(:, 2), si(2));
     end
 
     %% Auxiliary function

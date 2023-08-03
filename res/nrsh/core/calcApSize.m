@@ -125,7 +125,7 @@ function [apResOutList, tauList, idxWC] = calcApSize(arg1, arg2, resTarget, si, 
             %     end_row=end_row-1;
             % end
         otherwise
-            error('nrsh:calcApSize:invalid_mode', 'Error in nrsh: invalid aperture positioning mode. Valid values are: ''px'', ''angle''.')
+            error('calcApSize:invalid_mode', 'Invalid aperture positioning mode. Valid values are: ''px'', ''angle''.')
     end
 
     %% Aperture size may not exceed hologram size
@@ -148,7 +148,7 @@ function [apResOutList, tauList, idxWC] = calcApSize(arg1, arg2, resTarget, si, 
 
     %% Calculate number of viewpoints
     numViews = max([numel(z), numel(hpos), numel(vpos)]);
-    if (numViews == 0), apResOutList = []; tauList = []; idxWC = 0; warning('nrsh:calcApSize:empty_input', 'Warning in nrsh: 0 valid view points provided.'); end
+    if (numViews == 0), apResOutList = []; tauList = []; idxWC = 0; warning('calcApSize:empty_input', '0 valid view points provided.'); end
 
     %% Start binary search for best apperture size for each viewpoint in z, hpos, vpos
     ApSiList = unique(round([linspace(1, si(1), min(si)).', linspace(1, si(2), min(si)).']), 'rows');

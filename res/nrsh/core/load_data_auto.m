@@ -15,7 +15,6 @@ function [hologram, dataset] = load_data_auto(path)
     % For B-com 32bit exr files HDRITools is used:
     % https://bitbucket.org/edgarv/hdritools
 
-
     fprintf('Automatic hologram loading from %s ...\n', path);
 
     %load hologram filename(s)
@@ -25,9 +24,9 @@ function [hologram, dataset] = load_data_auto(path)
     names_list = names_list(filter);
 
     if size(names_list, 2) > 3
-        error('nrsh:load_data_auto', 'Error in nrsh: too many files in %s.', path)
+        error('Too many files in %s.', path)
     elseif isempty(names_list)
-        error('nrsh:load_data_auto', 'Error in nrsh: no valid file found in %s.', path)
+        error('No valid file found in %s.', path)
     end
 
     load('plenodb.mat', 'plenodb')
@@ -41,7 +40,7 @@ function [hologram, dataset] = load_data_auto(path)
         current_match = cell2mat(current_match);
 
         if length(current_match) > 1
-            error('nrsh:load_data_auto', 'Error in nrsh: unable to find a match!') %multiple matches not allowed, for now.
+            error('Unable to find a match!') %multiple matches not allowed, for now.
         elseif isempty(current_match)
             current_match = 0;
         end
@@ -62,7 +61,7 @@ function [hologram, dataset] = load_data_auto(path)
     end
 
     if isempty(dataset)
-        error('nrsh:load_data_auto', 'Error in nrsh: automatic loading failed. Note that:\n1. It is strongly recommended to use the original filenames;\n2. %s should not contain any other file other than those that constitute the hologram to load.', path)
+        error('Automatic loading failed. Note that:\n1. It is strongly recommended to use the original filenames;\n2. %s should not contain any other file other than those that constitute the hologram to load.', path)
     end
 
     switch dataset
@@ -96,7 +95,7 @@ function [hologram, dataset] = load_data_auto(path)
                 try
                     hologram = hologram.Hbin; %bcom32_bin
                 catch
-                    error('nrsh:load_data_auto', 'Error in nrsh: cannot load hologram')
+                    error('Cannot load hologram')
                 end
 
             end
@@ -105,7 +104,7 @@ function [hologram, dataset] = load_data_auto(path)
             dataset = 'interfere';
 
             if ~(strcmpi(hol_ext1, '.mat') && size(names_list, 2) == 1)
-                error('nrsh:load_data_auto', 'Error in nrsh: unable to load the hologram from %s. In order to load an Interfere hologram, only one mat file should be in the folder.', path)
+                error('Unable to load the hologram from %s. In order to load an Interfere hologram, only one mat file should be in the folder.', path)
             end
 
             hologram = load(fullfile(path, names_list{1}));
@@ -126,7 +125,7 @@ function [hologram, dataset] = load_data_auto(path)
                             hologram = hologram.Hbin; %Interfere_bin
                             dataset = 'interfere_bin';
                         catch
-                            error('nrsh:load_data_auto', 'Error in nrsh: cannot load hologram')
+                            error('Cannot load hologram')
                         end
 
                     end
@@ -139,7 +138,7 @@ function [hologram, dataset] = load_data_auto(path)
             dataset = 'interfere4';
 
             if ~(strcmpi(hol_ext1, '.mat') && size(names_list, 2) == 1)
-                error('nrsh:load_data_auto', 'Error in nrsh: unable to load the hologram from %s. In order to load an Interfere IV hologram, only one mat file should be in the folder.', path)
+                error('Unable to load the hologram from %s. In order to load an Interfere IV hologram, only one mat file should be in the folder.', path)
             end
 
             hologram = load(fullfile(path, names_list{1}));
@@ -156,7 +155,7 @@ function [hologram, dataset] = load_data_auto(path)
                         hologram = hologram.Hbin; %BIN
                         dataset = 'interfere4_bin';
                     catch
-                        error('nrsh:load_data_auto', 'Error in nrsh: cannot load hologram')
+                        error('Cannot load hologram')
                     end
 
                 end
@@ -167,7 +166,7 @@ function [hologram, dataset] = load_data_auto(path)
             dataset = 'emergimg';
 
             if ~(strcmpi(hol_ext1, '.mat') && size(names_list, 2) == 1)
-                error('nrsh:load_data_auto', 'Error in nrsh: unable to load the hologram from %s. In order to load an EmergImg-Holograil hologram, only one mat file should be in the folder.', path)
+                error('Unable to load the hologram from %s. In order to load an EmergImg-Holograil hologram, only one mat file should be in the folder.', path)
             end
 
             hologram = load(fullfile(path, names_list{1}));
@@ -180,7 +179,7 @@ function [hologram, dataset] = load_data_auto(path)
                     hologram = hologram.Hbin; %EmergImg_bin
                     dataset = 'emergimg_bin';
                 catch
-                    error('nrsh:load_data_auto', 'Error in nrsh: cannot load hologram')
+                    error('Cannot load hologram')
                 end
 
             end
@@ -210,7 +209,7 @@ function [hologram, dataset] = load_data_auto(path)
                         hologram = hologram.Hbin;
                         dataset = 'wut_disp_on_axis_bin';
                     catch
-                        error('nrsh:load_data_auto', 'Error in nrsh: cannot load hologram')
+                        error('Cannot load hologram')
                     end
 
                 end
@@ -218,7 +217,7 @@ function [hologram, dataset] = load_data_auto(path)
             end
 
         otherwise
-            error('nrsh:load_data_auto', 'Error in nrsh: unknown dataset type');
+            error('Unknown dataset type');
     end
 
     disp('...loading completed.');
@@ -237,13 +236,13 @@ function [hol_ord_names, bcom_type_flag] = bcom_check(names_list, hol_name1, hol
         elseif strcmpi(hol_ext1, '.exr') && strcmpi(hol_ext2, '.exr')
             bcom_type_flag = 0;
         else
-            error('nrsh:load_data_auto', 'Error in nrsh: it appears that %s contains a B-Com hologram, but file extensions are not bmp or exr.', path)
+            error('It appears that %s contains a B-Com hologram, but file extensions are not bmp or exr.', path)
         end
 
     elseif size(names_list, 2) == 1 && strcmpi(hol_ext1, '.mat')
         bcom_type_flag = 2;
     else
-        error('nrsh:load_data_auto', 'Error in nrsh: it appears that %s contains a B-Com hologram, but one of the two files is missing.', path)
+        error('It appears that %s contains a B-Com hologram, but one of the two files is missing.', path)
     end
 
     if bcom_type_flag == 1
@@ -253,7 +252,7 @@ function [hol_ord_names, bcom_type_flag] = bcom_check(names_list, hol_name1, hol
         elseif regexpi(hol_name2, '.*ampli.*')
             hol_ord_names{1} = names_list{2};
         else
-            error('nrsh:load_data_auto', 'Error in nrsh: it appears that %s contains a B-Com 8 bit hologram, the amplitude file cannot be found.', path)
+            error('It appears that %s contains a B-Com 8 bit hologram, the amplitude file cannot be found.', path)
         end
 
         if regexpi(hol_name1, '.*phase.*')
@@ -261,7 +260,7 @@ function [hol_ord_names, bcom_type_flag] = bcom_check(names_list, hol_name1, hol
         elseif regexpi(hol_name2, '.*phase.*')
             hol_ord_names{2} = names_list{2};
         else
-            error('nrsh:load_data_auto', 'Error in nrsh: it appears that %s contains a B-Com 8 bit hologram, the phase file cannot be found.', path)
+            error('It appears that %s contains a B-Com 8 bit hologram, the phase file cannot be found.', path)
         end
 
     elseif bcom_type_flag == 0
@@ -271,7 +270,7 @@ function [hol_ord_names, bcom_type_flag] = bcom_check(names_list, hol_name1, hol
         elseif regexpi(hol_name2, '.*real.*')
             hol_ord_names{1} = names_list{2};
         else
-            error('nrsh:load_data_auto', 'Error in nrsh: it appears that %s contains a B-Com 32 bit hologram, the real part file cannot be found.', path)
+            error('It appears that %s contains a B-Com 32 bit hologram, the real part file cannot be found.', path)
         end
 
         if regexpi(hol_name1, '.*imag.*')
@@ -279,7 +278,7 @@ function [hol_ord_names, bcom_type_flag] = bcom_check(names_list, hol_name1, hol
         elseif regexpi(hol_name2, '.*imag.*')
             hol_ord_names{2} = names_list{2};
         else
-            error('nrsh:load_data_auto', 'Error in nrsh: it appears that %s contains a B-Com 32 bit hologram, the imag part file cannot be found.', path)
+            error('It appears that %s contains a B-Com 32 bit hologram, the imag part file cannot be found.', path)
         end
 
     else
@@ -300,7 +299,7 @@ function [hol_ord_names, rgb_flag, on_axis] = wut_disp_check(names_list, hol_nam
             hol_ord_names = names_list{1};
             on_axis = 1;
         else
-            error('nrsh:load_data_auto', 'Error in nrsh: it appears that %s contains a WUT Display hologram, but file extensions are not bmp or mat.', path)
+            error('It appears that %s contains a WUT Display hologram, but file extensions are not bmp or mat.', path)
         end
 
     elseif length(names_list) == 3
@@ -311,7 +310,7 @@ function [hol_ord_names, rgb_flag, on_axis] = wut_disp_check(names_list, hol_nam
         if strcmpi(hol_ext1, '.bmp') && strcmpi(hol_ext2, '.bmp') && strcmpi(hol_ext3, '.bmp')
             on_axis = 0;
         else
-            error('nrsh:load_data_auto', 'Error in nrsh: it appears that %s contains a WUT Display color hologram, but file extensions are not bmp.', path)
+            error('It appears that %s contains a WUT Display color hologram, but file extensions are not bmp.', path)
         end
 
         %search the R component. The name must contain _R/G/B. Not strong.
@@ -322,7 +321,7 @@ function [hol_ord_names, rgb_flag, on_axis] = wut_disp_check(names_list, hol_nam
         elseif regexpi(hol_name3, '.*_R.*')
             hol_ord_names{1} = names_list{3};
         else
-            error('nrsh:load_data_auto', 'Error in nrsh: it appears that %s contains a WUT Display color hologram, but the RED component cannot be found.', path)
+            error('It appears that %s contains a WUT Display color hologram, but the RED component cannot be found.', path)
         end
 
         %search the G component.
@@ -333,7 +332,7 @@ function [hol_ord_names, rgb_flag, on_axis] = wut_disp_check(names_list, hol_nam
         elseif regexpi(hol_name3, '.*_G.*')
             hol_ord_names{2} = names_list{3};
         else
-            error('nrsh:load_data_auto', 'Error in nrsh: it appears that %s contains a WUT Display color hologram, but the GREEN component cannot be found.', path)
+            error('It appears that %s contains a WUT Display color hologram, but the GREEN component cannot be found.', path)
         end
 
         %search the B component.
@@ -344,11 +343,11 @@ function [hol_ord_names, rgb_flag, on_axis] = wut_disp_check(names_list, hol_nam
         elseif regexpi(hol_name3, '.*_B.*')
             hol_ord_names{3} = names_list{3};
         else
-            error('nrsh:load_data_auto', 'Error in nrsh: it appears that %s contains a WUT Display color hologram, but the BLUE component cannot be found.', path)
+            error('It appears that %s contains a WUT Display color hologram, but the BLUE component cannot be found.', path)
         end
 
     else
-        error('nrsh:load_data_auto', 'Error in nrsh: it appears that %s contains a WUT Display color hologram, but some files are missing.', path)
+        error('It appears that %s contains a WUT Display color hologram, but some files are missing.', path)
     end
 
 end

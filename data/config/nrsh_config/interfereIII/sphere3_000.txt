@@ -17,6 +17,3 @@ show            : 0
 save_as_image   : 1
 bit_depth       : 16
 save_intensity  : 0
-
-#BINARY FILE OPTIONS#
-offaxisfilter	: h

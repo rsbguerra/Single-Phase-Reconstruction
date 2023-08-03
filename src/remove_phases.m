@@ -38,7 +38,7 @@ function remove_phases(hologram_list, channel_list)
         %% Reconstruct original hologram
         disp('Reconstruct original hologram');
 
-        obj_plane = num_rec(original_hologram, info, rec_dist);
+        obj_plane = num_rec(original_hologram, info.rec_par_cfg, rec_dist, info.direction);
         [amp, ph] = convert_to_amplitude_phase(obj_plane);
 
         ph_r = ph(:, :, channel);
@@ -48,7 +48,7 @@ function remove_phases(hologram_list, channel_list)
         disp('Backwards propagation of new hologram');
 
         info.direction = 'inverse';
-        single_ph_hologram = num_rec(obj_plane, info, rec_dist);
+        single_ph_hologram = num_rec(obj_plane, info.rec_par_cfg, rec_dist, info.direction);
 
         function [x] = convert_to_complex(am, ph)
             x = complex(zeros(size(am), 'single'), 0);
