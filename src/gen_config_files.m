@@ -106,7 +106,7 @@ for holo_name = holograms
         mkdir(save_dir);
     end
 
-    info.direction = 'forward'
+    info.direction = 'forward';
 
     save(save_path, ...
         'info', ...
