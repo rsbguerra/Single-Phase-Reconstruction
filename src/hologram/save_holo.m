@@ -4,12 +4,7 @@ function save_holo(hologram_name, hol_rendered, ...
 
     curr_dir = working_dir();
 
-    if channel
-        ch_str = channel2string(channel);
-    else
-        ch_str = 'rgb';
-    end
-
+    ch_str = channel2string(channel);
     figure_dir = sprintf('%sdata/output/single_phase_fig/%s/%s', curr_dir, hologram_name, ch_str);
 
     if ~exist(figure_dir, "dir")
@@ -57,5 +52,6 @@ function save_holo(hologram_name, hol_rendered, ...
             warning([format ' is not a valid format option.'])
             return
     end
+
     fprintf("Figure saved as %s.\n\n", format)
 end

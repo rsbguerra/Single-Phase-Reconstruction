@@ -1,5 +1,6 @@
 clear; clc
 addpath('./utils');
+
 % Get absolute path to project
 curr_dir = working_dir();
 
@@ -8,7 +9,7 @@ add_paths(curr_dir, ["res/nrsh/" ...
                          "res/nrsh/core/" ...
                          "res/nrsh/core/WUT_lib/" ...
                          "src/" ...
-                         "src/reconstruction/" ...
+                         "src/hologram/" ...
                          "src/utils/"
                      ])
 
@@ -23,6 +24,9 @@ ap_sizes = {[2000 3000] [2000 6000] [2016 2016] [0 0]};
 
 for c = channel
 
+    fprintf("Loading hologram %s...\n", hologram_name)
+    [original_hologram, info] = load_hologram(hologram_name, channel);
+
     for a = 1:length(ap_sizes)
 
         for d = rec_dists
@@ -30,8 +34,11 @@ for c = channel
             for h = h_pos
 
                 for v = v_pos
+
                     [hol_rendered, info] = reconstruct(hologram_name, d, h, v, ap_sizes{a}, c);
-                    save_holo(hologram_name, hol_rendered, info, d, h, v, ap_sizes{a}, c, "png");
+                    [am_diff, ph_diff] = reconst_diff(original_hologram, hol_rendered);
+
+
                 end
 
             end
@@ -39,4 +46,5 @@ for c = channel
         end
 
     end
+
 end

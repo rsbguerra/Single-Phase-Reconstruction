@@ -1,6 +1,6 @@
 %% Set Paths
 clear; clc
-addpath('./utils')
+addpath('../utils')
 
 working_dir = working_dir();
 
@@ -89,7 +89,7 @@ for holo_name = holograms
 
             info.dataset = 'wut_disp_on_axis';
             info.rec_par_cfg = read_render_cfg(cfg_file, dataset);
-            info.default_rec_dist = [1.060 1.030 1.075];
+            info.rec_dists = [1.060 1.030 1.075];
             info.isFourierDH = 1;
             info.clip_max = -1;
             info.clip_min = -1;

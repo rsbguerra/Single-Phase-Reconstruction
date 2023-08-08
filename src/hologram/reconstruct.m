@@ -1,4 +1,4 @@
-function [hol_rendered, info] = reconstruct(hologram_name, rec_dist, h_pos, v_pos, ap_size, channel)
+function [hol_rendered, info] = reconstruct(hologram_name, rec_dist, h_pos, v_pos, ap_size, channel, info)
 
     curr_dir = working_dir();
 
@@ -10,9 +10,6 @@ function [hol_rendered, info] = reconstruct(hologram_name, rec_dist, h_pos, v_po
     if ~exist(figure_dir, "dir")
         mkdir(figure_dir);
     end
-
-    fprintf("Loading hologram %s...\n", hologram_name)
-    [hologram, info] = load_hologram(hologram_name, channel);
 
     if hologram_name == "Lowiczanka_Doll"
         si = size(hologram);
